@@ -2,20 +2,20 @@ package ecommerce.core.impl.negocio;
 
 import ecommerce.core.IStrategy;
 import ecommerce.dominio.EntidadeDominio;
-import ecommerce.dominio.Fornecedor;
+import ecommerce.dominio.ClienteJuridico;
 
 public class ValidadorDadosObrigatoriosFornecedor implements IStrategy{
 
 	@Override
 	public String processar(EntidadeDominio entidade) {
 		
-		if(entidade instanceof Fornecedor){
-			Fornecedor fornecedor = (Fornecedor)entidade;
+		if(entidade instanceof ClienteJuridico){
+			ClienteJuridico clienteJuridico = (ClienteJuridico)entidade;
 			
-			String nome = fornecedor.getNome();
-			String logradouro = fornecedor.getEndereco().getLogradouro();
-			String cnpj = fornecedor.getCnpj();
-			String cidade = fornecedor.getEndereco().getCidade().getNome();
+			String nome = clienteJuridico.getNome();
+			String logradouro = clienteJuridico.getEndereco().getLogradouro();
+			String cnpj = clienteJuridico.getCnpj();
+			String cidade = clienteJuridico.getEndereco().getCidade().getNome();
 			
 			if(nome == null || logradouro == null || cnpj==null || cidade == null){
 				return "Nome, logradouro, CNPJ e cidade são de preenchimento obrigatório!";

@@ -6,34 +6,38 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.List;
 
-import ecommerce.dominio.Cliente;
 import ecommerce.dominio.Endereco;
 import ecommerce.dominio.EntidadeDominio;
-import ecommerce.dominio.Fornecedor;
+import ecommerce.dominio.ClienteJuridico;
 
-public class ClienteDAO extends AbstractJdbcDAO {
+public class ClienteJuricoDAO extends AbstractJdbcDAO {
 	
-	public ClienteDAO() {
-		super("tb_cliente", "id_cli");		
+	public ClienteJuricoDAO() {
+		super("tb_fornecedor", "id_for");		
 	}
 	public void salvar(EntidadeDominio entidade) {
 		openConnection();
 		PreparedStatement pst=null;
-		Cliente cliente = (Cliente)entidade;
-		
+		ClienteJuridico clienteJuridico = (ClienteJuridico)entidade;
+		Endereco end = clienteJuridico.getEndereco();
 		
 		try {
 			connection.setAutoCommit(false);			
-					
+			EnderecoDAO endDAO = new EnderecoDAO();
+			endDAO.connection = connection;
+			endDAO.ctrlTransaction = false;
+			endDAO.salvar(end);			
+			
 			StringBuilder sql = new StringBuilder();
-			sql.append("INSERT INTO tb_cliente(nome, cpf, ");
-			sql.append("dt_cadastro) VALUES (?,?,?)");		
+			sql.append("INSERT INTO tb_fornecedor(rzsocial, cnpj, end_id, ");
+			sql.append("dt_cadastro) VALUES (?,?,?,?)");		
 					
 			pst = connection.prepareStatement(sql.toString());
-			pst.setString(1, cliente.getNome());
-			pst.setString(2, cliente.getCpf());
-			Timestamp time = new Timestamp(cliente.getDtCadastro().getTime());
-			pst.setTimestamp(3, time);
+			pst.setString(1, clienteJuridico.getNome());
+			pst.setString(2, clienteJuridico.getCnpj());
+			pst.setInt(3, end.getId());
+			Timestamp time = new Timestamp(clienteJuridico.getDtCadastro().getTime());
+			pst.setTimestamp(4, time);
 			pst.executeUpdate();			
 			connection.commit();		
 		} catch (SQLException e) {

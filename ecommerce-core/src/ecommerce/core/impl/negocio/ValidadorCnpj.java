@@ -2,17 +2,17 @@ package ecommerce.core.impl.negocio;
 
 import ecommerce.core.IStrategy;
 import ecommerce.dominio.EntidadeDominio;
-import ecommerce.dominio.Fornecedor;
+import ecommerce.dominio.ClienteJuridico;
 
 public class ValidadorCnpj implements IStrategy {
 
 	@Override
 	public String processar(EntidadeDominio entidade) {
 		
-		if(entidade instanceof Fornecedor){
-			Fornecedor fornecedor = (Fornecedor)entidade;
+		if(entidade instanceof ClienteJuridico){
+			ClienteJuridico clienteJuridico = (ClienteJuridico)entidade;
 			
-			if(fornecedor.getCnpj().length() < 14){
+			if(clienteJuridico.getCnpj().length() < 14){
 				return "CNPJ deve conter 14 digitos!";
 			}
 			

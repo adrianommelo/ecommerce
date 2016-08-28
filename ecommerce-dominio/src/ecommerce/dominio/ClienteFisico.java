@@ -3,7 +3,7 @@ package ecommerce.dominio;
 
 
 
-public class Cliente extends Pessoa {
+public class ClienteFisico extends Pessoa {
 
 	private String cpf;
 

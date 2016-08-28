@@ -6,38 +6,34 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.List;
 
+import ecommerce.dominio.ClienteFisico;
 import ecommerce.dominio.Endereco;
 import ecommerce.dominio.EntidadeDominio;
-import ecommerce.dominio.Fornecedor;
+import ecommerce.dominio.ClienteJuridico;
 
-public class FornecedorDAO extends AbstractJdbcDAO {
+public class ClienteFisicoDAO extends AbstractJdbcDAO {
 	
-	public FornecedorDAO() {
-		super("tb_fornecedor", "id_for");		
+	public ClienteFisicoDAO() {
+		super("tb_cliente", "id_cli");		
 	}
 	public void salvar(EntidadeDominio entidade) {
 		openConnection();
 		PreparedStatement pst=null;
-		Fornecedor fornecedor = (Fornecedor)entidade;
-		Endereco end = fornecedor.getEndereco();
+		ClienteFisico clienteFisico = (ClienteFisico)entidade;
+		
 		
 		try {
 			connection.setAutoCommit(false);			
-			EnderecoDAO endDAO = new EnderecoDAO();
-			endDAO.connection = connection;
-			endDAO.ctrlTransaction = false;
-			endDAO.salvar(end);			
-			
+					
 			StringBuilder sql = new StringBuilder();
-			sql.append("INSERT INTO tb_fornecedor(rzsocial, cnpj, end_id, ");
-			sql.append("dt_cadastro) VALUES (?,?,?,?)");		
+			sql.append("INSERT INTO tb_cliente(nome, cpf, ");
+			sql.append("dt_cadastro) VALUES (?,?,?)");		
 					
 			pst = connection.prepareStatement(sql.toString());
-			pst.setString(1, fornecedor.getNome());
-			pst.setString(2, fornecedor.getCnpj());
-			pst.setInt(3, end.getId());
-			Timestamp time = new Timestamp(fornecedor.getDtCadastro().getTime());
-			pst.setTimestamp(4, time);
+			pst.setString(1, clienteFisico.getNome());
+			pst.setString(2, clienteFisico.getCpf());
+			Timestamp time = new Timestamp(clienteFisico.getDtCadastro().getTime());
+			pst.setTimestamp(3, time);
 			pst.executeUpdate();			
 			connection.commit();		
 		} catch (SQLException e) {

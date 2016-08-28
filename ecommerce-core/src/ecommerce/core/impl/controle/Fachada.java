@@ -10,17 +10,17 @@ import ecommerce.core.IDAO;
 import ecommerce.core.IFachada;
 import ecommerce.core.IStrategy;
 import ecommerce.core.aplicacao.Resultado;
-import ecommerce.core.impl.dao.ClienteDAO;
-import ecommerce.core.impl.dao.FornecedorDAO;
+import ecommerce.core.impl.dao.ClienteFisicoDAO;
+import ecommerce.core.impl.dao.ClienteJuricoDAO;
 import ecommerce.core.impl.dao.ProdutoDAO;
 import ecommerce.core.impl.negocio.ComplementarDtCadastro;
 import ecommerce.core.impl.negocio.ValidadorCnpj;
 import ecommerce.core.impl.negocio.ValidadorCpf;
 import ecommerce.core.impl.negocio.ValidadorDadosObrigatoriosFornecedor;
 import ecommerce.core.impl.negocio.ValidadorQtdProduto;
-import ecommerce.dominio.Cliente;
+import ecommerce.dominio.ClienteFisico;
 import ecommerce.dominio.EntidadeDominio;
-import ecommerce.dominio.Fornecedor;
+import ecommerce.dominio.ClienteJuridico;
 import ecommerce.dominio.Produto;
 
 public class Fachada implements IFachada {
@@ -47,13 +47,13 @@ public class Fachada implements IFachada {
 		rns = new HashMap<String, Map<String, List<IStrategy>>>();
 		
 		/* Criando instâncias dos DAOs a serem utilizados*/
-		FornecedorDAO forDAO = new FornecedorDAO();
-		ClienteDAO cliDAO = new ClienteDAO();
+		ClienteJuricoDAO forDAO = new ClienteJuricoDAO();
+		ClienteFisicoDAO cliDAO = new ClienteFisicoDAO();
 		ProdutoDAO proDAO = new ProdutoDAO();
 		
 		/* Adicionando cada dao no MAP indexando pelo nome da classe */
-		daos.put(Fornecedor.class.getName(), forDAO);		
-		daos.put(Cliente.class.getName(), cliDAO);		
+		daos.put(ClienteJuridico.class.getName(), forDAO);		
+		daos.put(ClienteFisico.class.getName(), cliDAO);		
 		daos.put(Produto.class.getName(), proDAO);
 		
 		
@@ -85,7 +85,7 @@ public class Fachada implements IFachada {
 		/* Adiciona o mapa(criado na linha 79) com as regras indexadas pelas operações no mapa geral indexado 
 		 * pelo nome da entidade
 		 */
-		rns.put(Fornecedor.class.getName(), rnsFornecedor);
+		rns.put(ClienteJuridico.class.getName(), rnsFornecedor);
 		
 		/* Criando uma lista para conter as regras de negócio de cliente
 		 * quando a operação for salvar
@@ -106,7 +106,7 @@ public class Fachada implements IFachada {
 		/* Adiciona o mapa(criado na linha 101) com as regras indexadas pelas operações no mapa geral indexado 
 		 * pelo nome da entidade. Observe que este mapa (rns) é o mesmo utilizado na linha 88.
 		 */
-		rns.put(Cliente.class.getName(), rnsCliente);
+		rns.put(ClienteFisico.class.getName(), rnsCliente);
 		
 		/* Criando uma lista para conter as regras de negócio de produto
 		 * quando a operação for salvar

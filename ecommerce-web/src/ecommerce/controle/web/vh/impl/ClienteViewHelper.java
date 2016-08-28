@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import ecommerce.controle.web.vh.IViewHelper;
 import ecommerce.core.aplicacao.Resultado;
-import ecommerce.dominio.Cliente;
+import ecommerce.dominio.ClienteFisico;
 import ecommerce.dominio.EntidadeDominio;
 
 
@@ -26,7 +26,7 @@ public class ClienteViewHelper implements IViewHelper {
 		String id = request.getParameter("txtId");
 		
 		
-		Cliente c = new Cliente();
+		ClienteFisico c = new ClienteFisico();
 		c.setNome(nome);
 		
 		if(id != null && !id.trim().equals("")){
