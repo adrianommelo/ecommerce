@@ -5,7 +5,7 @@ public class Endereco extends EntidadeDominio{
 	private String logradouro;
 	private String numero;
 	private String cep;
-	private String complento;
+	private String complemento;
 	private String bairro;
 	private Cidade cidade;
 	
@@ -27,11 +27,11 @@ public class Endereco extends EntidadeDominio{
 	public void setCep(String cep) {
 		this.cep = cep;
 	}
-	public String getComplento() {
-		return complento;
+	public String getComplemento() {
+		return complemento;
 	}
-	public void setComplento(String complento) {
-		this.complento = complento;
+	public void setComplemento(String complento) {
+		this.complemento = complento;
 	}
 	public String getBairro() {
 		return bairro;
