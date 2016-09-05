@@ -36,7 +36,7 @@ public class Pessoa extends EntidadeDominio {
 	}
 	
 	public String getDataNascimento() {
-		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
 		return (simpleDateFormat.format(dataNascimento));
 	}
 	

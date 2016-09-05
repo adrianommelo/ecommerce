@@ -13,13 +13,14 @@ import ecommerce.dominio.ClienteJuridico;
 public class ClienteJuricoDAO extends AbstractJdbcDAO {
 	
 	public ClienteJuricoDAO() {
-		super("tb_fornecedor", "id_for");		
+		super("tb_cliente_juridico", "id_cli_juridico");		
 	}
 	public void salvar(EntidadeDominio entidade) {
 		openConnection();
 		PreparedStatement pst=null;
 		ClienteJuridico clienteJuridico = (ClienteJuridico)entidade;
 		Endereco end = clienteJuridico.getEndereco();
+		
 		
 		try {
 			connection.setAutoCommit(false);			

@@ -9,24 +9,28 @@ import java.util.List;
 import ecommerce.dominio.ClienteFisico;
 import ecommerce.dominio.Endereco;
 import ecommerce.dominio.EntidadeDominio;
+import ecommerce.dominio.Genero;
+import ecommerce.dominio.Usuario;
 import ecommerce.dominio.ClienteJuridico;
 
 public class ClienteFisicoDAO extends AbstractJdbcDAO {
 	
 	public ClienteFisicoDAO() {
-		super("tb_cliente", "id_cli");		
+		super("tb_cliente_fisico", "id_cli_fisico");		
 	}
 	public void salvar(EntidadeDominio entidade) {
 		openConnection();
 		PreparedStatement pst=null;
 		ClienteFisico clienteFisico = (ClienteFisico)entidade;
-		
+		Endereco end = clienteFisico.getEndereco();
+		Genero gen = clienteFisico.getGenero();
+		Usuario usu = (Usuario) entidade;	
 		
 		try {
 			connection.setAutoCommit(false);			
-					
+	
 			StringBuilder sql = new StringBuilder();
-			sql.append("INSERT INTO tb_cliente(nome, cpf, ");
+			sql.append("INSERT INTO tb_cliente_fisico(nome, cpf, ");
 			sql.append("dt_cadastro) VALUES (?,?,?)");		
 					
 			pst = connection.prepareStatement(sql.toString());

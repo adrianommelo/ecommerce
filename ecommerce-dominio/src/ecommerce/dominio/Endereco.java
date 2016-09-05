@@ -30,8 +30,8 @@ public class Endereco extends EntidadeDominio{
 	public String getComplemento() {
 		return complemento;
 	}
-	public void setComplemento(String complento) {
-		this.complemento = complento;
+	public void setComplemento(String complemento) {
+		this.complemento = complemento;
 	}
 	public String getBairro() {
 		return bairro;
@@ -45,7 +45,6 @@ public class Endereco extends EntidadeDominio{
 	public void setCidade(Cidade cidade) {
 		this.cidade = cidade;
 	}
-	
 	
 	
 }
