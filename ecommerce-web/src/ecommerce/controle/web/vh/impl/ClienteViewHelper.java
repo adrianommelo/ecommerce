@@ -29,7 +29,7 @@ public class ClienteViewHelper implements IViewHelper {
 		String senha = request.getParameter("txtSenha");
 		String confirmaSenha = request.getParameter("txtConfirmarSenha");
 		
-		//falta pegar o valor do radio de generos
+		String rdGenero = request.getParameter("rdGenero");
 		
 		String nome = request.getParameter("txtNome");
 		String cpf = request.getParameter("txtCpf");
@@ -51,7 +51,23 @@ public class ClienteViewHelper implements IViewHelper {
 		//
 		
 		ClienteFisico c = new ClienteFisico();
+		c.setUsuario(new Usuario());
+		c.getUsuario().setEmail(email);
 		
+		
+		//criar um validador para senha
+		if (senha != null && ! senha.equals("") ) {
+			if (confirmaSenha != null && ! confirmaSenha.equals("")
+					&& senha.equals(confirmaSenha)) {
+				
+			}else{
+				
+			}
+		}
+		
+		c.getUsuario().setSenha(senha);
+		
+
 		c.setNome(nome);
 //		if(id != null && !id.trim().equals("")){
 //			c.setId(Integer.parseInt(id));

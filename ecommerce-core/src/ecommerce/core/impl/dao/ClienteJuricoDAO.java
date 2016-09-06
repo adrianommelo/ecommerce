@@ -8,6 +8,7 @@ import java.util.List;
 
 import ecommerce.dominio.Endereco;
 import ecommerce.dominio.EntidadeDominio;
+import ecommerce.dominio.Usuario;
 import ecommerce.dominio.ClienteJuridico;
 
 public class ClienteJuricoDAO extends AbstractJdbcDAO {
@@ -20,6 +21,8 @@ public class ClienteJuricoDAO extends AbstractJdbcDAO {
 		PreparedStatement pst=null;
 		ClienteJuridico clienteJuridico = (ClienteJuridico)entidade;
 		Endereco end = clienteJuridico.getEndereco();
+		Usuario usu = new Usuario();
+		usu = (Usuario)entidade;
 		
 		
 		try {
@@ -37,6 +40,7 @@ public class ClienteJuricoDAO extends AbstractJdbcDAO {
 			pst.setString(1, clienteJuridico.getNome());
 			pst.setString(2, clienteJuridico.getCnpj());
 			pst.setInt(3, end.getId());
+			pst.setInt(4, usu.getId());
 			Timestamp time = new Timestamp(clienteJuridico.getDtCadastro().getTime());
 			pst.setTimestamp(4, time);
 			pst.executeUpdate();			

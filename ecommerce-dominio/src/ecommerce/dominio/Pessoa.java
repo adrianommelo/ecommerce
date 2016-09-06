@@ -10,6 +10,7 @@ public class Pessoa extends EntidadeDominio {
 	private Endereco endereco;
 	private Date dataNascimento;
 	private String telefone;
+	private Usuario usuario;
 	
 	protected Pessoa(){
 		
@@ -56,6 +57,15 @@ public class Pessoa extends EntidadeDominio {
 	}
 	public void setGenero(Genero genero) {
 		this.genero = genero;
+	}
+
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 	
 

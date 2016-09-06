@@ -27,17 +27,31 @@ public class ClienteFisicoDAO extends AbstractJdbcDAO {
 		Usuario usu = (Usuario) entidade;	
 		
 		try {
-			connection.setAutoCommit(false);			
+			connection.setAutoCommit(false);
+			EnderecoDAO endDAO = new EnderecoDAO();
+			endDAO.connection = connection;
+			endDAO.ctrlTransaction = false;
+			endDAO.salvar(end);
+			
+			UsuarioDAO usuarioDAO = new UsuarioDAO();
+			usuarioDAO.connection = connection;
+			usuarioDAO.ctrlTransaction = false;
+			usuarioDAO.salvar(usu);
 	
 			StringBuilder sql = new StringBuilder();
-			sql.append("INSERT INTO tb_cliente_fisico(nome, cpf, ");
-			sql.append("dt_cadastro) VALUES (?,?,?)");		
+			sql.append("INSERT INTO tb_cliente_fisico(nome, cpf, id_gen, id_end, id_usu, ativo, ");
+			sql.append("dt_cadastro) VALUES (?,?,?,?,?,?,?)");		
 					
 			pst = connection.prepareStatement(sql.toString());
 			pst.setString(1, clienteFisico.getNome());
 			pst.setString(2, clienteFisico.getCpf());
+			pst.setInt(3, gen.getId());
+			pst.setInt(4, end.getId());
+			pst.setInt(5, usu.getId());
+			pst.setInt(5, clienteFisico.getAtivo());
+			
 			Timestamp time = new Timestamp(clienteFisico.getDtCadastro().getTime());
-			pst.setTimestamp(3, time);
+			pst.setTimestamp(6, time);
 			pst.executeUpdate();			
 			connection.commit();		
 		} catch (SQLException e) {

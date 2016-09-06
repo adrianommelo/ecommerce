@@ -6,6 +6,8 @@ public class Usuario extends Pessoa {
 
 	private String email;
 	private String senha;
+	private UsuarioTipo usuTipo;
+	
 	
 	public Usuario(){
 	}
@@ -32,6 +34,20 @@ public class Usuario extends Pessoa {
 	}
 	public void setSenha(String senha) {
 		this.senha = senha;
+	}
+
+	/**
+	 * @return the usuTipo
+	 */
+	public UsuarioTipo getUsuTipo() {
+		return usuTipo;
+	}
+
+	/**
+	 * @param usuTipo the usuTipo to set
+	 */
+	public void setUsuTipo(UsuarioTipo usuTipo) {
+		this.usuTipo = usuTipo;
 	}
 	
 }

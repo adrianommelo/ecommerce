@@ -7,6 +7,7 @@ public class EntidadeDominio implements IEntidade{
 	
 	private Integer id;
 	private Date dtCadastro;
+	private Integer ativo;
 	
 	public Integer getId() {
 		return id;
@@ -19,6 +20,18 @@ public class EntidadeDominio implements IEntidade{
 	}
 	public void setDtCadastro(Date dtCadastro) {
 		this.dtCadastro = dtCadastro;
+	}
+	/**
+	 * @return the ativo
+	 */
+	public Integer getAtivo() {
+		return ativo;
+	}
+	/**
+	 * @param ativo the ativo to set
+	 */
+	public void setAtivo(Integer ativo) {
+		this.ativo = ativo;
 	}
 	
 	
