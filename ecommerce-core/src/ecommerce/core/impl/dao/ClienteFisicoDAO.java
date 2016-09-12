@@ -65,8 +65,8 @@ public class ClienteFisicoDAO extends AbstractJdbcDAO {
 			try {
 				pst.close();
 				connection.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
+			} catch (SQLException e2) {
+				e2.printStackTrace();
 			}
 		}		
 
