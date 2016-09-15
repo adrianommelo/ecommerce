@@ -10,7 +10,7 @@ import ecommerce.dominio.Cidade;
 import ecommerce.dominio.Endereco;
 import ecommerce.dominio.EntidadeDominio;
 import ecommerce.dominio.Estado;
-import ecommerce.dominio.Fornecedor;
+import ecommerce.dominio.ClienteJuridico;
 
 
 
@@ -33,7 +33,7 @@ public class FornecedorViewHelper implements IViewHelper {
 		String cep = request.getParameter("txtCep");		
 		String numero = request.getParameter("txtNumero");
 		
-		Fornecedor f = new Fornecedor();
+		ClienteJuridico f = new ClienteJuridico();
 		
 		if(id !=null && !id.trim().equals(""))
 			f.setId(Integer.parseInt(id));
