@@ -4,13 +4,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.sql.Timestamp;
 import java.util.List;
-
 
 import ecommerce.dominio.EntidadeDominio;
 import ecommerce.dominio.Usuario;
+import ecommerce.dominio.UsuarioTipo;
 
 public class UsuarioDAO extends AbstractJdbcDAO {
 
@@ -23,7 +21,7 @@ public class UsuarioDAO extends AbstractJdbcDAO {
 	}
 	
 	public UsuarioDAO(){
-		super("tb_usuario","id_end");
+		super("tb_usuario","id_usu");
 	}
 	
 
@@ -34,22 +32,23 @@ public class UsuarioDAO extends AbstractJdbcDAO {
 		
 		PreparedStatement pst = null;
 		Usuario usuario = (Usuario)entidade;
+		
+		
 		StringBuilder sql = new StringBuilder();
-
-		sql.append("insert into tb_usuario (email, senha, id_usu_tipo, ativo, ");
-		sql.append("dt_cadastro) values (?,?,?,?,?)");
+		sql.append("insert into tb_usuario values (seqid_usu.NEXTVAL, ?, ?, ?, ?, ?)");
 		
 		try {
 			connection.setAutoCommit(false);
+			
 			pst = connection.prepareStatement(sql.toString(),
-					Statement.RETURN_GENERATED_KEYS);
+					new String[] { "id_usu" } );
 
 			pst.setString(1, usuario.getEmail());
 			pst.setString(2, usuario.getSenha());
-			pst.setString(3, "2");
-			pst.setString(4, "1");
-			Timestamp time = new Timestamp(usuario.getDtCadastro().getTime());
-			pst.setTimestamp(5, time);
+			pst.setInt(3, (UsuarioTipo.CLIENTE));
+			usuario.setAtivo(1);
+			pst.setInt(4, usuario.getAtivo());
+			pst.setDate(5, new java.sql.Date(usuario.getDtCadastro().getTime()));
 			pst.executeUpdate();
 			
 			ResultSet rs = pst.getGeneratedKeys();
@@ -62,23 +61,28 @@ public class UsuarioDAO extends AbstractJdbcDAO {
 			connection.commit();
 			
 		} catch (SQLException e) {
+			
 			try {
 				connection.rollback();
 			} catch (SQLException e1) {
 				e1.printStackTrace();
 			}
+			
 			e.printStackTrace();
+			
 		}finally{
 			if(ctrlTransaction){
+				
 				try {
 					pst.close();
 					if(ctrlTransaction){
 						connection.close();
 					}
-				}catch (SQLException ef){
-					ef.printStackTrace();
+				}catch (SQLException e3){
+					e3.printStackTrace();
 				}
-			}
+				
+			}//if
 			
 		}
 		

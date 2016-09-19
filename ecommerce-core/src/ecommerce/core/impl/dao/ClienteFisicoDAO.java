@@ -19,15 +19,26 @@ public class ClienteFisicoDAO extends AbstractJdbcDAO {
 		super("tb_cliente_fisico", "id_cli_fisico");		
 	}
 	public void salvar(EntidadeDominio entidade) {
+		if ( connection == null){
+			openConnection();
+		}
 		openConnection();
 		PreparedStatement pst=null;
 		ClienteFisico clienteFisico = (ClienteFisico)entidade;
 		Endereco end = clienteFisico.getEndereco();
 		Genero gen = clienteFisico.getGenero();
-		Usuario usu = (Usuario) entidade;	
+		Usuario usu = clienteFisico.getUsuario();	
+		
+		StringBuilder sql = new StringBuilder();
+		sql.append("INSERT INTO tb_cliente_fisico VALUES (seqid_cli_fisico.NEXTVAL,"
+				+ " ?, ?, ?, ?, ?, ?, ?, ?)");
 		
 		try {
 			connection.setAutoCommit(false);
+			
+			pst = connection.prepareStatement(sql.toString(), 
+					new String[] { "id_cli_fisico" });
+			
 			EnderecoDAO endDAO = new EnderecoDAO();
 			endDAO.connection = connection;
 			endDAO.ctrlTransaction = false;
@@ -38,14 +49,11 @@ public class ClienteFisicoDAO extends AbstractJdbcDAO {
 			usuarioDAO.ctrlTransaction = false;
 			usuarioDAO.salvar(usu);
 	
-			StringBuilder sql = new StringBuilder();
-			sql.append("INSERT INTO tb_cliente_fisico(nome, cpf, id_gen, id_end, id_usu, ativo, ");
-			sql.append("dt_cadastro) VALUES (?,?,?,?,?,?,?)");		
-					
-			pst = connection.prepareStatement(sql.toString());
+			
 			pst.setString(1, clienteFisico.getNome());
 			pst.setString(2, clienteFisico.getCpf());
-			pst.setInt(3, gen.getId());
+			pst.setDate(3, new java.sql.Date(clienteFisico.getDataNascimento().getTime()));
+			pst.setInt(4, gen.getId());
 			pst.setInt(4, end.getId());
 			pst.setInt(5, usu.getId());
 			pst.setInt(5, clienteFisico.getAtivo());

@@ -36,9 +36,8 @@ public class Pessoa extends EntidadeDominio {
 		this.endereco = endereco;
 	}
 	
-	public String getDataNascimento() {
-		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
-		return (simpleDateFormat.format(dataNascimento));
+	public Date getDataNascimento() {
+		return dataNascimento;
 	}
 	
 	public void setDataNascimento(Date dataNascimento) {

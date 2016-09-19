@@ -33,54 +33,57 @@ public class EnderecoDAO extends AbstractJdbcDAO {
 		}
 		PreparedStatement pst=null;
 		Endereco end = (Endereco)entidade;
-		StringBuilder sql = new StringBuilder();
 		
-		sql.append("INSERT INTO tb_endereco(cidade, estado, ");
-		sql.append("logradouro, numero, cep) ");
-		sql.append(" VALUES (?, ?, ?, ?, ?)");	
+		StringBuilder sql = new StringBuilder();
+		sql.append("INSERT INTO tb_endereco values (seqid_end.NEXTVAL, ?, ?, ?, ?, ?, ?, ?, ?)");	
 		try {
 			connection.setAutoCommit(false);
-			
 					
 			pst = connection.prepareStatement(sql.toString(), 
-					Statement.RETURN_GENERATED_KEYS);
-			
+					new String[] { "id_end" });
 			pst.setString(1, end.getCidade().getNome());
 			pst.setString(2, end.getCidade().getEstado().getNome());
 			pst.setString(3, end.getLogradouro());
 			pst.setString(4, end.getNumero());
-			pst.setString(5, end.getCep());			
+			pst.setString(5, end.getCep());	
+			pst.setString(6, end.getComplemento());
+			end.setAtivo(1);
+			pst.setInt(7, end.getAtivo());
+			pst.setDate(8, new java.sql.Date(end.getDtCadastro().getTime()));
 			pst.executeUpdate();		
 					
 			ResultSet rs = pst.getGeneratedKeys();
 			int idEnd=0;
 			if(rs.next())
 				idEnd = rs.getInt(1);
+			
 			end.setId(idEnd);
 			
-			connection.commit();					
+			connection.commit();
+			
 		} catch (SQLException e) {
+			
 			try {
 				connection.rollback();
 			} catch (SQLException e1) {
 				e1.printStackTrace();
 			}
-			e.printStackTrace();	
+			
+			e.printStackTrace();
+			
 		}finally{
 			if(ctrlTransaction){
 				try {
 					pst.close();
 					if(ctrlTransaction)
 						connection.close();
-				} catch (SQLException e) {
+				} catch (SQLException e2) {
 					// TODO Auto-generated catch block
-					e.printStackTrace();
+					e2.printStackTrace();
 				}
 			}
-			
-			
 		}
-	}
+	}//salvar
 
 	
 	@Override

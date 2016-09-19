@@ -1,12 +1,10 @@
 package ecommerce.core.impl.dao;
 
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-import ecommerce.core.util.ConverteDate;
 import ecommerce.dominio.EntidadeDominio;
 import ecommerce.dominio.Teste;
 
@@ -27,16 +25,19 @@ public class TesteDAO extends AbstractJdbcDAO {
 		Teste ts = (Teste) entidade;
 		
 		StringBuilder sql = new StringBuilder();
-		sql.append("insert into teste values (seqtesteid.NEXTVAL, ?, ?, ?)");
+		sql.append("insert into teste values (seqtesteid.NEXTVAL, ?, ?, ?, ?)");
 		
 		try {
 			
 			connection.setAutoCommit(false);
 			
-			pst = connection.prepareStatement(sql.toString(), new String[] { "IDTESTE" } );
+			pst = connection.prepareStatement(sql.toString(),
+					new String[] { "IDTESTE" } );
 			pst.setString(1, ts.getEmail());
 			pst.setString(2, ts.getSenha());
 			pst.setDate(3, new java.sql.Date(ts.getDtCadastro().getTime()));
+			ts.setAtivo(1);
+			pst.setInt(4, ts.getAtivo());
 			pst.executeUpdate();
 			
 			ResultSet rs = pst.getGeneratedKeys();
@@ -68,7 +69,7 @@ public class TesteDAO extends AbstractJdbcDAO {
 				} catch (SQLException e3) {
 					e3.printStackTrace();
 				}
-			}
+			}//if
 			
 		}
 
