@@ -57,7 +57,6 @@ public class UsuarioDAO extends AbstractJdbcDAO {
 				idUsu = rs.getInt(1);
 			}
 			usuario.setId(idUsu);
-			
 			connection.commit();
 			
 		} catch (SQLException e) {
@@ -71,19 +70,14 @@ public class UsuarioDAO extends AbstractJdbcDAO {
 			e.printStackTrace();
 			
 		}finally{
-			if(ctrlTransaction){
-				
-				try {
-					pst.close();
-					if(ctrlTransaction){
-						connection.close();
-					}
-				}catch (SQLException e3){
-					e3.printStackTrace();
+			try {
+				pst.close();
+				if(ctrlTransaction){
+					connection.close();
 				}
-				
-			}//if
-			
+			}catch (SQLException e3){
+				e3.printStackTrace();
+			}
 		}
 		
 	}//salvar

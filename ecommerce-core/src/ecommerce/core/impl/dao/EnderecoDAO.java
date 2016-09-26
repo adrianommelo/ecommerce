@@ -5,8 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 import ecommerce.dominio.Endereco;
@@ -31,6 +30,7 @@ public class EnderecoDAO extends AbstractJdbcDAO {
 		if(connection == null){
 			openConnection();
 		}
+		openConnection();
 		PreparedStatement pst=null;
 		Endereco end = (Endereco)entidade;
 		
@@ -41,6 +41,7 @@ public class EnderecoDAO extends AbstractJdbcDAO {
 					
 			pst = connection.prepareStatement(sql.toString(), 
 					new String[] { "id_end" });
+			
 			pst.setString(1, end.getCidade().getNome());
 			pst.setString(2, end.getCidade().getEstado().getNome());
 			pst.setString(3, end.getLogradouro());
@@ -49,6 +50,7 @@ public class EnderecoDAO extends AbstractJdbcDAO {
 			pst.setString(6, end.getComplemento());
 			end.setAtivo(1);
 			pst.setInt(7, end.getAtivo());
+			end.setDtCadastro(new Date());
 			pst.setDate(8, new java.sql.Date(end.getDtCadastro().getTime()));
 			pst.executeUpdate();		
 					
@@ -72,15 +74,13 @@ public class EnderecoDAO extends AbstractJdbcDAO {
 			e.printStackTrace();
 			
 		}finally{
-			if(ctrlTransaction){
-				try {
-					pst.close();
-					if(ctrlTransaction)
-						connection.close();
-				} catch (SQLException e2) {
-					// TODO Auto-generated catch block
-					e2.printStackTrace();
-				}
+			try {
+				pst.close();
+				if(ctrlTransaction)
+					connection.close();
+			} catch (SQLException e2) {
+				// TODO Auto-generated catch block
+				e2.printStackTrace();
 			}
 		}
 	}//salvar

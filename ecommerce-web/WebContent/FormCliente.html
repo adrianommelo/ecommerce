@@ -45,11 +45,14 @@
 			<input type="text"id="txtNome" name="txtNome" /> 
 			</br>
 	
-			<form id="rdGenero" action="">
-				<input type="radio" name="rdGenero" value="Masculino" checked> Masculino<br>
-				<input type="radio" name="rdGenero" value="Feminino"> Feminino<br>
-				<input type="radio" name="rdGenero" value="Outro"> Outro
-			</form>
+				
+			<input type="radio" name="rdGenero" value="1" checked />
+			<label for="rdGenero"> Feminino </label>
+			<input type="radio" name="rdGenero" value="2" /> 
+			<label for="rdGenero"> Masculino </label>
+			<input type="radio" name="rdGenero" value="3" />
+			<label for="rdGenero"> Outro </label>
+			<br>
 			
 			<label for="txtCpf">CPF:</label>
 			<input type="text" id="txtCpf"name="txtCpf" /> 
@@ -91,8 +94,10 @@
 			<input type="text" id="txtEstado"name="txtEstado" /> 
 			</br>
 			
-			<input type="submit" id="operacao" name="operacao"value="SALVAR" />
-			<input type="submit" id="operacao" name="operacao"value="EXCLUIR" />
+			<input type="submit" id="operacao" name="operacao" value="SALVAR" />
+			
+			<input type="submit" id="operacao" name="operacao" value="EXCLUIR" />
+			
 		</form>
 	</div>
 </body>

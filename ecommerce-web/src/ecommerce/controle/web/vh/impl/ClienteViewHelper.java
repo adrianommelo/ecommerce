@@ -70,6 +70,11 @@ public class ClienteViewHelper implements IViewHelper {
 		c.setGenero(new Genero());
 		c.getGenero().setGenero(rdGenero);
 		
+		if(c.getGenero() != null && !c.getGenero().equals("")){
+			if(c.getGenero().getGeneros().containsKey(Integer.parseInt(rdGenero)))
+				c.getGenero().setId(Integer.parseInt(rdGenero));
+		}
+		
 		c.setCpf(cpf);
 		c.setDataNascimento(ConverteDate.converteStringDate(dtNascimento));
 		c.setTelefone(telefone);

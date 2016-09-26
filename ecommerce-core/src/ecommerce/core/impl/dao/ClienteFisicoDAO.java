@@ -18,16 +18,24 @@ public class ClienteFisicoDAO extends AbstractJdbcDAO {
 	public ClienteFisicoDAO() {
 		super("tb_cliente_fisico", "id_cli_fisico");		
 	}
-	public void salvar(EntidadeDominio entidade) {
+	
+	@Override
+	public void salvar(EntidadeDominio entidade)  throws SQLException {
 		if ( connection == null){
 			openConnection();
 		}
 		openConnection();
 		PreparedStatement pst=null;
 		ClienteFisico clienteFisico = (ClienteFisico)entidade;
+		
 		Endereco end = clienteFisico.getEndereco();
+		end.setDtCadastro(entidade.getDtCadastro());
+		
 		Genero gen = clienteFisico.getGenero();
+		gen.setDtCadastro(entidade.getDtCadastro());
+		
 		Usuario usu = clienteFisico.getUsuario();	
+		usu.setDtCadastro(entidade.getDtCadastro());
 		
 		StringBuilder sql = new StringBuilder();
 		sql.append("INSERT INTO tb_cliente_fisico VALUES (seqid_cli_fisico.NEXTVAL,"
@@ -54,12 +62,14 @@ public class ClienteFisicoDAO extends AbstractJdbcDAO {
 			pst.setString(2, clienteFisico.getCpf());
 			pst.setDate(3, new java.sql.Date(clienteFisico.getDataNascimento().getTime()));
 			pst.setInt(4, gen.getId());
-			pst.setInt(4, end.getId());
-			pst.setInt(5, usu.getId());
-			pst.setInt(5, clienteFisico.getAtivo());
+			pst.setInt(5, end.getId());
+			pst.setInt(6, usu.getId());
+			clienteFisico.setAtivo(1);
+			pst.setInt(7, clienteFisico.getAtivo());
 			
 			Timestamp time = new Timestamp(clienteFisico.getDtCadastro().getTime());
-			pst.setTimestamp(6, time);
+			pst.setTimestamp(8, time);
+			
 			pst.executeUpdate();			
 			connection.commit();		
 		} catch (SQLException e) {
