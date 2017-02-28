@@ -1,19 +1,19 @@
-<!DOCTYPE html>
+ï»¿<!DOCTYPE html>
 <html>
 <head>
 
-<style>
-	div.format {
-		line-height: 3em;
-		margin: auto;
-	}
-</style>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--<meta charset="ISO-8859-1">-->
 
-<meta charset="ISO-8859-1">
+<link type="text/css" rel="stylesheet" href="resources/css/template.css" />
+<!--<script type="text/javascript" src="/resources/js/script.js"></script>-->
+
 <title>Cadastro</title>
 </head>
 
 <body>
+
+	<h1>NOVO CLIENTE</h1>
 	<div class="format" >
 		<form action="SalvarCliente" method="post">
 			<label for="txtEmail">Email:</label>
@@ -24,7 +24,7 @@
 			<input type="text" id="txtSenha" name="txtSenha" /> 
 			</br>
 
-<!-- 			<label for="txtEmail">Email:</label>
+			<label for="txtEmail">Email:</label>
 			<input type="text" id="txtEmail"name="txtEmail" /> 
 			</br>
 	
@@ -41,7 +41,7 @@
 			</br>
 			 -->
 			 
-			<!-- <label for="txtNome">Nome Completo:</label>
+			<label for="txtNome">Nome Completo:</label>
 			<input type="text"id="txtNome" name="txtNome" /> 
 			</br>
 	
@@ -63,11 +63,11 @@
 			<input type="text" id="txtTelefoneContato"name="txtTelefoneContato" /> 
 			</br>
 			
-			<label for="txtLogradouro">Endereço:</label>
+			<label for="txtLogradouro">EndereÃ§o:</label>
 			<input type="text" id="txtLogradouro"name="txtLogradouro" /> 
 			</br>
 			
-			<label for="txtNumero">Número:</label>
+			<label for="txtNumero">NÃºmero:</label>
 			<input type="text" id="txtNumero"name="txtNumero" /> 
 			</br>
 			
@@ -86,9 +86,15 @@
 			<label for="txtEstado">Estado:</label>
 			<input type="text" id="txtEstado"name="txtEstado" /> 
 			</br>
-					 -->
-			<input type="submit" id="operacao" name="operacao"value="SALVAR" />
-			<input type="submit" id="operacao" name="operacao"value="EXCLUIR" />
+			
+			<span id="button">
+				<button type="submit" id="operacao" name="operacao" value="SALVAR" />
+			</span>
+			
+			<span id="button">
+				<button type="submit" id="operacao" name="operacao" value="EXCLUIR" />
+			</span>
+
 		</form>
 	</div>
 </body>

@@ -2,14 +2,16 @@
 package ecommerce.core.impl.dao;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
+import ecommerce.dominio.ClienteJuridico;
 import ecommerce.dominio.Endereco;
 import ecommerce.dominio.EntidadeDominio;
 import ecommerce.dominio.Usuario;
-import ecommerce.dominio.ClienteJuridico;
 
 public class ClienteJuricoDAO extends AbstractJdbcDAO {
 	
@@ -33,11 +35,12 @@ public class ClienteJuricoDAO extends AbstractJdbcDAO {
 			endDAO.salvar(end);			
 			
 			StringBuilder sql = new StringBuilder();
-			sql.append("INSERT INTO tb_fornecedor(rzsocial, cnpj, end_id, ");
-			sql.append("dt_cadastro) VALUES (?,?,?,?)");		
+
+			sql.append("INSERT INTO tb_cliente_juridico VALUES (seqid_cli_juridico.NEXTVAL, ?, ?, ?, ?, ?, ?)");
 					
-			pst = connection.prepareStatement(sql.toString());
-			pst.setString(1, clienteJuridico.getNome());
+			pst = connection.prepareStatement(sql.toString(), new String[] { "id_cli_juridico" } );
+			pst.setString(1, clienteJuridico.getNome().trim());
+
 			pst.setString(2, clienteJuridico.getCnpj());
 			pst.setInt(3, end.getId());
 			pst.setInt(4, usu.getId());
@@ -79,8 +82,61 @@ public class ClienteJuricoDAO extends AbstractJdbcDAO {
 	 * @see fai.dao.IDAO#consulta(fai.domain.EntidadeDominio)
 	 */
 	@Override
-	public List<EntidadeDominio> consultar(EntidadeDominio entidade) {
-		// TODO Auto-generated method stub
+	public List<EntidadeDominio> consultar(EntidadeDominio entidade) throws SQLException{
+		PreparedStatement pst = null;
+
+		ClienteJuridico clienteJuridico = (ClienteJuridico) entidade;
+		
+		StringBuilder sql = new StringBuilder();
+		if(clienteJuridico != null && clienteJuridico.getCnpj() !=null ){
+			sql.append("SELECT * FROM tb_cliente_juridico ");
+			sql.append("WHERE CNPJ = ? ");
+		}
+		
+		try {
+			openConnection();
+						
+			pst = connection.prepareStatement(sql.toString());
+			if(clienteJuridico != null && clienteJuridico.getCnpj() !=null ){
+				pst.setString(1, clienteJuridico.getCnpj());
+			}
+			ResultSet rs = pst.executeQuery();
+			List<EntidadeDominio> clientesJuridicos = new ArrayList<EntidadeDominio>();
+			
+			while (rs.next()) {
+				ClienteJuridico cj = new ClienteJuridico();
+				cj.setId(rs.getInt("ID_CLI_JURIDICO"));
+				cj.setRazaoSocial(rs.getString("RZSOCIAL"));
+				cj.setCnpj(rs.getString("CNPJ"));
+				
+//				UsuarioDAO usuarioDAO = new UsuarioDAO();
+//				usuarioDAO.connection = connection;
+//				List<EntidadeDominio> usuarios = usuarioDAO.consultar(usu);
+				
+				Usuario usu = new Usuario();
+				cj.setUsuario(usu);
+				cj.getUsuario().setId(rs.getInt("ID_USU"));
+
+//				EnderecoDAO endDAO = new EnderecoDAO();
+//				endDAO.connection = connection;
+//				List<EntidadeDominio> enderecos = endDAO.consultar(end);			
+
+				Endereco end = new Endereco();
+				cj.setEndereco(end);
+				cj.getEndereco().setId(rs.getInt("ID_END"));
+				cj.setAtivo(rs.getInt("ATIVO"));
+				cj.setDtCadastro(rs.getDate("DT_CADASTRO"));
+				clientesJuridicos.add(cj);
+
+			}
+			
+			rs.close();
+			pst.close();
+			return clientesJuridicos;	
+		} catch (SQLException e) {
+			e.printStackTrace();
+			e.getMessage();
+		}
 		return null;
 	}
 

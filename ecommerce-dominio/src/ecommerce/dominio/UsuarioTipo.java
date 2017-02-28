@@ -2,11 +2,11 @@ package ecommerce.dominio;
 
 public class UsuarioTipo extends EntidadeDominio{
 
-	protected static final String ADMINISTRATIVO = "Administrativo";
+	public static final int ADMINISTRATIVO = 1;
 	
-	protected static final String CLIENTE = "Cliente";
+	public static final int CLIENTE = 2;
 	
-	protected static final String FORNECEDOR = "Fornecedor";
+	public static final int FORNECEDOR = 3;
 
 	
 }
