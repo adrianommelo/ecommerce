@@ -10,19 +10,19 @@
 
 <!-- Bootstrap and Font Awesome css -->
 <link rel="stylesheet"
-	href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+	href="resources/css/font-awesome.min.css">
 <link rel="stylesheet"
-	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+	href="resources/css/bootstrap.min.css">
 
 <!-- Css animations  -->
-<link href="css/animate.css" rel="stylesheet">
+<link href="resources/css/animate.css" rel="stylesheet">
 
 <!-- Theme stylesheet, if possible do not edit this stylesheet -->
-<link href="css/style.default.css" rel="stylesheet"
+<link href="resources/css/style.default.css" rel="stylesheet"
 	id="theme-stylesheet">
 
 <!-- Custom stylesheet - for your changes -->
-<link href="css/custom.css" rel="stylesheet">
+<link href="resources/css/custom.css" rel="stylesheet">
 <title>Novo Fornecedor</title>
 </head>
 <body>
@@ -40,35 +40,12 @@
 									class="form-control" id="txtRzSocial" name="txtRzSocial">
 							</div>
 							<div class="form-group">
-								<label for="txtEmail">Email</label> <input type="text"
-									class="form-control" id="txtEmail" name="txtEmail">
+								<label for="txtForEmail">Email</label> <input type="text"
+									class="form-control" id="txtForEmail" name="txtForEmail">
 							</div>
-							<div class="form-group">
-								<label for="txtSenha">Senha</label> <input type="password"
-									class="form-control" id="txtSenha" name="txtSenha">
-							</div>
-							<div class="form-group">
-								<label for="txtConfirmarSenha">Confirmar Senha</label> <input
-									type="password" class="form-control" id="txtConfirmarSenha"
-									name="txtConfirmarSenha">
-							</div>
-
-							<div class="text-center">
-								<input type="radio" name="rdGenero" value="1" checked /> <label
-									for="rdGenero"> Feminino </label> <input type="radio"
-									name="rdGenero" value="2" /> <label for="rdGenero">
-									Masculino </label> <input type="radio" name="rdGenero" value="3" /> <label
-									for="rdGenero"> Outro </label>
-							</div>
-
 							<div class="form-group">
 								<label for="txtCnpj">CNPJ</label> <input type="text"
 									class="form-control" id="txtCnpj" name="txtCnpj">
-							</div>
-							<div class="form-group">
-								<label for="txtDtNascimento">Data Nascimento</label> <input
-									type="text" class="form-control" id="txtDtNascimento"
-									name="txtDtNascimento">
 							</div>
 							<div class="form-group">
 								<label for="txtTelefoneContato">Telefone Contato</label> <input

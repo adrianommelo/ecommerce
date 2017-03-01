@@ -11,7 +11,7 @@ import ecommerce.core.IFachada;
 import ecommerce.core.IStrategy;
 import ecommerce.core.aplicacao.Resultado;
 import ecommerce.core.impl.dao.ClienteFisicoDAO;
-import ecommerce.core.impl.dao.ClienteJuricoDAO;
+import ecommerce.core.impl.dao.FornecedorDAO;
 import ecommerce.core.impl.dao.ProdutoDAO;
 import ecommerce.core.impl.negocio.ComplementarDtCadastro;
 import ecommerce.core.impl.negocio.ValidadorCnpj;
@@ -19,7 +19,7 @@ import ecommerce.core.impl.negocio.ValidadorCpf;
 import ecommerce.core.impl.negocio.ValidadorDadosObrigatoriosFornecedor;
 import ecommerce.core.impl.negocio.ValidadorQtdProduto;
 import ecommerce.dominio.ClienteFisico;
-import ecommerce.dominio.ClienteJuridico;
+import ecommerce.dominio.Fornecedor;
 import ecommerce.dominio.EntidadeDominio;
 import ecommerce.dominio.Produto;
 
@@ -48,14 +48,14 @@ public class Fachada implements IFachada {
 		rns = new HashMap<String, Map<String, List<IStrategy>>>();
 		
 		/* Criando instâncias dos DAOs a serem utilizados*/
-		ClienteJuricoDAO forDAO = new ClienteJuricoDAO();
+		FornecedorDAO forDAO = new FornecedorDAO();
 		ClienteFisicoDAO cliDAO = new ClienteFisicoDAO();
 		ProdutoDAO proDAO = new ProdutoDAO();
 		
 //		TesteDAO testeDAO = new TesteDAO();
 		
 		/* Adicionando cada dao no MAP indexando pelo nome da classe */
-		daos.put(ClienteJuridico.class.getName(), forDAO);
+		daos.put(Fornecedor.class.getName(), forDAO);
 		daos.put(ClienteFisico.class.getName(), cliDAO);
 			//daos.put(Teste.class.getName(), testeDAO);		
 		daos.put(Produto.class.getName(), proDAO);
@@ -89,7 +89,7 @@ public class Fachada implements IFachada {
 		/* Adiciona o mapa(criado na linha 79) com as regras indexadas pelas operações no mapa geral indexado 
 		 * pelo nome da entidade
 		 */
-		rns.put(ClienteJuridico.class.getName(), rnsFornecedor);
+		rns.put(Fornecedor.class.getName(), rnsFornecedor);
 		
 		
 		

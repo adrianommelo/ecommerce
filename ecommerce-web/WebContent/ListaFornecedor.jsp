@@ -51,6 +51,7 @@
 								<th>Razão Social</th>
 								<th>Cnpj</th>
 								<th>Data Cadastro</th>
+								<th>Email</th>
 								<th colspan="2" >Ações</th>
 							</tr>
 							<c:forEach var="cj" items="${resultado.entidades}">
@@ -58,6 +59,7 @@
 									<td>${cj.razaoSocial}</td>
 									<td>${cj.cnpj}</td>
 									<td>${cj.dtCadastro}</td>
+									<td>${cj.usuario.email}</td>
 									<td>
 										<button type="submit" class="btn btn-template-main "
 										id="operacao" name="operacao" value="ALTERAR">

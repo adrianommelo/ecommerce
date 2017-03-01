@@ -28,7 +28,7 @@
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>Servlet</servlet-name>
-		<url-pattern>/ConsultarClienteJuridico</url-pattern>
+		<url-pattern>/ConsultarFornecedor</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>Servlet</servlet-name>

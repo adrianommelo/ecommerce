@@ -22,7 +22,7 @@ import ecommerce.dominio.Fornecedor;
 
 
 
-public class FornecedorViewHelper implements IViewHelper {
+public class FornecedorViewHelper2 implements IViewHelper {
 
 	/** 
 	 * TODO Descrição do Método
@@ -32,9 +32,18 @@ public class FornecedorViewHelper implements IViewHelper {
 	 * @see ecommerce.controle.web.vh.IViewHelper#getEntidade(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
 	 */
 	public EntidadeDominio getEntidade(HttpServletRequest request) {
+		String email = request.getParameter("txtEmail");
+		
+		String senha = request.getParameter("txtSenha");
+		
+		String confirmaSenha = request.getParameter("txtConfirmarSenha");
+
+		
 		String nome = request.getParameter("txtRzSocial");
-		String email = request.getParameter("txtForEmail");		
+		String rdGenero = request.getParameter("rdGenero");
 		String cnpj = request.getParameter("txtCnpj");
+		
+		String dtNascimento = request.getParameter("txtDtNascimento");
 		String telefone = request.getParameter("txtTelefoneContato");
 		String cep = request.getParameter("txtCep");
 		String logradouro = request.getParameter("txtLogradouro");
@@ -44,15 +53,35 @@ public class FornecedorViewHelper implements IViewHelper {
 		String cidade = request.getParameter("txtCidade");
 		String estado = request.getParameter("txtEstado");
 		
-				
+		
+
+		Usuario u = new Usuario();
+		u.setEmail(email);
+		u.setSenha(senha);
+		//confirmarSenha : verificar onde deve ser armarzenado, se deve ser armazenado, etc
+		//
+		
 		Fornecedor f = new Fornecedor();
 		f.setUsuario(new Usuario());
 		f.getUsuario().setEmail(email);
+		f.getUsuario().setSenha(senha);
 		
 
 		f.setNome(nome);
-	
+//		if(id != null && !id.trim().equals("")){
+//			c.setId(Integer.parseInt(id));
+//		}
+		
+		f.setGenero(new Genero());
+		f.getGenero().setGenero(new String());
+		
+		if(f.getGenero() != null && !f.getGenero().getGenero().equals("")){
+			if(f.getGenero().getGeneros().containsKey(Integer.parseInt(rdGenero)))
+				f.getGenero().setId(Integer.parseInt(rdGenero));
+		}
+		
 		f.setCnpj(cnpj);
+		f.setDataNascimento(ConverteDate.converteStringDate(dtNascimento));
 		f.setTelefone(telefone);
 		f.setEndereco(new Endereco());
 		f.getEndereco().setLogradouro(logradouro);

@@ -34,7 +34,7 @@
 					<div class="box">
 						<h2 class="text-uppercase">Consultar Fornecedor</h2>
 						<hr>
-						<form action="ConsultarClienteJuridico" method="post">
+						<form action="ConsultarFornecedor" method="post">
 							<p>Consulte o Fornecedor através de um dos campos abaixo: </p>
 							<div class="form-group">
 								<label for="txtRzSocial">Razão Social</label> <input type="text"

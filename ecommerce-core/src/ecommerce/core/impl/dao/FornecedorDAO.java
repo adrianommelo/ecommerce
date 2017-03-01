@@ -9,26 +9,26 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import ecommerce.dominio.ClienteJuridico;
+import ecommerce.dominio.Fornecedor;
 import ecommerce.dominio.Endereco;
 import ecommerce.dominio.EntidadeDominio;
 import ecommerce.dominio.Usuario;
 
-public class ClienteJuricoDAO extends AbstractJdbcDAO {
+public class FornecedorDAO extends AbstractJdbcDAO {
 	
-	public ClienteJuricoDAO() {
-		super("tb_cliente_juridico", "id_cli_juridico");		
+	public FornecedorDAO() {
+		super("tb_fornecedor", "id_fornecedor");		
 	}
 	public void salvar(EntidadeDominio entidade) {
 		openConnection();
 		PreparedStatement pst=null;
 		
-		ClienteJuridico clienteJuridico = (ClienteJuridico) entidade;
+		Fornecedor fornecedor = (Fornecedor) entidade;
 		
-		Endereco end = clienteJuridico.getEndereco();
+		Endereco end = fornecedor.getEndereco();
 		end.setDtCadastro(entidade.getDtCadastro());
 		
-		Usuario usu = clienteJuridico.getUsuario();
+		Usuario usu = fornecedor.getUsuario();
 		usu.setDtCadastro(entidade.getDtCadastro());
 		
 		
@@ -40,24 +40,20 @@ public class ClienteJuricoDAO extends AbstractJdbcDAO {
 			endDAO.ctrlTransaction = false;
 			endDAO.salvar(end);			
 			
-			UsuarioDAO usuarioDAO = new UsuarioDAO();
-			usuarioDAO.connection = connection;
-			usuarioDAO.ctrlTransaction = false;
-			usuarioDAO.salvar(usu);		
 			
 			StringBuilder sql = new StringBuilder();
-			sql.append("INSERT INTO tb_cliente_juridico VALUES (seqid_cli_juridico.NEXTVAL, ?, ?, ?, ?, ?, ?)");
+			sql.append("INSERT INTO tb_fornecedor VALUES (seqid_fornecedor.NEXTVAL, ?, ?, ?, ?, ?, ?)");
 					
 			pst = connection.prepareStatement(sql.toString(),
-					new String[] { "id_cli_juridico" } );
+					new String[] { "id_fornecedor" } );
 			
-			pst.setString(1, clienteJuridico.getNome());
-			pst.setString(2, clienteJuridico.getCnpj());
-			pst.setInt(3, usu.getId());
-			pst.setInt(4, end.getId());
-			clienteJuridico.setAtivo(1);
-			pst.setInt(5, clienteJuridico.getAtivo());
-			pst.setDate(6, new java.sql.Date(clienteJuridico.getDtCadastro().getTime()));
+			pst.setString(1, fornecedor.getNome());
+			pst.setString(2, fornecedor.getCnpj());
+			pst.setInt(3, end.getId());
+			fornecedor.setAtivo(1);
+			pst.setInt(4, fornecedor.getAtivo());
+			pst.setDate(5, new java.sql.Date(fornecedor.getDtCadastro().getTime()));
+			pst.setString(6, fornecedor.getUsuario().getEmail());
 			
 			pst.executeUpdate();			
 			
@@ -67,7 +63,7 @@ public class ClienteJuricoDAO extends AbstractJdbcDAO {
 				idFor = rs.getInt(1);
 			}
 			
-			clienteJuridico.setId(idFor);
+			fornecedor.setId(idFor);
 
 			connection.commit();			
 		} catch (SQLException e) {
@@ -96,27 +92,27 @@ public class ClienteJuricoDAO extends AbstractJdbcDAO {
 	public void alterar(EntidadeDominio entidade) {
 		PreparedStatement pst = null;
 		
-		ClienteJuridico clienteJuridico = (ClienteJuridico) entidade;
+		Fornecedor fornecedor = (Fornecedor) entidade;
 		
 		StringBuilder sql = new StringBuilder();
 		
-		if(clienteJuridico != null && clienteJuridico.getRazaoSocial() != null 
-				&& !clienteJuridico.getRazaoSocial().equals("")) {
-			sql.append("UPDATE tb_cliente_juridico ");
+		if(fornecedor != null && fornecedor.getRazaoSocial() != null 
+				&& !fornecedor.getRazaoSocial().equals("")) {
+			sql.append("UPDATE tb_fornecedor ");
 			sql.append("SET RZSOCIAL = ? ");
 		}
-		if(clienteJuridico != null && clienteJuridico.getCnpj() != null 
-				&& !clienteJuridico.getCnpj().equals("")) {
+		if(fornecedor != null && fornecedor.getCnpj() != null 
+				&& !fornecedor.getCnpj().equals("")) {
 			sql.append(", CNPJ = ? ");
 		}	
-		if(clienteJuridico != null && clienteJuridico.getId() != null) {
-			sql.append("WHERE id_cli_juri = ?");			
+		if(fornecedor != null && fornecedor.getId() != null) {
+			sql.append("WHERE id_fornecedor = ?");			
 		}
 		
 		try {
 			openConnection();
 			
-			//TODO REALIZAR O RESTO
+			//TODO REALIZAR O RESTO, falta implementar uma maneira de alterar o endereço deste fornecedor
 			
 			if (ctrlTransaction)
 				connection.commit();
@@ -153,54 +149,50 @@ public class ClienteJuricoDAO extends AbstractJdbcDAO {
 	public List<EntidadeDominio> consultar(EntidadeDominio entidade) throws SQLException{
 		PreparedStatement pst = null;
 
-		ClienteJuridico clienteJuridico = (ClienteJuridico) entidade;
+		Fornecedor fornecedor = (Fornecedor) entidade;
 		
 		StringBuilder sql = new StringBuilder();
-		if(clienteJuridico != null && clienteJuridico.getCnpj() !=null ){
-			sql.append("SELECT * FROM tb_cliente_juridico ");
+		if(fornecedor != null && fornecedor.getCnpj() !=null ){
+			sql.append("SELECT * FROM tb_fornecedor ");
 			sql.append("WHERE CNPJ = ? ");
 		}
 		
 		try {
 			openConnection();
-						
 			pst = connection.prepareStatement(sql.toString());
-			if(clienteJuridico != null && clienteJuridico.getCnpj() !=null ){
-				pst.setString(1, clienteJuridico.getCnpj());
+			
+			if(fornecedor != null && fornecedor.getCnpj() !=null ){
+				pst.setString(1, fornecedor.getCnpj());
 			}
 			ResultSet rs = pst.executeQuery();
-			List<EntidadeDominio> clientesJuridicos = new ArrayList<EntidadeDominio>();
+			List<EntidadeDominio> fornecedores = new ArrayList<EntidadeDominio>();
 			
 			while (rs.next()) {
-				ClienteJuridico cj = new ClienteJuridico();
-				cj.setId(rs.getInt("ID_CLI_JURIDICO"));
-				cj.setRazaoSocial(rs.getString("RZSOCIAL"));
-				cj.setCnpj(rs.getString("CNPJ"));
+				Fornecedor f = new Fornecedor();
+				f.setId(rs.getInt("ID_FORNECEDOR"));
+				f.setRazaoSocial(rs.getString("RZSOCIAL"));
+				f.setCnpj(rs.getString("CNPJ"));
 				
-//				UsuarioDAO usuarioDAO = new UsuarioDAO();
-//				usuarioDAO.connection = connection;
-//				List<EntidadeDominio> usuarios = usuarioDAO.consultar(usu);
-				
-				Usuario usu = new Usuario();
-				cj.setUsuario(usu);
-				cj.getUsuario().setId(rs.getInt("ID_USU"));
-
 //				EnderecoDAO endDAO = new EnderecoDAO();
 //				endDAO.connection = connection;
 //				List<EntidadeDominio> enderecos = endDAO.consultar(end);			
 
 				Endereco end = new Endereco();
-				cj.setEndereco(end);
-				cj.getEndereco().setId(rs.getInt("ID_END"));
-				cj.setAtivo(rs.getInt("ATIVO"));
-				cj.setDtCadastro(rs.getDate("DT_CADASTRO"));
-				clientesJuridicos.add(cj);
+				f.setEndereco(end);
+				f.getEndereco().setId(rs.getInt("ID_END"));
+				f.setAtivo(rs.getInt("ATIVO"));
+				f.setDtCadastro(rs.getDate("DT_CADASTRO"));
+				f.setUsuario(new Usuario());
+				f.getUsuario().setEmail(rs.getString("F_EMAI"));
+				
+				fornecedores.add(f);
 
 			}
 			
 			rs.close();
 			pst.close();
-			return clientesJuridicos;	
+			return fornecedores;	
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 			e.getMessage();

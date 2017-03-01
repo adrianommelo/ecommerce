@@ -103,8 +103,8 @@ public class UsuarioDAO extends AbstractJdbcDAO {
 		
 		if(usu.getId() != null) {
 			sql.append("select * from TB_USUARIO usu ");
-	//		sql.append("TB_CLIENTE_JURIDICO cj ");
-	//		sql.append("AND cj.ID_USU = e.ID_USU ");
+	//		sql.append("TB_FORNECEDOR f ");
+	//		sql.append("AND f.ID_USU = e.ID_USU ");
 			sql.append("WHERE usu.ID_USU = ? ");
 			sql.append("AND e.ATIVO = 1 ");
 		}
