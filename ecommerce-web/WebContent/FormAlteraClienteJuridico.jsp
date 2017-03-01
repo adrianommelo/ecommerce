@@ -23,7 +23,7 @@
 
 <!-- Custom stylesheet - for your changes -->
 <link href="css/custom.css" rel="stylesheet">
-<title>Novo Fornecedor</title>
+<title>Alterar Fornecedor</title>
 </head>
 <body>
 	<div id="content">
@@ -32,9 +32,9 @@
 			<div class="row">
 				<div class="col-md-6">
 					<div class="box">
-						<h2 class="text-uppercase">Novo Fornecedor</h2>
+						<h2 class="text-uppercase">Novo Cliente Jurídico</h2>
 						<hr>
-						<form action="SalvarFornecedor" method="post">
+						<form action="AlterarFornecedor" method="post">
 							<div class="form-group">
 								<label for="txtRzSocial">Razão Social</label> <input type="text"
 									class="form-control" id="txtRzSocial" name="txtRzSocial">
@@ -43,33 +43,12 @@
 								<label for="txtEmail">Email</label> <input type="text"
 									class="form-control" id="txtEmail" name="txtEmail">
 							</div>
-							<div class="form-group">
-								<label for="txtSenha">Senha</label> <input type="password"
-									class="form-control" id="txtSenha" name="txtSenha">
-							</div>
-							<div class="form-group">
-								<label for="txtConfirmarSenha">Confirmar Senha</label> <input
-									type="password" class="form-control" id="txtConfirmarSenha"
-									name="txtConfirmarSenha">
-							</div>
-
-							<div class="text-center">
-								<input type="radio" name="rdGenero" value="1" checked /> <label
-									for="rdGenero"> Feminino </label> <input type="radio"
-									name="rdGenero" value="2" /> <label for="rdGenero">
-									Masculino </label> <input type="radio" name="rdGenero" value="3" /> <label
-									for="rdGenero"> Outro </label>
-							</div>
-
+						
 							<div class="form-group">
 								<label for="txtCnpj">CNPJ</label> <input type="text"
 									class="form-control" id="txtCnpj" name="txtCnpj">
 							</div>
-							<div class="form-group">
-								<label for="txtDtNascimento">Data Nascimento</label> <input
-									type="text" class="form-control" id="txtDtNascimento"
-									name="txtDtNascimento">
-							</div>
+							
 							<div class="form-group">
 								<label for="txtTelefoneContato">Telefone Contato</label> <input
 									type="text" class="form-control" id="txtTelefoneContato"
@@ -107,8 +86,8 @@
 
 							<div class="text-center">
 								<button type="submit" class="btn btn-template-main"
-									id="operacao" name="operacao" value="SALVAR">
-									SALVAR
+									id="operacao" name="operacao" value="ALTERAR">
+									ALTERAR
 								</button>
 								
 							</div>

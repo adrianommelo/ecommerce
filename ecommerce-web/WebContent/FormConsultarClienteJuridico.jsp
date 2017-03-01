@@ -23,7 +23,7 @@
 
 <!-- Custom stylesheet - for your changes -->
 <link href="css/custom.css" rel="stylesheet">
-<title>Novo Fornecedor</title>
+<title>Fornecedor</title>
 </head>
 <body>
 	<div id="content">
@@ -32,10 +32,10 @@
 			<div class="row">
 				<div class="col-md-6">
 					<div class="box">
-						<h2 class="text-uppercase">Consultar Cliente Jurídico</h2>
+						<h2 class="text-uppercase">Consultar Fornecedor</h2>
 						<hr>
 						<form action="ConsultarClienteJuridico" method="post">
-							<p>Consulte o Cliente Jurícido através de um dos campos abaixo: </p>
+							<p>Consulte o Fornecedor através de um dos campos abaixo: </p>
 							<div class="form-group">
 								<label for="txtRzSocial">Razão Social</label> <input type="text"
 									class="form-control" id="txtRzSocial" name="txtRzSocial">

@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import ecommerce.dominio.ClienteJuridico;
@@ -21,10 +22,15 @@ public class ClienteJuricoDAO extends AbstractJdbcDAO {
 	public void salvar(EntidadeDominio entidade) {
 		openConnection();
 		PreparedStatement pst=null;
-		ClienteJuridico clienteJuridico = (ClienteJuridico)entidade;
+		
+		ClienteJuridico clienteJuridico = (ClienteJuridico) entidade;
+		
 		Endereco end = clienteJuridico.getEndereco();
-		Usuario usu = new Usuario();
-		usu = (Usuario)entidade;
+		end.setDtCadastro(entidade.getDtCadastro());
+		
+		Usuario usu = clienteJuridico.getUsuario();
+		usu.setDtCadastro(entidade.getDtCadastro());
+		
 		
 		
 		try {
@@ -34,20 +40,36 @@ public class ClienteJuricoDAO extends AbstractJdbcDAO {
 			endDAO.ctrlTransaction = false;
 			endDAO.salvar(end);			
 			
+			UsuarioDAO usuarioDAO = new UsuarioDAO();
+			usuarioDAO.connection = connection;
+			usuarioDAO.ctrlTransaction = false;
+			usuarioDAO.salvar(usu);		
+			
 			StringBuilder sql = new StringBuilder();
-
 			sql.append("INSERT INTO tb_cliente_juridico VALUES (seqid_cli_juridico.NEXTVAL, ?, ?, ?, ?, ?, ?)");
 					
-			pst = connection.prepareStatement(sql.toString(), new String[] { "id_cli_juridico" } );
-			pst.setString(1, clienteJuridico.getNome().trim());
-
+			pst = connection.prepareStatement(sql.toString(),
+					new String[] { "id_cli_juridico" } );
+			
+			pst.setString(1, clienteJuridico.getNome());
 			pst.setString(2, clienteJuridico.getCnpj());
-			pst.setInt(3, end.getId());
-			pst.setInt(4, usu.getId());
-			Timestamp time = new Timestamp(clienteJuridico.getDtCadastro().getTime());
-			pst.setTimestamp(4, time);
+			pst.setInt(3, usu.getId());
+			pst.setInt(4, end.getId());
+			clienteJuridico.setAtivo(1);
+			pst.setInt(5, clienteJuridico.getAtivo());
+			pst.setDate(6, new java.sql.Date(clienteJuridico.getDtCadastro().getTime()));
+			
 			pst.executeUpdate();			
-			connection.commit();		
+			
+			ResultSet rs = pst.getGeneratedKeys();
+			int idFor = 0;
+			if (rs.next()) {
+				idFor = rs.getInt(1);
+			}
+			
+			clienteJuridico.setId(idFor);
+
+			connection.commit();			
 		} catch (SQLException e) {
 			try {
 				connection.rollback();
@@ -72,7 +94,53 @@ public class ClienteJuricoDAO extends AbstractJdbcDAO {
 	 */
 	@Override
 	public void alterar(EntidadeDominio entidade) {
-		// TODO Auto-generated method stub
+		PreparedStatement pst = null;
+		
+		ClienteJuridico clienteJuridico = (ClienteJuridico) entidade;
+		
+		StringBuilder sql = new StringBuilder();
+		
+		if(clienteJuridico != null && clienteJuridico.getRazaoSocial() != null 
+				&& !clienteJuridico.getRazaoSocial().equals("")) {
+			sql.append("UPDATE tb_cliente_juridico ");
+			sql.append("SET RZSOCIAL = ? ");
+		}
+		if(clienteJuridico != null && clienteJuridico.getCnpj() != null 
+				&& !clienteJuridico.getCnpj().equals("")) {
+			sql.append(", CNPJ = ? ");
+		}	
+		if(clienteJuridico != null && clienteJuridico.getId() != null) {
+			sql.append("WHERE id_cli_juri = ?");			
+		}
+		
+		try {
+			openConnection();
+			
+			//TODO REALIZAR O RESTO
+			
+			if (ctrlTransaction)
+				connection.commit();
+			
+		} catch (SQLException e) {
+			
+			try {
+				connection.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+			
+			e.printStackTrace();
+			
+		}finally{
+			try {
+				pst.close();
+				if(ctrlTransaction)
+					connection.close();
+			} catch (SQLException e2) {
+				// TODO Auto-generated catch block
+				e2.printStackTrace();
+			}
+		}
 		
 	}
 	/** 

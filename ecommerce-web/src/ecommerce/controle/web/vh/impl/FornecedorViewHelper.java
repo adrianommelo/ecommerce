@@ -115,12 +115,16 @@ public class FornecedorViewHelper implements IViewHelper {
 				&& operacao.equals("SALVAR")){
 			resultado.setMsg("Novo Cliente Juridico cadastrado com sucesso!");
 			request.getSession().setAttribute("resultado", resultado);
-			d = request.getRequestDispatcher("FormClienteJuri.html");
+			d = request.getRequestDispatcher("FormConsultarClienteJuridico.jsp");
 		}
 		
 		if(resultado.getMsg() == null && operacao.equals("CONSULTAR")) {
 			request.getSession().setAttribute("resultado", resultado);
 			d = request.getRequestDispatcher("ListaClienteJuridico.jsp");
+		}
+		if(resultado.getMsg() == null && operacao.equals("ALTERAR")) {
+			request.getSession().setAttribute("resultado", resultado);
+			d = request.getRequestDispatcher("FormAlteraClienteJuridico.jsp");
 		}
 		
 	

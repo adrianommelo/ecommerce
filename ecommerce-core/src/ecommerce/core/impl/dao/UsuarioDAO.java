@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,7 +22,7 @@ public class UsuarioDAO extends AbstractJdbcDAO {
 	}
 	
 	public UsuarioDAO(){
-		super("tb_usuario","id_end");
+		super("tb_usuario","id_usu");
 	}
 	
 
@@ -34,15 +33,16 @@ public class UsuarioDAO extends AbstractJdbcDAO {
 		
 		PreparedStatement pst = null;
 		Usuario usuario = (Usuario)entidade;
+		
+		
 		StringBuilder sql = new StringBuilder();
-
-		sql.append("insert into tb_usuario (email, senha, id_usu_tipo, ativo, ");
-		sql.append("dt_cadastro) values (?,?,?,?,?)");
+		sql.append("insert into tb_usuario values (seqid_usu.NEXTVAL, ?, ?, ?, ?, ?)");
 		
 		try {
 			connection.setAutoCommit(false);
+			
 			pst = connection.prepareStatement(sql.toString(),
-					Statement.RETURN_GENERATED_KEYS);
+					new String[] { "id_usu" } );
 
 			pst.setString(1, usuario.getEmail());
 			pst.setString(2, usuario.getSenha());
@@ -50,7 +50,6 @@ public class UsuarioDAO extends AbstractJdbcDAO {
 			usuario.setAtivo(1);
 			pst.setInt(4, usuario.getAtivo());
 			pst.setDate(5, new java.sql.Date(usuario.getDtCadastro().getTime()));
-
 			pst.executeUpdate();
 			
 			ResultSet rs = pst.getGeneratedKeys();
@@ -60,7 +59,6 @@ public class UsuarioDAO extends AbstractJdbcDAO {
 			}
 			usuario.setId(idUsu);
 			
-
 			if(ctrlTransaction)
 				connection.commit();
 			

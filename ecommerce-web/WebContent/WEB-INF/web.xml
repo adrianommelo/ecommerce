@@ -26,6 +26,14 @@
 		<servlet-name>Servlet</servlet-name>
 		<url-pattern>/SalvarFornecedor</url-pattern>
 	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>Servlet</servlet-name>
+		<url-pattern>/ConsultarClienteJuridico</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>Servlet</servlet-name>
+		<url-pattern>/AlterarFornecedor</url-pattern>
+	</servlet-mapping>
 
 	<servlet-mapping>
 		<servlet-name>Servlet</servlet-name>
@@ -37,9 +45,5 @@
 		<url-pattern>/SalvarProduto</url-pattern>
 	</servlet-mapping>
 
-	<servlet-mapping>
-		<servlet-name>Servlet</servlet-name>
-		<url-pattern>/ConsultarClienteJuridico</url-pattern>
-	</servlet-mapping>
 
 </web-app>
