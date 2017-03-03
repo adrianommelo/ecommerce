@@ -59,11 +59,11 @@
 							<c:forEach var="fornecedor" items="${resultado.entidades}">
 								<tr id="fornecedor${fornecedor.id}">
 									<!-- <input type="hidden" name="txtId" value="${fornecedor.id}"> -->
-									<td id="txtId">${fornecedor.id}</td>
-									<td id="txtRzSocial">${fornecedor.razaoSocial}</td>
-									<td id="txtCnpj">${fornecedor.cnpj}</td>
-									<td id="txtDtCadastro">${fornecedor.dtCadastro}</td>
-									<td id="txtForEmail">${fornecedor.usuario.email}</td>
+									<td id="txtId" nowrap="nowrap">${fornecedor.id}</td>
+									<td id="txtRzSocial" nowrap="nowrap">${fornecedor.razaoSocial}</td>
+									<td id="txtCnpj" nowrap="nowrap">${fornecedor.cnpj}</td>
+									<td id="txtDtCadastro" nowrap="nowrap">${fornecedor.dtCadastro}</td>
+									<td id="txtForEmail" nowrap="nowrap">${fornecedor.usuario.email}</td>
 									<td>
 										<a class="btn-template-main" 
 										href="/ecommerce-web/AlterarFornecedor?txtId=${fornecedor.id}&operacao=CONSULTAR">ALTERAR</a>
