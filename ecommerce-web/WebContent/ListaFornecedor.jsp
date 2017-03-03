@@ -19,7 +19,7 @@
 <link rel="stylesheet"
 	href="resources/css/font-awesome.min.css">
 <link rel="stylesheet"
-	href="resources/css/bootstrap.min.css">
+	href="resources/css/bootstrap.css">
 
 <!-- Css animations  -->
 <link href="resources/css/animate.css" rel="stylesheet">
@@ -44,27 +44,34 @@
 			<div class="row">
 				<div class="col-md-6">
 					<div class="box">
-						<h2 class="text-uppercase">Cliente(s) encontrados</h2>
+						<h2 class="text-uppercase">Fornecedor(es) encontrado(s)</h2>
+						<!-- <form action="AlterarFornecedor" method="post"> -->
 						
 						<table class="table">
 							<tr>
+								<th>Id</th>
 								<th>Razão Social</th>
 								<th>Cnpj</th>
 								<th>Data Cadastro</th>
 								<th>Email</th>
 								<th colspan="2" >Ações</th>
 							</tr>
-							<c:forEach var="cj" items="${resultado.entidades}">
-								<tr id="cli_juri${cj.id}">
-									<td>${cj.razaoSocial}</td>
-									<td>${cj.cnpj}</td>
-									<td>${cj.dtCadastro}</td>
-									<td>${cj.usuario.email}</td>
+							<c:forEach var="fornecedor" items="${resultado.entidades}">
+								<tr id="fornecedor${fornecedor.id}">
+									<!-- <input type="hidden" name="txtId" value="${fornecedor.id}"> -->
+									<td id="txtId">${fornecedor.id}</td>
+									<td id="txtRzSocial">${fornecedor.razaoSocial}</td>
+									<td id="txtCnpj">${fornecedor.cnpj}</td>
+									<td id="txtDtCadastro">${fornecedor.dtCadastro}</td>
+									<td id="txtForEmail">${fornecedor.usuario.email}</td>
 									<td>
-										<button type="submit" class="btn btn-template-main "
+										<a class="btn-template-main" 
+										href="/ecommerce-web/AlterarFornecedor?txtId=${fornecedor.id}&operacao=CONSULTAR">ALTERAR</a>
+										<!--  <button type="submit" class="btn btn-template-main "
 										id="operacao" name="operacao" value="ALTERAR">
 										ALTERAR
 										</button>
+										 -->
 									</td>
 									<td>
 										<button type="submit" class="btn btn-template-main"
@@ -75,6 +82,7 @@
 								</tr>
 							</c:forEach>
 						</table>
+						<!-- </form> -->
 					</div>
 				</div>
 			</div>

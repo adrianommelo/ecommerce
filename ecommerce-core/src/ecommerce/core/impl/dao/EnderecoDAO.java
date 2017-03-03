@@ -113,11 +113,8 @@ public class EnderecoDAO extends AbstractJdbcDAO {
 		PreparedStatement pst = null;
 		
 		if(end.getId() != null) {
-			sql.append("select * from TB_ENDERECO e ");
-	//		sql.append("TB_FORNECEDOR f ");
-	//		sql.append("AND f.ID_USU = e.ID_USU ");
-			sql.append("AND e.ID_USU = ? ");
-			sql.append("AND e.ATIVO = 1 ");
+			sql.append("SELECT * FROM TB_ENDERECO ");
+			sql.append("WHERE ID_END = ? ");
 		}
 		
 		try {
@@ -142,17 +139,7 @@ public class EnderecoDAO extends AbstractJdbcDAO {
 				e.setComplemento(rs.getString("COMPLEMENTO"));
 				e.setAtivo(rs.getInt("ATIVO"));
 				e.setDtCadastro(rs.getDate("DT_CADASTRO"));
-				enderecos.add(e);
-//				System.out.println(rs.getString("ID_END")+" ");
-//				System.out.println(rs.getString("CIDADE")+" ");
-//				System.out.println(rs.getString("ESTADO")+" ");
-//				System.out.println(rs.getString("LOGRADOURO")+" ");
-//				System.out.println(rs.getString("NUMERO")+" ");
-//				System.out.println(rs.getString("CEP")+" ");
-//				System.out.println(rs.getString("COMPLEMENTO")+" ");
-//				System.out.println(rs.getString("ATIVO")+" ");
-//				System.out.println(rs.getString("DT_CADASTRO"));
-				
+				enderecos.add(e);				
 			}
 			
 			return enderecos;

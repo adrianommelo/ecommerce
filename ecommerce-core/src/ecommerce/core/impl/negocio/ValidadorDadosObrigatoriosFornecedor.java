@@ -12,7 +12,7 @@ public class ValidadorDadosObrigatoriosFornecedor implements IStrategy{
 		if(entidade instanceof Fornecedor){
 			Fornecedor fornecedor = (Fornecedor)entidade;
 			
-			String nome = fornecedor.getNome();
+			String nome = fornecedor.getRazaoSocial();
 			String logradouro = fornecedor.getEndereco().getLogradouro();
 			String cnpj = fornecedor.getCnpj();
 			String cidade = fornecedor.getEndereco().getCidade().getNome();

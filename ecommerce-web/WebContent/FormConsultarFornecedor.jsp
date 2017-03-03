@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -36,13 +39,18 @@
 						<hr>
 						<form action="ConsultarFornecedor" method="post">
 							<p>Consulte o Fornecedor através de um dos campos abaixo: </p>
+							
+							<div class="form-group">
+								<label for="txtId">Id</label> <input type="text"
+									class="form-control" id="txtId" name="txtId" />
+							</div>							
 							<div class="form-group">
 								<label for="txtRzSocial">Razão Social</label> <input type="text"
-									class="form-control" id="txtRzSocial" name="txtRzSocial">
+									class="form-control" id="txtRzSocial" name="txtRzSocial" />
 							</div>							
 							<div class="form-group">
 								<label for="txtCnpj">CNPJ</label> <input type="text"
-									class="form-control" id="txtCnpj" name="txtCnpj">
+									class="form-control" id="txtCnpj" name="txtCnpj" />
 							</div>
 							
 							<div class="text-center">
@@ -56,8 +64,9 @@
 				</div>
 			</div>
 			<!-- /.row -->
-
+			
 		</div>
+		<c:import url="ListaFornecedor.jsp" />
 		<!-- /.container -->
 	</div>
 	<!-- /#content -->

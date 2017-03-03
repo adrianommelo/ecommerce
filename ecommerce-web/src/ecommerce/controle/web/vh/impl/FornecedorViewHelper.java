@@ -8,6 +8,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.sun.media.sound.RealTimeSequencerProvider;
+
 import ecommerce.controle.web.vh.IViewHelper;
 import ecommerce.core.aplicacao.Resultado;
 import ecommerce.core.util.ConverteDate;
@@ -32,6 +34,8 @@ public class FornecedorViewHelper implements IViewHelper {
 	 * @see ecommerce.controle.web.vh.IViewHelper#getEntidade(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
 	 */
 	public EntidadeDominio getEntidade(HttpServletRequest request) {
+		
+		String id = request.getParameter("txtId");
 		String nome = request.getParameter("txtRzSocial");
 		String email = request.getParameter("txtForEmail");		
 		String cnpj = request.getParameter("txtCnpj");
@@ -46,24 +50,40 @@ public class FornecedorViewHelper implements IViewHelper {
 		
 				
 		Fornecedor f = new Fornecedor();
-		f.setUsuario(new Usuario());
-		f.getUsuario().setEmail(email);
 		
-
-		f.setNome(nome);
-	
-		f.setCnpj(cnpj);
-		f.setTelefone(telefone);
+		if(id != null && !id.equals(""))
+			f.setId(Integer.parseInt(id));
+		if(nome != null && !nome.equals(""))
+			f.setRazaoSocial(nome);
+		
+		f.setUsuario(new Usuario());
+		if(email != null && !email.equals(""))
+			f.getUsuario().setEmail(email);
+		if(cnpj != null && !cnpj.equals(""))
+			f.setCnpj(cnpj);
+		if(telefone != null && !telefone.equals(""))
+			f.setTelefone(telefone);
+		
 		f.setEndereco(new Endereco());
-		f.getEndereco().setLogradouro(logradouro);
-		f.getEndereco().setNumero(numero);
-		f.getEndereco().setCep(cep);
-		f.getEndereco().setComplemento(complemento);
-		f.getEndereco().setBairro(bairro);
+		if(logradouro != null && !logradouro.equals(""))
+			f.getEndereco().setLogradouro(logradouro);
+		if(numero != null && !numero.equals(""))
+			f.getEndereco().setNumero(numero);
+		if(cep != null && !cep.equals(""))
+			f.getEndereco().setCep(cep);
+		if(complemento != null && !complemento.equals(""))
+			f.getEndereco().setComplemento(complemento);
+		if(bairro != null && !bairro.equals(""))
+			f.getEndereco().setBairro(bairro);
+		
 		f.getEndereco().setCidade(new Cidade());
-		f.getEndereco().getCidade().setNome(cidade);
+		if(cidade != null && !cidade.equals(""))
+			f.getEndereco().getCidade().setNome(cidade);
+		
 		f.getEndereco().getCidade().setEstado(new Estado());
-		f.getEndereco().getCidade().getEstado().setNome(estado);
+		if(estado != null && !estado.equals(""))
+			f.getEndereco().getCidade().getEstado().setNome(estado);
+		
 		
 		return f;
 	}
@@ -89,9 +109,15 @@ public class FornecedorViewHelper implements IViewHelper {
 			d = request.getRequestDispatcher("FormConsultarFornecedor.jsp");
 		}
 		
-		if(resultado.getMsg() == null && operacao.equals("CONSULTAR")) {
+		if(resultado.getMsg() == null && operacao.equals("CONSULTAR")
+				&& request.getRequestURI().equals("/ecommerce-web/AlterarFornecedor")) {
 			request.getSession().setAttribute("resultado", resultado);
-			d = request.getRequestDispatcher("ListaFornecedor.jsp");
+			d = request.getRequestDispatcher("FormAlteraFornecedor.jsp");
+		}
+		if(resultado.getMsg() == null && operacao.equals("CONSULTAR")
+				&& request.getRequestURI().equals("/ecommerce-web/ConsultarFornecedor")) {
+			request.getSession().setAttribute("resultado", resultado);
+			d = request.getRequestDispatcher("FormConsultarFornecedor.jsp");
 		}
 		if(resultado.getMsg() == null && operacao.equals("ALTERAR")) {
 			request.getSession().setAttribute("resultado", resultado);
