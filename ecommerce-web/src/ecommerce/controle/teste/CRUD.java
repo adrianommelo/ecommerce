@@ -4,12 +4,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import ecommerce.dominio.ClienteJuridico;
+import ecommerce.dominio.Fornecedor;
 
 public class CRUD {
 
@@ -117,7 +116,7 @@ public class CRUD {
 //		pst.setInt(1, 1);
 		pst.setString(1, "99988877766677");
 		ResultSet rs = pst.executeQuery();
-		List<ClienteJuridico> arrayList = new ArrayList<ClienteJuridico>();
+		List<Fornecedor> arrayList = new ArrayList<Fornecedor>();
 		while (rs.next()) {
 //			ClienteJuridico cj = new ClienteJuridico();
 //			cj.setId(rs.getInt(1));
