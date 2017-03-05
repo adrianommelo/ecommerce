@@ -46,8 +46,8 @@
 						<hr>
 						<form action="AlterarFornecedor" method="post" >
 							<div class="form-group">
-								<label for="txtRzSocial">Id</label> <input type="text" disabled="disabled"
-									class="form-control" id="txtRzSocial" name="txtRzSocial" value="${resultado.entidades.get(0).id}">
+								<label for="txtId">Id</label> <input type="text" readonly="readonly"
+									class="form-control" id="txtId" name="txtId" value="${resultado.entidades.get(0).id}">
 							</div>
 							<div class="form-group">
 								<label for="txtRzSocial">Razão Social</label> <input type="text"
@@ -55,7 +55,7 @@
 							</div>
 							<div class="form-group">
 								<label for="txtEmail">Email</label> <input type="text"
-									class="form-control" id="txtEmail" name="txtEmail" value="${resultado.entidades.get(0).usuario.email}">
+									class="form-control" id="txtForEmail" name="txtForEmail" value="${resultado.entidades.get(0).usuario.email}">
 							</div>
 						
 							<div class="form-group">
@@ -68,6 +68,8 @@
 									type="text" class="form-control" id="txtTelefoneContato"
 									name="txtTelefoneContato" value="${resultado.entidades.get(0).telefone}">
 							</div>
+							
+							<input type="hidden" id="txtEndId" name="txtEndId" value="${resultado.entidades.get(0).endereco.id}">
 							<div class="form-group">
 								<label for="txtCep">CEP</label> <input type="text"
 									class="form-control" id="txtCep" name="txtCep" value="${resultado.entidades.get(0).endereco.cep}">
@@ -87,7 +89,7 @@
 							</div>
 							<div class="form-group">
 								<label for="txtBairro">Bairro</label> <input type="text"
-									class="form-control" id="txtBairro" name="txtBairro">
+									class="form-control" id="txtBairro" name="txtBairro" value="${resultado.entidades.get(0).endereco.bairro}">
 							</div>
 							<div class="form-group">
 								<label for="txtCidade">Cidade</label> <input type="text"
@@ -104,7 +106,7 @@
 									ALTERAR
 								</button>
 								<button type="submit" class="btn btn-template-main">
-									<a href="ListaClientes.jsp" >VOLTAR</a>
+									<a href="FormConsultarFornecedor.jsp" >VOLTAR</a>
 								</button>
 								
 							</div>
