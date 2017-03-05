@@ -36,6 +36,7 @@ public class FornecedorViewHelper implements IViewHelper {
 	public EntidadeDominio getEntidade(HttpServletRequest request) {
 		
 		String id = request.getParameter("txtId");
+		String idEnd = request.getParameter("txtEndId");
 		String nome = request.getParameter("txtRzSocial");
 		String email = request.getParameter("txtForEmail");		
 		String cnpj = request.getParameter("txtCnpj");
@@ -65,6 +66,10 @@ public class FornecedorViewHelper implements IViewHelper {
 			f.setTelefone(telefone);
 		
 		f.setEndereco(new Endereco());
+		
+		if(idEnd != null && !idEnd.equals("")) {
+			f.getEndereco().setId(Integer.parseInt(idEnd));
+		}
 		if(logradouro != null && !logradouro.equals(""))
 			f.getEndereco().setLogradouro(logradouro);
 		if(numero != null && !numero.equals(""))
@@ -123,6 +128,11 @@ public class FornecedorViewHelper implements IViewHelper {
 			request.getSession().setAttribute("resultado", resultado);
 			d = request.getRequestDispatcher("FormAlteraFornecedor.jsp");
 		}
+		if(resultado.getMsg() == null && operacao.equals("EXCLUIR")) {
+			request.getSession().setAttribute("resultado", resultado);
+			d = request.getRequestDispatcher("FormConsultarFornecedor.jsp");
+		}
+		
 		
 	
 		d.forward(request, response);
