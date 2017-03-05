@@ -74,10 +74,13 @@
 										 -->
 									</td>
 									<td>
-										<button type="submit" class="btn btn-template-main"
+										<a class="btn-template-main" 
+										href="/ecommerce-web/ExcluirFornecedor?txtId=${fornecedor.id}&operacao=EXCLUIR">EXCLUIR</a>
+										<!-- <button type="submit" class="btn btn-template-main"
 										id="operacao" name="operacao" value="EXCLUIR">
 										EXCLUIR
 										</button>
+										 -->
 									</td>
 								</tr>
 							</c:forEach>
