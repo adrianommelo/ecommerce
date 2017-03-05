@@ -61,6 +61,7 @@ public class Servlet extends HttpServlet {
     	vhs.put("/ecommerce-web/SalvarFornecedor", new FornecedorViewHelper());
     	vhs.put("/ecommerce-web/ConsultarFornecedor", new FornecedorViewHelper());
     	vhs.put("/ecommerce-web/AlterarFornecedor", new FornecedorViewHelper());
+    	vhs.put("/ecommerce-web/ExcluirFornecedor", new FornecedorViewHelper());
     	
     	vhs.put("/ecommerce-web/SalvarCliente", new ClienteViewHelper());
     	vhs.put("/ecommerce-web/SalvarProduto", new ProdutoViewHelper());
