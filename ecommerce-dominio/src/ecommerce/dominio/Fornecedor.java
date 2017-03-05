@@ -1,6 +1,6 @@
 package ecommerce.dominio;
 
-public class ClienteJuridico extends Pessoa{
+public class Fornecedor extends Pessoa{
 
 	private String cnpj;
 	private String razaoSocial;	

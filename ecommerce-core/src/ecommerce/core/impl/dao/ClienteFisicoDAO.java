@@ -11,7 +11,7 @@ import ecommerce.dominio.Endereco;
 import ecommerce.dominio.EntidadeDominio;
 import ecommerce.dominio.Genero;
 import ecommerce.dominio.Usuario;
-import ecommerce.dominio.ClienteJuridico;
+import ecommerce.dominio.Fornecedor;
 
 public class ClienteFisicoDAO extends AbstractJdbcDAO {
 	
