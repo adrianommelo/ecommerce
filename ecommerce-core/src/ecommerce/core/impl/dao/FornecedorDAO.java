@@ -49,12 +49,12 @@ public class FornecedorDAO extends AbstractJdbcDAO {
 			
 			pst.setString(1, fornecedor.getRazaoSocial());
 			pst.setString(2, fornecedor.getCnpj());
-			pst.setInt(3, end.getId());
+			pst.setString(3, fornecedor.getUsuario().getEmail());
+			pst.setString(4, fornecedor.getTelefone());
+			pst.setInt(5, end.getId());
 			fornecedor.setAtivo(1);
-			pst.setInt(4, fornecedor.getAtivo());
-			pst.setDate(5, new java.sql.Date(fornecedor.getDtCadastro().getTime()));
-			pst.setString(6, fornecedor.getUsuario().getEmail());
-			pst.setString(7, fornecedor.getTelefone());
+			pst.setInt(6, fornecedor.getAtivo());
+			pst.setDate(7, new java.sql.Date(fornecedor.getDtCadastro().getTime()));
 			
 			pst.executeUpdate();			
 			
@@ -94,26 +94,51 @@ public class FornecedorDAO extends AbstractJdbcDAO {
 		PreparedStatement pst = null;
 		
 		Fornecedor fornecedor = (Fornecedor) entidade;
+		Endereco end = fornecedor.getEndereco();
 		
 		StringBuilder sql = new StringBuilder();
 		
-		if(fornecedor != null && fornecedor.getRazaoSocial() != null 
-				&& !fornecedor.getRazaoSocial().equals("")) {
-			sql.append("UPDATE tb_fornecedor ");
-			sql.append("SET RZSOCIAL = ? ");
-		}
-		if(fornecedor != null && fornecedor.getCnpj() != null 
-				&& !fornecedor.getCnpj().equals("")) {
-			sql.append(", CNPJ = ? ");
-		}	
-		if(fornecedor != null && fornecedor.getId() != null) {
-			sql.append("WHERE id_fornecedor = ?");			
-		}
-		
 		try {
 			openConnection();
+		
+			connection.setAutoCommit(false);			
+			EnderecoDAO endDAO = new EnderecoDAO();
+			endDAO.connection = connection;
+			endDAO.ctrlTransaction = false;
+			endDAO.alterar(end);			
 			
-			//TODO REALIZAR O RESTO, falta implementar uma maneira de alterar o endereço deste fornecedor
+			if(fornecedor != null && fornecedor.getRazaoSocial() != null 
+					&& !fornecedor.getRazaoSocial().equals("")) {
+				sql.append("UPDATE tb_fornecedor ");
+				sql.append("SET RZSOCIAL = ? ");
+			}
+			if(fornecedor != null && fornecedor.getCnpj() != null 
+					&& !fornecedor.getCnpj().equals("")) {
+				sql.append(", CNPJ = ? ");
+			}	
+			if(fornecedor != null && fornecedor.getUsuario() != null 
+					&& (fornecedor.getUsuario().getEmail() != null && !fornecedor.getUsuario().getEmail().equals(""))) {
+				sql.append(", EMAIL = ? ");
+			}	
+			if(fornecedor != null && fornecedor.getTelefone() != null 
+					&& !fornecedor.getTelefone().equals("")) {
+				sql.append(", TELEFONE = ? ");
+			}	
+			if(fornecedor != null && fornecedor.getId() != null) {
+				sql.append("WHERE id_fornecedor = ?");			
+			}
+			
+			
+			pst = connection.prepareStatement(sql.toString());
+
+			pst.setString(1, fornecedor.getRazaoSocial());
+			pst.setString(2, fornecedor.getCnpj());
+			pst.setString(3, fornecedor.getUsuario().getEmail());
+			pst.setString(4, fornecedor.getTelefone());
+			pst.setInt(5, fornecedor.getId());
+
+			pst.executeUpdate();
+			
 			
 			if (ctrlTransaction)
 				connection.commit();
@@ -196,21 +221,21 @@ public class FornecedorDAO extends AbstractJdbcDAO {
 				f.setId(rs.getInt("ID_FORNECEDOR"));
 				f.setRazaoSocial(rs.getString("RZSOCIAL"));
 				f.setCnpj(rs.getString("CNPJ"));
-				
 
+				f.setUsuario(new Usuario());
+				f.getUsuario().setEmail(rs.getString("EMAIL"));
+				f.setTelefone(rs.getString("TELEFONE"));
+				
 				Endereco end = new Endereco();
 				f.setEndereco(end);
 				f.getEndereco().setId(rs.getInt("ID_END"));
-
 				EnderecoDAO endDAO = new EnderecoDAO();
 				endDAO.connection = connection;
 				List<EntidadeDominio> enderecos = endDAO.consultar(end);
 				f.setEndereco((Endereco)enderecos.get(0));
+				
 				f.setAtivo(rs.getInt("ATIVO"));
 				f.setDtCadastro(rs.getDate("DT_CADASTRO"));
-				f.setUsuario(new Usuario());
-				f.getUsuario().setEmail(rs.getString("F_EMAI"));
-				f.setTelefone(rs.getString("TELEFONE"));
 				
 				fornecedores.add(f);
 

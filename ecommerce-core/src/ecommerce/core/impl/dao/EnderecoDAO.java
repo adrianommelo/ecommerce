@@ -13,6 +13,7 @@ import ecommerce.dominio.Cidade;
 import ecommerce.dominio.Endereco;
 import ecommerce.dominio.EntidadeDominio;
 import ecommerce.dominio.Estado;
+import ecommerce.dominio.Fornecedor;
 
 public class EnderecoDAO extends AbstractJdbcDAO {
 
@@ -38,7 +39,7 @@ public class EnderecoDAO extends AbstractJdbcDAO {
 		Endereco end = (Endereco) entidade;
 		
 		StringBuilder sql = new StringBuilder();
-		sql.append("INSERT INTO tb_endereco values (seqid_end.NEXTVAL, ?, ?, ?, ?, ?, ?, ?, ?)");	
+		sql.append("INSERT INTO tb_endereco values (seqid_end.NEXTVAL, ?, ?, ?, ?, ?, ?, ?, ?, ?)");	
 		try {
 			connection.setAutoCommit(false);
 					
@@ -49,12 +50,13 @@ public class EnderecoDAO extends AbstractJdbcDAO {
 			pst.setString(2, end.getCidade().getEstado().getNome());
 			pst.setString(3, end.getLogradouro());
 			pst.setString(4, end.getNumero());
-			pst.setString(5, end.getCep());	
-			pst.setString(6, end.getComplemento());
+			pst.setString(5, end.getBairro());
+			pst.setString(6, end.getCep());	
+			pst.setString(7, end.getComplemento());
 			end.setAtivo(1);
-			pst.setInt(7, end.getAtivo());
+			pst.setInt(8, end.getAtivo());
 			end.setDtCadastro(new Date());
-			pst.setDate(8, new java.sql.Date(end.getDtCadastro().getTime()));
+			pst.setDate(9, new java.sql.Date(end.getDtCadastro().getTime()));
 			pst.executeUpdate();		
 					
 			ResultSet rs = pst.getGeneratedKeys();
@@ -92,7 +94,91 @@ public class EnderecoDAO extends AbstractJdbcDAO {
 	
 	@Override
 	public void alterar(EntidadeDominio entidade) {
-		// TODO Auto-generated method stub
+		openConnection();
+		
+		PreparedStatement pst = null;
+		
+		Endereco end = (Endereco) entidade;
+		StringBuilder sql = new StringBuilder();
+		
+		try {
+			if(connection == null){
+				openConnection();
+			}
+			
+			
+			connection.setAutoCommit(false);
+			
+			sql.append("UPDATE tb_endereco SET ");
+			
+			if(end != null && end.getCidade() != null 
+					&& (end.getCidade().getNome() != null && !end.getCidade().getNome().equals(""))){
+				sql.append(" CIDADE = ? ");
+			}
+			if(end != null && end.getCidade() != null && end.getCidade().getEstado() != null
+					&& (end.getCidade().getEstado().getNome() != null && !end.getCidade().getEstado().getNome().equals(""))){
+				sql.append(", ESTADO = ? ");
+			}
+			if(end != null && end.getLogradouro() != null 
+					&& !end.getLogradouro().equals("")) {
+				sql.append(", LOGRADOURO = ? ");
+			}
+			if(end != null && end.getNumero() != null 
+					&& !end.getNumero().equals("")) {
+				sql.append(", NUMERO = ? ");
+			}	
+			if(end != null && end.getBairro() != null 
+					&& !end.getBairro().equals("")) {
+				sql.append(", BAIRRO = ? ");
+			}
+			if(end != null && end.getCep() != null 
+					&& !end.getCep().equals("")) {
+				sql.append(", CEP = ? ");
+			}
+			if(end != null && end.getComplemento() != null 
+					&& !end.getComplemento().equals("")) {
+				sql.append(", COMPLEMENTO = ? ");
+			}
+			
+			sql.append(" WHERE id_end = ? ");
+			
+			
+			
+			pst = connection.prepareStatement(sql.toString());
+
+			pst.setString(1, end.getCidade().getNome());
+			pst.setString(2, end.getCidade().getEstado().getNome());
+			pst.setString(3, end.getLogradouro());
+			pst.setString(4, end.getNumero());
+			pst.setString(5, end.getBairro());
+			pst.setString(6, end.getCep());
+			pst.setString(7, end.getComplemento());
+			pst.setInt(8, end.getId());
+
+			pst.executeUpdate();
+			if (ctrlTransaction)
+				connection.commit();
+			
+		} catch (SQLException e) {
+			
+			try {
+				connection.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+			
+			e.printStackTrace();
+			
+		}finally{
+			try {
+				pst.close();
+				if(ctrlTransaction)
+					connection.close();
+			} catch (SQLException e2) {
+				// TODO Auto-generated catch block
+				e2.printStackTrace();
+			}
+		}
 
 	}
 
@@ -135,6 +221,7 @@ public class EnderecoDAO extends AbstractJdbcDAO {
 				e.getCidade().getEstado().setNome(rs.getString("ESTADO"));
 				e.setLogradouro(rs.getString("LOGRADOURO"));
 				e.setNumero(rs.getString("NUMERO"));
+				e.setBairro(rs.getString("BAIRRO"));
 				e.setCep(rs.getString("CEP"));
 				e.setComplemento(rs.getString("COMPLEMENTO"));
 				e.setAtivo(rs.getInt("ATIVO"));
