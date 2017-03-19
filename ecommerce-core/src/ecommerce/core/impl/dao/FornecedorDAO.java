@@ -182,11 +182,11 @@ public class FornecedorDAO extends AbstractJdbcDAO {
 		if(fornecedor != null && fornecedor.getId() == null
 				&& (fornecedor.getRazaoSocial() == null || fornecedor.getRazaoSocial().equals(""))
 				&& (fornecedor.getCnpj() == null || fornecedor.getCnpj().equals(""))) {
-			sql.append("SELECT * FROM tb_fornecedor ");
+			sql.append("SELECT * FROM tb_fornecedor WHERE ATIVO = 1");
 		}
 		else {
 			sql.append("SELECT * FROM tb_fornecedor ");
-			sql.append("WHERE 1 = 1 ");
+			sql.append("WHERE ATIVO = 1 ");
 			if(fornecedor != null && fornecedor.getId() !=null){
 				sql.append("AND ID_FORNECEDOR = ? ");
 			}

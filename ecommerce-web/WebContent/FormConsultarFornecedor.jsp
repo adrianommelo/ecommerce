@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <html>
 <head>
@@ -32,43 +32,75 @@
 	<div id="content">
 		<div class="container">
 
-			<div class="row">
-				<div class="col-md-6">
-					<div class="box">
-						<h2 class="text-uppercase">Consultar Fornecedor</h2>
-						<hr>
-						<form action="ConsultarFornecedor" method="post">
-							<p>Consulte o Fornecedor através de um dos campos abaixo: </p>
-							
-							<div class="form-group">
-								<label for="txtId">Id</label> <input type="text"
-									class="form-control" id="txtId" name="txtId" />
-							</div>							
-							<div class="form-group">
-								<label for="txtRzSocial">Razão Social</label> <input type="text"
-									class="form-control" id="txtRzSocial" name="txtRzSocial" />
-							</div>							
-							<div class="form-group">
-								<label for="txtCnpj">CNPJ</label> <input type="text"
-									class="form-control" id="txtCnpj" name="txtCnpj" />
+			<form action="ConsultarFornecedor" method="post">
+				<div class="form-group">
+					<div class="row">
+						<div class="box">
+							<div class="col-md-10">
+								<h2 class="text-uppercase">Consultar Fornecedor</h2>
+								<hr>
+								<p>Consulte o Fornecedor através de um dos campos abaixo:</p>
 							</div>
-							
-							<div class="text-center">
+						</div>
+					</div>
+					<div class="row">
+						<div class="box">
+							<div class="col-md-1">
+								<label for="txtId">Id</label>
+							</div>
+							<div class="col-md-4">
+								<label for="txtRzSocial">Razão Social</label>
+							</div>
+							<div class="col-md-3">
+								<label for="txtCnpj">CNPJ</label>
+							</div>
+						</div>
+					</div>
+					<!-- /.row -->
+					<div class="row">
+						<div class="box">
+							<div class="col-md-1">
+								<input type="text" class="form-control" id="txtId" name="txtId" />
+							</div>
+							<div class="col-md-4">
+								<input type="text" class="form-control" id="txtRzSocial"
+									name="txtRzSocial" />
+							</div>
+							<div class="col-md-3">
+								<input type="text" class="form-control" id="txtCnpj"
+									name="txtCnpj" />
+							</div>
+
+							<div class="col-md-1">
 								<button type="submit" class="btn btn-template-main"
-									id="operacao" name="operacao" value="CONSULTAR">
-									CONSULTAR
-								</button>
+									id="operacao" name="operacao" value="CONSULTAR">CONSULTAR</button>
 							</div>
-						</form>
+
+						</div>
+					</div>
+					<!-- /.row -->
+
+
+
+
+					<!-- /.row -->
+				</div>
+			</form>
+			<div class="form-group">
+				<div class="row">
+					<div class="box">
+						<div class="col-md-10">
+							<hr>
+						</div>
 					</div>
 				</div>
 			</div>
-			<!-- /.row -->
-			
-		</div>
-		<c:import url="ListaFornecedor.jsp" />
-		<!-- /.container -->
-	</div>
-	<!-- /#content -->
+		</div><!-- /.container -->
+		
+	</div><!-- /#content -->
+
+	<c:import url="ListaFornecedor.jsp" />
+
+
 </body>
 </html>

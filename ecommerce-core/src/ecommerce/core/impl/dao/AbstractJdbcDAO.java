@@ -31,12 +31,18 @@ public abstract class AbstractJdbcDAO implements IDAO{
 		openConnection();
 		PreparedStatement pst=null;		
 		StringBuilder sb = new StringBuilder();
-		sb.append("DELETE FROM ");
+//		sb.append("DELETE FROM ");
+//		sb.append(table);
+//		sb.append(" WHERE ");
+//		sb.append(idTable);
+//		sb.append("=");
+//		sb.append("?");
+		sb.append("UPDATE ");
 		sb.append(table);
-		sb.append(" WHERE ");
+		sb.append(" SET ATIVO = 0 WHERE ");
 		sb.append(idTable);
 		sb.append("=");
-		sb.append("?");	
+		sb.append("?");
 		try {
 			connection.setAutoCommit(false);
 			pst = connection.prepareStatement(sb.toString());

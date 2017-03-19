@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="ecommerce-web">
+        <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
+        <dependent-module archiveName="postgresql-9.2-1002.jdbc4.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/C:/Users/rodrigo/Programas/Java/postgresql-9.2-1002.jdbc4.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module deploy-path="/WEB-INF/lib" handle="module:/resource/ecommerce-core/ecommerce-core">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module deploy-path="/WEB-INF/lib" handle="module:/resource/ecommerce-dominio/ecommerce-dominio">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <property name="java-output-path" value="/ecommerce-web/build/classes"/>
+        <property name="context-root" value="ecommerce-web"/>
+    </wb-module>
+</project-modules>
