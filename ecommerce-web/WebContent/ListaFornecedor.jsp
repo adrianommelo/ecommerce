@@ -42,19 +42,25 @@
 		<div class="container">
 
 			<div class="row">
-				<div class="col-md-6">
-					<div class="box">
+				<div class="box">
+					<div class="col-md-10">
 						<h2 class="text-uppercase">Fornecedor(es) encontrado(s)</h2>
+						<br>
 						<!-- <form action="AlterarFornecedor" method="post"> -->
-						
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="box">
+					<div class="col-md-10">
 						<table class="table">
 							<tr>
-								<th>Id</th>
-								<th>Razão Social</th>
-								<th>Cnpj</th>
-								<th>Data Cadastro</th>
-								<th>Email</th>
-								<th colspan="2" >Ações</th>
+								<th nowrap="nowrap">Id</th>
+								<th nowrap="nowrap">Razão Social</th>
+								<th nowrap="nowrap">Cnpj</th>
+								<th nowrap="nowrap">Data Cadastro</th>
+								<th nowrap="nowrap">Email</th>
+								<th  nowrap="nowrap" colspan="2" >Ações</th>
 							</tr>
 							<c:forEach var="fornecedor" items="${resultado.entidades}">
 								<tr id="fornecedor${fornecedor.id}">

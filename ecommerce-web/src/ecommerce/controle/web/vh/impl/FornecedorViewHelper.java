@@ -129,7 +129,7 @@ public class FornecedorViewHelper implements IViewHelper {
 			d = request.getRequestDispatcher("FormAlteraFornecedor.jsp");
 		}
 		if(resultado.getMsg() == null && operacao.equals("EXCLUIR")) {
-			request.getSession().setAttribute("resultado", resultado);
+			//request.getSession().setAttribute("resultado", resultado);
 			d = request.getRequestDispatcher("FormConsultarFornecedor.jsp");
 		}
 		
