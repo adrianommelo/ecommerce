@@ -183,7 +183,7 @@
 					</div>
 					<div class="pull-right">
 
-						<a href="index.jsp" class="btn btn-success">
+						<a href="order-review.jsp" class="btn btn-success">
 							Finalizar compra <i class="fa fa-chevron-right"></i>
 						</a>
 					</div>

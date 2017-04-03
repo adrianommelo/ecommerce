@@ -146,7 +146,7 @@ _________________________________________________________ -->
                     <div class="col-md-1"></div>
                     <div class="col-md-1">
                         <div class="text-center">
-                        	<i class="fa fa-shopping-cart fa-3x fa-lg"></i>
+                        	<a href="shop-cart.jsp"><i class="fa fa-shopping-cart fa-3x fa-lg"></i></a>
                        	</div>
                     </div>
 

@@ -149,7 +149,6 @@ _________________________________________________________ -->
                     <div class="col-md-1">
                         <div class="text-center">
                         	<a href="shop-cart.jsp"><i class="fa fa-shopping-cart fa-3x fa-lg"></i></a>
-                       	</div>
                     </div>
 
                     
@@ -232,7 +231,7 @@ _________________________________________________________ -->
 			_________________________________________________________ -->                    
                     <div class="col-sm-9">
                     
-                    	<c:import url="FormFornecedor.jsp" />
+                    	<c:import url="FormCliente.jsp" />
                     	
                     </div>
                     <!-- /.col-md-9 -->
