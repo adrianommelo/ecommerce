@@ -1,12 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 
-
 <%@ page
-	import="ecommerce.core.aplicacao.Resultado, ecommerce.dominio.*, java.util.*"%>
+    import="ecommerce.core.aplicacao.*, ecommerce.dominio.*, java.util.*"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -16,10 +15,8 @@
 	rel='stylesheet' type='text/css'>
 
 <!-- Bootstrap and Font Awesome css -->
-<link rel="stylesheet"
-	href="resources/css/font-awesome.min.css">
-<link rel="stylesheet"
-	href="resources/css/bootstrap.css">
+<link rel="stylesheet" href="resources/css/font-awesome.min.css">
+<link rel="stylesheet" href="resources/css/bootstrap.css">
 
 <!-- Css animations  -->
 <link href="resources/css/animate.css" rel="stylesheet">
@@ -37,7 +34,7 @@
 	<%
 		Resultado resultado = (Resultado) session.getAttribute("resultado");
 	%>
-	
+
 	<div id="content">
 		<div class="container">
 
@@ -60,7 +57,7 @@
 								<th nowrap="nowrap">Cnpj</th>
 								<th nowrap="nowrap">Data Cadastro</th>
 								<th nowrap="nowrap">Email</th>
-								<th  nowrap="nowrap" colspan="2" >Ações</th>
+								<th nowrap="nowrap" colspan="2">Ações</th>
 							</tr>
 							<c:forEach var="fornecedor" items="${resultado.entidades}">
 								<tr id="fornecedor${fornecedor.id}">
@@ -70,23 +67,12 @@
 									<td id="txtCnpj" nowrap="nowrap">${fornecedor.cnpj}</td>
 									<td id="txtDtCadastro" nowrap="nowrap">${fornecedor.dtCadastro}</td>
 									<td id="txtForEmail" nowrap="nowrap">${fornecedor.usuario.email}</td>
-									<td>
-										<a class="btn-template-main" 
+									<td><a type="submit" class="btn btn-warning"
 										href="/ecommerce-web/AlterarFornecedor?txtId=${fornecedor.id}&operacao=CONSULTAR">ALTERAR</a>
-										<!--  <button type="submit" class="btn btn-template-main "
-										id="operacao" name="operacao" value="ALTERAR">
-										ALTERAR
-										</button>
-										 -->
 									</td>
-									<td>
-										<a class="btn-template-main" 
+									<td><a type="submit" class="btn btn-danger"
 										href="/ecommerce-web/ExcluirFornecedor?txtId=${fornecedor.id}&operacao=EXCLUIR">EXCLUIR</a>
-										<!-- <button type="submit" class="btn btn-template-main"
-										id="operacao" name="operacao" value="EXCLUIR">
-										EXCLUIR
-										</button>
-										 -->
+
 									</td>
 								</tr>
 							</c:forEach>

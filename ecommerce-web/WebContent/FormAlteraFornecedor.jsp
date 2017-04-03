@@ -2,7 +2,7 @@
 	pageEncoding="ISO-8859-1"%>
 	
 <%@ page
-	import="ecommerce.core.aplicacao.Resultado, ecommerce.dominio.*, java.util.*"%>
+    import="ecommerce.core.aplicacao.*, ecommerce.dominio.*, java.util.*"%>
 	
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -14,19 +14,19 @@
 
 <!-- Bootstrap and Font Awesome css -->
 <link rel="stylesheet"
-	href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+	href="resources/css/font-awesome.css">
 <link rel="stylesheet"
-	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+	href="resources/css/bootstrap.css">
 
-<!-- Css animations  -->
-<link href="css/animate.css" rel="stylesheet">
+<!-- Css animations  
+<link href="css/animate.css" rel="stylesheet">-->
 
-<!-- Theme stylesheet, if possible do not edit this stylesheet -->
+<!-- Theme stylesheet, if possible do not edit this stylesheet 
 <link href="css/style.default.css" rel="stylesheet"
-	id="theme-stylesheet">
+	id="theme-stylesheet">-->
 
-<!-- Custom stylesheet - for your changes -->
-<link href="css/custom.css" rel="stylesheet">
+<!-- Custom stylesheet - for your changes
+<link href="css/custom.css" rel="stylesheet">-->
 <title>Alterar Fornecedor</title>
 </head>
 <body>
@@ -42,7 +42,8 @@
 				<div class="col-md-6">
 					<div class="box">
 						<h2 class="text-uppercase">Alterar Fornecedor</h2>
-						<h3 class="text-uppercase">Altere os dados nos campos que deseja atualizar: </h3>
+						<hr>
+						<p>Altere os dados nos campos que deseja atualizar: </p>
 						<hr>
 						<form action="AlterarFornecedor" method="post" >
 							<div class="form-group">
@@ -101,14 +102,11 @@
 							</div>
 
 							<div class="text-center">
-								<button type="submit" class="btn btn-template-main"
+								<button type="submit" class="btn btn-success"
 									id="operacao" name="operacao" value="ALTERAR">
 									ALTERAR
 								</button>
-								<button type="submit" class="btn btn-template-main">
-									<a href="FormConsultarFornecedor.jsp" >VOLTAR</a>
-								</button>
-								
+								<a type="submit" class="btn  btn-danger"href="FormConsultarFornecedor.jsp" >VOLTAR</a>
 							</div>
 						</form>
 					</div>

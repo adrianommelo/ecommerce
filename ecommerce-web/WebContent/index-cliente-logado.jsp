@@ -2,7 +2,7 @@
 	pageEncoding="utf-8"%>
 
 <%@ page
-    import="ecommerce.core.aplicacao.*, ecommerce.dominio.*, java.util.*"%>
+	import="ecommerce.core.aplicacao.*, ecommerce.dominio.*, java.util.*"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -76,7 +76,12 @@ _________________________________________________________ -->
 						</div>
 						<div class="col-xs-4 "></div>
 						<div class="col-xs-5 ">
-							
+							<div class="pull-right">
+								<a type="submit" href="index.jsp"><i class="fa fa-user"></i><span
+									class="hidden-xs text-uppercase">Minha conta</span></a> <a
+									type="submit" href="index.jsp"><i class="fa fa-list-alt"></i><span
+									class="hidden-xs text-uppercase">Meus Pedidos</span></a>
+							</div>
 						</div>
 					</div>
 					<div class="col-xs-3">
