@@ -117,20 +117,20 @@ public class FornecedorViewHelper implements IViewHelper {
 		if(resultado.getMsg() == null && operacao.equals("CONSULTAR")
 				&& request.getRequestURI().equals("/ecommerce-web/AlterarFornecedor")) {
 			request.getSession().setAttribute("resultado", resultado);
-			d = request.getRequestDispatcher("FormAlteraFornecedor.jsp");
+			d = request.getRequestDispatcher("update-fornecedor.jsp");
 		}
 		if(resultado.getMsg() == null && operacao.equals("CONSULTAR")
 				&& request.getRequestURI().equals("/ecommerce-web/ConsultarFornecedor")) {
 			request.getSession().setAttribute("resultado", resultado);
-			d = request.getRequestDispatcher("FormConsultarFornecedor.jsp");
+			d = request.getRequestDispatcher("consult-fornecedor.jsp");
 		}
 		if(resultado.getMsg() == null && operacao.equals("ALTERAR")) {
 			request.getSession().setAttribute("resultado", resultado);
-			d = request.getRequestDispatcher("FormAlteraFornecedor.jsp");
+			d = request.getRequestDispatcher("/update-fornecedor.jsp");
 		}
 		if(resultado.getMsg() == null && operacao.equals("EXCLUIR")) {
-			//request.getSession().setAttribute("resultado", resultado);
-			d = request.getRequestDispatcher("FormConsultarFornecedor.jsp");
+			request.getSession().setAttribute("resultado", resultado);
+			d = request.getRequestDispatcher("consult-fornecedor.jsp");
 		}
 		
 		
