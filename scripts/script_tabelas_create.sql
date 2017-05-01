@@ -104,3 +104,58 @@ ALTER TABLE tb_fornecedor ADD CONSTRAINT tbcj_end_id_fk FOREIGN KEY ( id_end ) R
 
 ALTER TABLE tb_usuario ADD CONSTRAINT tbu_usu_tipo_id_fk FOREIGN KEY ( id_usu_tipo ) REFERENCES tb_usuario_tipo ( id_usu_tipo ) ;
 --alter table tb_cliente_fisico drop constraint tbu_usu_tipo_id_fk;
+
+
+
+
+--PARA TABELA DE PRODUTOS
+
+CREATE TABLE tb_produto
+  (
+    id_prod			NUMBER (9) NOT NULL ,
+    descricao		VARCHAR2 (45 CHAR) NOT NULL ,
+    preco			NUMBER (9) NOT NULL ,
+    qtde			date not null,
+    id_categoria	NUMBER (9) NOT NULL ,
+    id_fornecedor 	NUMBER (9) NOT NULL ,
+    peso        	NUMBER (9) NOT NULL ,
+    comprimento     NUMBER (9) NOT NULL ,
+    altura			NUMBER (9) NOT NULL ,
+    largura			NUMBER (9) NOT NULL ,
+    diametro		NUMBER (9) NOT NULL ,
+    id_formato		NUMBER (9) NOT NULL ,
+    ativo         NUMBER (1) NOT NULL ,
+    dt_cadastro   DATE NOT NULL
+  ) ;
+ALTER TABLE tb_produto ADD CONSTRAINT tb_produto_PK PRIMARY KEY ( id_prod ) ;
+CREATE SEQUENCE seqid_prod;
+--drop sequence seqid_prod;
+
+CREATE TABLE tb_categoria
+  (
+  	id_categoria	NUMBER (9) NOT NULL ,
+  	categoria 		VARCHAR2 (45 CHAR) NOT NULL ,
+  	ativo        	NUMBER (1) NOT NULL ,
+    dt_cadastro  	DATE NOT NULL
+  ) ;
+ALTER TABLE tb_categoria ADD CONSTRAINT tb_categoria_PK PRIMARY KEY ( id_categoria ) ;
+CREATE SEQUENCE seqid_categoria;
+--drop sequence seqid_categoria;
+
+CREATE TABLE tb_formato
+  (
+  	id_formato		NUMBER (9) NOT NULL ,
+  	formato 		VARCHAR2 (45 CHAR) NOT NULL ,
+  	ativo        	NUMBER (1) NOT NULL ,
+    dt_cadastro  	DATE NOT NULL
+  ) ;
+ALTER TABLE tb_formato ADD CONSTRAINT tb_formato_PK PRIMARY KEY ( id_formato ) ;
+CREATE SEQUENCE seqid_formato;
+--drop sequence seqid_formato;
+
+ALTER TABLE tb_produto ADD CONSTRAINT tbprod_for_id_fk FOREIGN KEY ( id_fornecedor ) REFERENCES tb_fornecedor ( id_fornecedor ) ;
+--alter table tb_fornecedor drop constraint tbprod_for_id_fk;
+ALTER TABLE tb_produto ADD CONSTRAINT tbprod_cat_id_fk FOREIGN KEY ( id_categoria ) REFERENCES tb_categoria ( id_categoria ) ;
+--alter table tb_fornecedor drop constraint tbprod_cat_id_fk;
+ALTER TABLE tb_produto ADD CONSTRAINT tbprod_formato_id_fk FOREIGN KEY ( id_formato ) REFERENCES tb_formato ( id_formato ) ;
+--alter table tb_fornecedor drop constraint tbprod_formato_id_fk;
