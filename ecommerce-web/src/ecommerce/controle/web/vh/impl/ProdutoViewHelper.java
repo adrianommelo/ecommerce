@@ -2,18 +2,18 @@
 package ecommerce.controle.web.vh.impl;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import ecommerce.controle.web.vh.IViewHelper;
 import ecommerce.core.aplicacao.Resultado;
-import ecommerce.core.util.ConverteDate;
+import ecommerce.dominio.Categoria;
 import ecommerce.dominio.EntidadeDominio;
+import ecommerce.dominio.Formato;
+import ecommerce.dominio.Fornecedor;
 import ecommerce.dominio.Produto;
 
 
@@ -22,50 +22,73 @@ public class ProdutoViewHelper implements IViewHelper {
 
 	public EntidadeDominio getEntidade(HttpServletRequest request) {
 		
-		String operacao = request.getParameter("operacao");
-		Produto produto = null; 
+		//Parametros da tela
+		String id = request.getParameter("txtId");
+		String nome = request.getParameter("txtNomeProd");
+		String descricao = request.getParameter("txtDescProd");
+		String preco = request.getParameter("txtPrecoProd");
+		String quantidade = request.getParameter("txtQtdProd");
+		String categoria = request.getParameter("cmbCategoria");
+		String fornecedor = request.getParameter("txtFornecedor");
+		String peso = request.getParameter("txtPesoProd");
+		String comprimento = request.getParameter("txtComprimentoProd");
+		String altura = request.getParameter("txtAlturaProd");
+		String largura = request.getParameter("txtLarguraProd");
+		String diametro = request.getParameter("txtDiametroProd");
+		String formato = request.getParameter("cmbFormatoProd");
 		
-		if(!operacao.equals("VISUALIZAR")){
-			String descricao = request.getParameter("txtDescricao");
-			String qtd = request.getParameter("txtQtd");
-			String id = request.getParameter("txtId");
-			String dtCadastro = request.getParameter("txtDtCadastro");
-			
-			
-			produto = new Produto();
-			
-			
-			if(descricao != null && !descricao.trim().equals("")){
-				produto.setDescricao(descricao);
-			}
-			
-			if(id != null && !id.trim().equals("")){
-				produto.setId(Integer.parseInt(id));
-			}
-			
-			if(qtd != null && !qtd.trim().equals("")){
-				produto.setQuantidade(Integer.parseInt(qtd));
-			}
-			
-			if(dtCadastro != null && !dtCadastro.trim().equals("")){
-				produto.setDtCadastro(ConverteDate.converteStringDate(dtCadastro));
-			}
-		}else{
-			HttpSession session = request.getSession();
-			Resultado resultado = (Resultado) session.getAttribute("resultado");
-			String txtId = request.getParameter("txtId");
-			int id=0;
-			
-			if(txtId != null && !txtId.trim().equals("")){
-				id = Integer.parseInt(txtId);
-			}
-			
-			for(EntidadeDominio e: resultado.getEntidades()){
-				if(e.getId() == id){
-					produto = (Produto)e;
-				}
-			}
+		Produto produto = new Produto();
+		
+		if(id != null && !id.equals("")) 
+			produto.setId(Integer.parseInt(id));
+
+		if(nome != null && !nome.equals("")) 
+			produto.setNome(nome);
+
+		if(descricao != null && !descricao.equals("")) 
+			produto.setDescricao(descricao);
+		
+		if(preco != null && !preco.equals("")) 
+			produto.setPreco(Double.parseDouble(preco));
+		
+		if(quantidade != null && !quantidade.equals("")) 
+			produto.setQuantidade(Integer.parseInt(quantidade));
+		
+		produto.setCategoria(new Categoria());
+		if(categoria != null && !categoria.equals("")) 
+			produto.getCategoria().setCategoria(categoria);
+		
+		Fornecedor f = new Fornecedor();
+		if(fornecedor != null && !fornecedor.equals("")){
+			f.setNome(fornecedor);
+			produto.setFornecedor(f);
 		}
+		
+		if(peso != null && !peso.equals("")) 
+			produto.setPeso(Double.parseDouble(peso));
+		
+		if(comprimento != null && !comprimento.equals("")) 
+			produto.setComprimento(Long.parseLong(comprimento));
+		
+		if(altura != null && !altura.equals("")) 
+			produto.setAltura(Long.parseLong(altura));
+		
+		if(largura != null && !largura.equals("")) 
+			produto.setLargura(Long.parseLong(largura));
+		
+		if(diametro != null && !diametro.equals("")) 
+			produto.setDiametro(Long.parseLong(diametro));
+		
+		produto.setFormato(new Formato());
+		if(formato != null && !formato.equals("")) 
+			produto.getFormato().setFormato(formato);
+		
+		
+		
+		
+		
+		
+		
 		
 		return produto;
 	}
