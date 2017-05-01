@@ -69,51 +69,53 @@
 
 	<div class="container">
 
-		<div class="form-group">
-			<form action="ConsultarFornecedor" method="post">
-
-				<div class="col-sm-9">
-					<h2 class="text-uppercase">Consultar Fornecedor</h2>
-					<hr>
-					<p>Consulte o Fornecedor através de um dos campos abaixo:</p>
-				</div>
-
-
-
-				<div class="col-sm-9">
-					<div class="col-md-2">
-
-						<label for="txtId">Id</label> <input type="text"
-							class="form-control" id="txtId" name="txtId" />
-
-					</div>
-					<div class="col-md-4">
-
-						<label for="txtRzSocial">Razão Social</label> <input type="text"
-							class="form-control" id="txtRzSocial" name="txtRzSocial" />
-
-					</div>
-					<div class="col-md-4">
-						<label for="txtCnpj">CNPJ</label> <input type="text"
-							class="form-control" id="txtCnpj" name="txtCnpj" />
-					</div>
-
-
-					<div class="col-md-2">
-						<sub>
-							<button type="submit" class="btn btn-info" id="operacao"
-								name="operacao" value="CONSULTAR">CONSULTAR</button>
-						</sub>
-					</div>
-				</div>
-			</form>
-		</div>
-
-
 		<div class="col-sm-9">
-			<c:if test="${resultado.entidades != null }">
-				<c:import url="ListaFornecedor.jsp" />
-			</c:if>
+			<div class="form-group">
+				<form action="ConsultarFornecedor" method="post">
+
+					<div class="col-sm-12">
+						<h2 class="text-uppercase">Consultar Produto</h2>
+						<hr>
+						<p>Consulte o Fornecedor através de um dos campos abaixo:</p>
+					</div>
+
+
+
+					<div class="col-sm-12">
+						<div class="col-md-2">
+
+							<label for="txtId">Id</label> <input type="text"
+								class="form-control" id="txtId" name="txtId" />
+
+						</div>
+						<div class="col-md-4">
+
+							<label for="txtNomeProd">Nome</label> <input type="text"
+								class="form-control" id="txtNomeProd" name="txtNomeProd" />
+
+						</div>
+						<div class="col-md-4">
+							<label for="txtFornecedor">Fornecedor</label> <input type="text"
+								class="form-control" id="txtFornecedor" name="txtFornecedor" />
+						</div>
+
+
+						<div class="col-md-2">
+							<sub>
+								<button type="submit" class="btn btn-info" id="operacao"
+									name="operacao" value="CONSULTAR">CONSULTAR</button>
+							</sub>
+						</div>
+					</div>
+				</form>
+			</div>
+
+
+			<div class="col-sm-12">
+				<c:if test="${resultado.entidades != null }">
+					<c:import url="ListaProduto.jsp" />
+				</c:if>
+			</div>
 		</div>
 	</div>
 	<!-- /.container -->

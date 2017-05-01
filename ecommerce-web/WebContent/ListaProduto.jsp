@@ -1,10 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+
 <%@ page
 	import="ecommerce.core.aplicacao.*, ecommerce.dominio.*, java.util.*"%>
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html>
@@ -67,58 +66,46 @@
 		Resultado resultado = (Resultado) session.getAttribute("resultado");
 	%>
 
-	<div class="container">
+	
+			<div class="col-sm-12">
+				<h2 class="text-uppercase">Produto(s) encontrado(s)</h2>
+				<br>
+				<!-- <form action="AlterarFornecedor" method="post"> -->
+			</div>
 
-		<div class="form-group">
-			<form action="ConsultarFornecedor" method="post">
+			<div class="col-sm-12">
+				<table class="table">
+					<tr>
+						<th nowrap="nowrap">Id</th>
+						<th nowrap="nowrap">Nome</th>
+						<th nowrap="nowrap">Data Cadastro</th>
+						<th nowrap="nowrap">Categoria</th>
+						<th nowrap="nowrap">Fornecedor</th>
+						<th nowrap="nowrap" colspan="2">Ações</th>
+					</tr>
+					<c:forEach var="produto" items="${resultado.entidades}">
+						<tr id="produto${fornecedor.id}">
+							<!-- <input type="hidden" name="txtId" value="${fornecedor.id}"> -->
+							<td id="txtId" nowrap="nowrap">${fornecedor.id}</td>
+							<td id="txtNomeProd" nowrap="nowrap">${fornecedor.razaoSocial}</td>
+							<td id="txtDtCadastro" nowrap="nowrap">${fornecedor.dtCadastro}</td>
+							<td id="txtCategoria" nowrap="nowrap">${fornecedor.usuario.email}</td>
+							<td id="txtFornecedor" nowrap="nowrap">${fornecedor.usuario.email}</td>
+							<td><a type="submit" class="btn btn-warning"
+								href="/ecommerce-web/AlterarFornecedor?txtId=${fornecedor.id}&operacao=CONSULTAR">ALTERAR</a>
+							</td>
+							<td><a type="submit" class="btn btn-danger"
+								href="/ecommerce-web/ExcluirFornecedor?txtId=${fornecedor.id}&operacao=EXCLUIR">EXCLUIR</a>
 
-				<div class="col-sm-9">
-					<h2 class="text-uppercase">Consultar Fornecedor</h2>
-					<hr>
-					<p>Consulte o Fornecedor através de um dos campos abaixo:</p>
-				</div>
-
-
-
-				<div class="col-sm-9">
-					<div class="col-md-2">
-
-						<label for="txtId">Id</label> <input type="text"
-							class="form-control" id="txtId" name="txtId" />
-
-					</div>
-					<div class="col-md-4">
-
-						<label for="txtRzSocial">Razão Social</label> <input type="text"
-							class="form-control" id="txtRzSocial" name="txtRzSocial" />
-
-					</div>
-					<div class="col-md-4">
-						<label for="txtCnpj">CNPJ</label> <input type="text"
-							class="form-control" id="txtCnpj" name="txtCnpj" />
-					</div>
-
-
-					<div class="col-md-2">
-						<sub>
-							<button type="submit" class="btn btn-info" id="operacao"
-								name="operacao" value="CONSULTAR">CONSULTAR</button>
-						</sub>
-					</div>
-				</div>
-			</form>
-		</div>
-
-
-		<div class="col-sm-9">
-			<c:if test="${resultado.entidades != null }">
-				<c:import url="ListaFornecedor.jsp" />
-			</c:if>
-		</div>
-	</div>
-	<!-- /.container -->
+							</td>
+						</tr>
+					</c:forEach>
+				</table>
+				<!-- </form> -->
+			</div>
 
 
 
+	
 </body>
 </html>

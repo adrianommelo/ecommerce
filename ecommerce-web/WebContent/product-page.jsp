@@ -57,8 +57,8 @@
 					<div class="col-md-6">
 						<div class="panel">
 							<div class="panel-body">
-								<div class="text-center">
-									<a type="submit" class="btn btn-warning"
+								<div class="text-center" style="white-space: nowrap;">
+									<a type="submit" style='white-space: nowrap;' class="btn btn-warning"
 										href="#">Adicionar carrinho</a>
 								</div>
 							</div>

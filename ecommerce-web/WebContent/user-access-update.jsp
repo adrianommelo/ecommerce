@@ -2,9 +2,11 @@
 	pageEncoding="utf-8"%>
 
 <%@ page
-    import="ecommerce.core.aplicacao.*, ecommerce.dominio.*, java.util.*"%>
+	import="ecommerce.core.aplicacao.*, ecommerce.dominio.*, java.util.*"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -70,17 +72,26 @@ _________________________________________________________ -->
 			<div class="container">
 				<div class="row">
 					<div class="col-xs-9 contact">
-						<div class="col-xs-4 contact">
+						<div class="col-xs-3 ">
 							<a type="submit" href="index.jsp"><i class="fa fa-home"></i><span
 								class="hidden-xs text-uppercase">Home</span></a>
 						</div>
-
+						<div class="col-xs-4 "></div>
+						<div class="col-xs-5 ">
+							<div class="pull-right">
+								<a type="submit" href="user-account.jsp"><i
+									class="fa fa-user"></i><span class="hidden-xs text-uppercase">Minha
+										conta</span></a> <a type="submit" href="index.jsp"><i
+									class="fa fa-list-alt"></i><span
+									class="hidden-xs text-uppercase">Meus Pedidos</span></a>
+							</div>
+						</div>
 					</div>
 					<div class="col-xs-3">
 						<div class="login">
 							<a href="#" data-toggle="modal" data-target="#login-modal"><i
 								class="fa fa-sign-in"></i><span class="hidden-xs text-uppercase">Login</span></a>
-							<a href="customer-register.html"><i class="fa fa-user"></i><span
+							<a href="customer-register.jsp"><i class="fa fa-user"></i><span
 								class="hidden-xs text-uppercase">Registrar</span></a>
 						</div>
 					</div>
@@ -141,78 +152,92 @@ _________________________________________________________ -->
 		<!-- *** LOGIN MODAL END *** -->
 
 
-		<!-- **CONTENT AND CONTAINER**
-_________________________________________________________ -->
 
 		<div id="content">
 			<div class="container">
 
 				<div class="row">
+
+					<!-- *** SEARCH BAR *** -->
+					<br />
+					<div class="col-md-3"></div>
+
 					<div class="col-md-6">
-						<div class="box">
-							<div class="panel panel-default">
-								<div class="panel-body min-area">
-									<h2 class="text-uppercase">Já tenho cadastro</h2>
-									<hr>
+						<input class="form-control" type="text"
+							placeholder="Encontre seus produtos" />
+					</div>
 
-									<form action="customer-orders.html" method="post">
-										<div class="form-group">
-											<label for="email">Email</label> <input type="text"
-												class="form-control" id="email">
-										</div>
-										<div class="form-group">
-											<label for="password">Password</label> <input type="password"
-												class="form-control" id="password">
-										</div>
-										<div class="text-center">
-											<a type="submit" class="btn btn-template-main"
-												href="index-cliente-logado.jsp"><i class="fa fa-sign-in"></i>
-												Acessar</a>
-										</div>
-									</form>
-
-								</div>
-							</div>
+					<div class="col-md-1">
+						<button class="btn btn-info" type="submit">PESQUISAR</button>
+					</div>
+					<div class="col-md-1"></div>
+					<div class="col-md-1">
+						<div class="text-center">
+							<a href="shop-cart.jsp"><i
+								class="fa fa-shopping-cart fa-3x fa-lg"></i></a>
 						</div>
 					</div>
 
-					<div class="col-md-6">
-						
-							<div class="panel panel-default">
-								<div class="panel-body ">
-									<h2 class="text-uppercase">Nova conta</h2>
-									<hr>
-									<p class="text-muted">
-										Se houve alguma dúvida, sinta-se a vontade em <a
-											href="contact.html">nos contatar</a>, nossos serviços ocorrem
-										em escala 24/7.
-									</p>
 
-									<hr>
-
-
-									<div class="text-center">
-										<a type="submit" class="btn btn-template-main"
-											href="novoCliente1.jsp"><i class="fa fa-user-md"></i>
-											Registrar-se</a>
-
-									</div>
-								</div>
-							</div>
-						
-					</div>
 				</div>
-				<!-- /.row -->
 
+				<div class="row">
+
+					<!-- *** LEFT COLUMN *** -->
+
+					<div class="col-sm-3">
+
+						<!-- *** MENUS AND FILTERS ***-->
+						<div class="panel panel-default sidebar-menu">
+
+							<div class="panel-heading">
+								<h3 class="panel-title">Menu</h3>
+							</div>
+
+							<div class="panel-body">
+								<ul class="nav nav-pills nav-stacked category-menu">
+									<li class="active"><ul></ul></li>
+									<li> <a href="user-account.jsp"> Minha Conta</a>
+										<ul>
+											<li><a href="user-profile-update.jsp">Atualizar
+													dados</a></li>
+											<li><a href="user-adress.jsp">Endereço(s)</a></li>
+											<li><a href="user-account-cancel.jsp">Cancelar conta</a></li>
+										</ul></li>
+									<li><a href="user-orders.jsp">Meus pedidos</a></li>
+									<li><a href="order-exchanges.jsp">Gestão de trocas</a></li>
+									<li><a href="#">Contato</a>
+										<ul>
+											<li><a href="contact-us.jsp">Atendimento</a></li>
+											<li><a href="faq.jsp">FAQ</a></li>
+										</ul></li>
+
+								</ul>
+
+							</div>
+						</div>
+						<!-- *** MENUS AND FILTERS END *** -->
+					</div>
+					<!-- /.col-md-3 -->
+
+					<!-- *** LEFT COLUMN END *** -->
+
+					<!-- *** RIGHT COLUMN ***-->
+					<div class="col-sm-9">
+
+						<c:import url="frmCliAccessUpdate.jsp"></c:import>
+
+					</div>
+					<!-- col-sm-9 -->
+					<!-- *** RIGHT COLUMN END *** -->
+				</div>
+				<!-- row -->
 			</div>
 			<!-- /.container -->
 		</div>
 		<!-- /#content -->
-		<!-- END **CONTENT AND CONTAINER
-_________________________________________________________ -->
 
-		<!-- *** FOOTER ***
-_________________________________________________________ -->
+		<!-- *** FOOTER *** -->
 		<div id="footer">
 			<div class="container">
 				<div class="col-md-12">
@@ -222,12 +247,34 @@ _________________________________________________________ -->
 						&amp; <a href="https://remoteplease.com">Remote Please</a>
 						<!-- Not removing these links is part of the license conditions of the template. Thanks for understanding :) If you want to use the template without the attribution links, you can do so after supporting further themes development at https://bootstrapious.com/donate  -->
 					</p>
+
 				</div>
 			</div>
 		</div>
 		<!-- /#footer -->
 
 		<!-- *** FOOTER END *** -->
+
+		<!-- *** COPYRIGHT ***-->
+
+		<div id="copyright">
+			<div class="container">
+				<div class="col-md-12">
+					<p class="pull-left">© 2015. Ecomm Ltda / Adriano Melo</p>
+					<p class="pull-right">
+						Template by <a href="https://bootstrapious.com">Bootstrapious</a>
+						&amp; <a href="https://remoteplease.com">Remote Please</a>
+						<!-- Not removing these links is part of the license conditions of the template. Thanks for understanding :) If you want to use the template without the attribution links, you can do so after supporting further themes development at https://bootstrapious.com/donate  -->
+					</p>
+
+				</div>
+			</div>
+		</div>
+		<!-- /#copyright -->
+
+		<!-- *** COPYRIGHT END *** -->
+
+
 
 	</div>
 	<!-- /#all -->

@@ -73,17 +73,26 @@ _________________________________________________________ -->
 			<div class="container">
 				<div class="row">
 					<div class="col-xs-9 contact">
-						<div class="col-xs-3 ">
+						<div class="col-xs-2 ">
 							<a type="submit" href="index.jsp"><i class="fa fa-home"></i><span
 								class="hidden-xs text-uppercase">Home</span></a>
 						</div>
-						<div class="col-xs-4 "></div>
-						<div class="col-xs-5 ">
+
+						<div class="col-xs-10 ">
 							<div class="pull-right">
-								<a type="submit" href="user-account.jsp"><i class="fa fa-user"></i><span
-									class="hidden-xs text-uppercase">Minha conta</span></a> <a
-									type="submit" href="index.jsp"><i class="fa fa-list-alt"></i><span
-									class="hidden-xs text-uppercase">Meus Pedidos</span></a>
+								<a type="submit" href="my-account-adm.jsp"><i
+									class="fa fa-user"></i><span class="hidden-xs text-uppercase">Minha
+										Conta</span></a> <a type="submit" href="pages-fornecedor.jsp"><i
+									class="fa fa-user"></i><span class="hidden-xs text-uppercase">Fornecedores</span></a>
+								<a type="submit" href="pages-produto.jsp"><i
+									class="fa fa-list-alt"></i><span
+									class="hidden-xs text-uppercase">Produtos</span></a> <a
+									type="submit" href="pages-estoque.jsp"><i
+									class="fa fa-list-alt"></i><span
+									class="hidden-xs text-uppercase">Estoque</span></a> <a
+									type="submit" href="pages-analise.jsp"><i
+									class="fa fa-list-alt"></i><span
+									class="hidden-xs text-uppercase">Análises</span></a>
 							</div>
 						</div>
 					</div>
@@ -96,6 +105,7 @@ _________________________________________________________ -->
 						</div>
 					</div>
 				</div>
+				<!-- row header -->
 			</div>
 		</div>
 
@@ -173,7 +183,8 @@ _________________________________________________________ -->
 					<div class="col-md-1"></div>
 					<div class="col-md-1">
 						<div class="text-center">
-							<a href="shop-cart.jsp"><i class="fa fa-shopping-cart fa-3x fa-lg"></i></a>
+							<a href="shop-cart.jsp"><i
+								class="fa fa-shopping-cart fa-3x fa-lg"></i></a>
 						</div>
 					</div>
 
@@ -197,14 +208,15 @@ _________________________________________________________ -->
 
 							<div class="panel-body">
 								<ul class="nav nav-pills nav-stacked category-menu">
-									<li class="active"><a href="shop-category.html">Smartphone <span
-											class="badge pull-right">42</span></a>
+									<li class="active"><a href="shop-category.html">Smartphone
+											<span class="badge pull-right">42</span>
+									</a>
 										<ul>
 											<li><a href="shop-category.html">Marca</a></li>
 											<li><a href="shop-category.html">Modelo</a></li>
 										</ul></li>
-									<li><a href="shop-category.html">Computadores
-											<span class="badge pull-right">123</span>
+									<li><a href="shop-category.html">Computadores <span
+											class="badge pull-right">123</span>
 									</a>
 										<ul>
 											<li><a href="shop-category.html">Marca</a></li>

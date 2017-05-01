@@ -15,12 +15,15 @@
 	
 	JFreeChart grafico = ChartFactory.createLineChart("Quantidade de Vendas x Estado", "Estado", "Valor", ds, PlotOrientation.VERTICAL, true, true, false);
 	
-	response.setContentType("image/PNG");
-	OutputStream sa = response.getOutputStream();
-	//final ChartRenderingInfo info = new ChartRenderingInfo(new StandardEntityCollection());
-	//final File file1 = new File("grafico.png");
-	ChartUtilities.writeChartAsPNG(sa, grafico, 600, 400);
-	sa.close();
+	//response.setContentType("image/PNG");
+	//OutputStream sa = response.getOutputStream();
+	final ChartRenderingInfo info = new ChartRenderingInfo(new StandardEntityCollection());
+	
+	final File file1 = new File(getServletContext().getRealPath(".") + "/resources/grafico.png");
+	//ChartUtilities.writeChartAsPNG(sa, grafico, 600, 400);
+	ChartUtilities.saveChartAsPNG(file1, grafico, 600, 400);
+	
+	//sa.close();
 %>
 <html>
 <head>
@@ -50,37 +53,41 @@
 </head>
 <body>
 	<div class="container">
-		<div class="row">
-			<div class="col-md-9">
-				<h2 class="text-uppercase">Gráfico de Análise</h2>
-				<hr>
-			</div>
-		</div>
-		<!-- row -->
-		<div class="row">
-			<form class="form-group" action="SalvarGrafico" method="post">
+		
+		<div class="col-md-12">
+		
+			<div class="row">
 				<div class="col-md-9">
-					<div class="col-md-6">
-						<img src="grafico.png" WIDTH="600" HEIGHT="400" BORDER="0" USEMAP="#chart">									 						
-					</div>
+					<h2 class="text-uppercase">Gráfico de Análise</h2>
+					<hr>
 				</div>
-
-				<div class="col-md-9">
-					<div class="col-md-6">
-						<div class="text-center">
-							<br />
-							<button type="submit" class="btn btn-success" id="operacao"
-								name="operacao" value="SALVAR">SALVAR</button>
-							<a type="submit" class="btn  btn-danger"
-								href="FormConsultarCliente.jsp">VOLTAR</a>
+			</div>
+			<!-- row -->
+			<div class="row">
+				<form class="form-group" action="SalvarGrafico" method="post">
+					<div class="col-md-9">
+						<div class="col-md-6">
+							<img src="resources/grafico.png" WIDTH="600" HEIGHT="400" BORDER="0" USEMAP="#chart">									 						
 						</div>
 					</div>
-				</div>
-
-			</form>
-			<!-- form -->
+	
+					<div class="col-md-9">
+						<div class="col-md-6">
+							<div class="text-center">
+								<br />
+								<button type="submit" class="btn btn-success" id="operacao"
+									name="operacao" value="SALVAR">SALVAR</button>
+								<a type="submit" class="btn  btn-danger"
+									href="FormConsultarCliente.jsp">VOLTAR</a>
+							</div>
+						</div>
+					</div>
+	
+				</form>
+				<!-- form -->
+			</div>
+			<!-- row -->
 		</div>
-		<!-- row -->
 	</div>
 	<!-- /.container -->
 </body>
