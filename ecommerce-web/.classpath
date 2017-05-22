@@ -16,5 +16,7 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/ecommerce-core"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/ecommerce-dominio"/>
 	<classpathentry exported="true" kind="lib" path="D:/programas/drives/ojdbc6.jar"/>
+	<classpathentry kind="lib" path="D:/ecommerce/PROJETO/LES/jfreechart-1.0.19/jfreechart-1.0.19/lib/jcommon-1.0.23.jar"/>
+	<classpathentry kind="lib" path="D:/ecommerce/PROJETO/LES/jfreechart-1.0.19/jfreechart-1.0.19/lib/jfreechart-1.0.19.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

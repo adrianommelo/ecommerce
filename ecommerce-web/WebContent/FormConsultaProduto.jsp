@@ -17,7 +17,7 @@
 		Resultado resultado = (Resultado) session.getAttribute("resultado");
 	%>
 
-	<form action="SalvarProduto" method="post">
+	<form action="" method="post">
 
 		<label for="txtId">Id:</label> <input type="text" id="txtId"
 			name="txtId" /> </br> 

@@ -10,7 +10,6 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<meta charset="utf-8">
 <meta name="robots" content="all,follow">
 <meta name="googlebot" content="index,follow,snippet,archive">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -69,7 +68,7 @@
 		<hr>
 	</div>
 
-	<form class="form-group" action="SalvarFornecedor" method="post">
+	<form class="form-group" action="SalvarProduto" method="post">
 		<div class="col-sm-9">
 			<div class="col-md-6">
 				<label for="txtNomeProd">Nome</label> 

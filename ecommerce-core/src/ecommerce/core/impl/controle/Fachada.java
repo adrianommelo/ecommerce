@@ -139,7 +139,7 @@ public class Fachada implements IFachada {
 //		
 		//
 		
-		/* Criando uma lista para conter as regras de negócio de produto
+		/** Criando uma lista para conter as regras de negócio de PRODUTO
 		 * quando a operação for salvar
 		 */
 		List<IStrategy> rnsSalvarProduto = new ArrayList<IStrategy>();

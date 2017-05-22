@@ -56,11 +56,12 @@ public class ProdutoViewHelper implements IViewHelper {
 		
 		produto.setCategoria(new Categoria());
 		if(categoria != null && !categoria.equals("")) 
-			produto.getCategoria().setCategoria(categoria);
+			produto.getCategoria().setId(Integer.parseInt(categoria));;
 		
 		Fornecedor f = new Fornecedor();
 		if(fornecedor != null && !fornecedor.equals("")){
-			f.setNome(fornecedor);
+			f.setId(Integer.parseInt(fornecedor));
+//			f.setNome(fornecedor);
 			produto.setFornecedor(f);
 		}
 		
@@ -81,15 +82,9 @@ public class ProdutoViewHelper implements IViewHelper {
 		
 		produto.setFormato(new Formato());
 		if(formato != null && !formato.equals("")) 
-			produto.getFormato().setFormato(formato);
+			produto.getFormato().setId(Integer.parseInt(formato));
 		
-		
-		
-		
-		
-		
-		
-		
+				
 		return produto;
 	}
 
@@ -106,12 +101,12 @@ public class ProdutoViewHelper implements IViewHelper {
 			}
 			
 			request.getSession().setAttribute("resultado", resultado);
-			d= request.getRequestDispatcher("FormConsultaProduto.jsp");  			
+			d= request.getRequestDispatcher("FormConsultarProduto.jsp");  			
 		}
 		
 		if(resultado.getMsg() == null && operacao.equals("ALTERAR")){
 			
-			d= request.getRequestDispatcher("FormConsultaProduto.jsp");  
+			d= request.getRequestDispatcher("FormConsultarProduto.jsp");  
 		}
 		
 		if(resultado.getMsg() == null && operacao.equals("VISUALIZAR")){
@@ -123,13 +118,13 @@ public class ProdutoViewHelper implements IViewHelper {
 		if(resultado.getMsg() == null && operacao.equals("EXCLUIR")){
 			
 			request.getSession().setAttribute("resultado", null);
-			d= request.getRequestDispatcher("FormConsultaProduto.jsp");  
+			d= request.getRequestDispatcher("FormConsultarProduto.jsp");  
 		}
 		
 		if(resultado.getMsg() != null){
 			if(operacao.equals("SALVAR") || operacao.equals("ALTERAR")){
 				request.getSession().setAttribute("resultado", resultado);
-				d= request.getRequestDispatcher("FormConsultaProduto.jsp");  	
+				d= request.getRequestDispatcher("consult-produto.jsp");  	
 			}
 		}
 		

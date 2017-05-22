@@ -4,7 +4,6 @@ package ecommerce.core.impl.dao;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
@@ -16,11 +15,12 @@ import ecommerce.dominio.Produto;
 public class ProdutoDAO extends AbstractJdbcDAO {
 	
 	public ProdutoDAO() {
-		super("tb_produto", "id_pro");		
+		super("tb_produto", "id_prod");		
 	}
 	public void salvar(EntidadeDominio entidade) {
 		openConnection();
 		PreparedStatement pst=null;
+		
 		Produto produto = (Produto)entidade;
 		
 		
@@ -28,23 +28,38 @@ public class ProdutoDAO extends AbstractJdbcDAO {
 			connection.setAutoCommit(false);			
 					
 			StringBuilder sql = new StringBuilder();
-			sql.append("INSERT INTO tb_produto(descricao, quantidade, ");
-			sql.append("dt_cadastro) VALUES (?,?,?)");		
+			sql.append("INSERT INTO tb_produto VALUES (seqid_prod.NEXTVAL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ");
 			
 			pst = connection.prepareStatement(sql.toString(), 
-					Statement.RETURN_GENERATED_KEYS);
+					new String[] { "id_prod" } );
 			
-			pst.setString(1, produto.getDescricao());
-			pst.setInt(2, produto.getQuantidade());
-			Timestamp time = new Timestamp(produto.getDtCadastro().getTime());
-			pst.setTimestamp(3, time);
+			pst.setString(1, produto.getNome());
+			pst.setString(2, produto.getDescricao());
+			pst.setDouble(3, produto.getPreco());
+			pst.setInt(4, produto.getQuantidade());
+			pst.setInt(5, produto.getCategoria().getId());
+			pst.setInt(6, produto.getFornecedor().getId());
+			pst.setDouble(7, produto.getPeso());
+			pst.setDouble(8, produto.getComprimento());
+			pst.setDouble(9, produto.getAltura());
+			pst.setDouble(10, produto.getLargura());
+			pst.setDouble(11, produto.getDiametro());
+			pst.setInt(12, produto.getFormato().getId());
+			produto.setAtivo(1);
+			pst.setInt(13, produto.getAtivo());
+			pst.setDate(14, new java.sql.Date(produto.getDtCadastro().getTime()));
+			
 			pst.executeUpdate();	
 			
 			ResultSet rs = pst.getGeneratedKeys();
-			int id=0;
-			if(rs.next())
-				id = rs.getInt(1);
-			produto.setId(id);
+			int idProd = 0;
+			if (rs.next()) {
+				idProd = rs.getInt(1);
+			}
+			
+			produto.setId(idProd);
+
+			connection.commit();		
 			
 			connection.commit();		
 		} catch (SQLException e) {

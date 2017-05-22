@@ -1,8 +1,6 @@
 
 package ecommerce.dominio;
 
-import java.math.BigDecimal;
-
 public class Produto extends EntidadeDominio {
 
 	private String nome;
