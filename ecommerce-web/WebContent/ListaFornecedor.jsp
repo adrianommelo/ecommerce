@@ -63,7 +63,7 @@
 </head>
 <body>
 	<%
-		Resultado resultado = (Resultado) session.getAttribute("resultado");
+		Resultado resultado = (Resultado) request.getAttribute("resultado");
 	%>
 
 	<div id="content">

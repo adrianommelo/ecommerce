@@ -64,11 +64,16 @@
 </head>
 <body>
 	<%
-		Resultado resultado = (Resultado) session.getAttribute("resultado");
+		Resultado resultado = (Resultado) request.getAttribute("resultado");
 	%>
 
 	<div class="container">
 
+		<c:if test="${resultado.msg != null}">
+			<div class="bg-success text-success">
+				${resultado.msg }
+			</div>
+		</c:if>
 		<div class="form-group">
 			<form action="ConsultarFornecedor" method="post">
 
@@ -111,7 +116,7 @@
 
 
 		<div class="col-sm-9">
-			<c:if test="${resultado.entidades != null }">
+			<c:if test="${resultado.entidades != null && resultado.msg == null }">
 				<c:import url="ListaFornecedor.jsp" />
 			</c:if>
 		</div>
