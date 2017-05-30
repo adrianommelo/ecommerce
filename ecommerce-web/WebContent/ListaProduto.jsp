@@ -63,7 +63,7 @@
 </head>
 <body>
 	<%
-		Resultado resultado = (Resultado) session.getAttribute("resultado");
+		Resultado resultado = (Resultado) request.getAttribute("resultado");
 	%>
 
 	
@@ -84,18 +84,18 @@
 						<th nowrap="nowrap" colspan="2">Ações</th>
 					</tr>
 					<c:forEach var="produto" items="${resultado.entidades}">
-						<tr id="produto${fornecedor.id}">
+						<tr id="produto${produto.id}">
 							<!-- <input type="hidden" name="txtId" value="${fornecedor.id}"> -->
-							<td id="txtId" nowrap="nowrap">${fornecedor.id}</td>
-							<td id="txtNomeProd" nowrap="nowrap">${fornecedor.razaoSocial}</td>
-							<td id="txtDtCadastro" nowrap="nowrap">${fornecedor.dtCadastro}</td>
-							<td id="txtCategoria" nowrap="nowrap">${fornecedor.usuario.email}</td>
-							<td id="txtFornecedor" nowrap="nowrap">${fornecedor.usuario.email}</td>
+							<td id="txtId" nowrap="nowrap">${produto.id}</td>
+							<td id="txtNomeProd" nowrap="nowrap">${produto.nome}</td>
+							<td id="txtDtCadastro" nowrap="nowrap">${produto.dtCadastro}</td>
+							<td id="txtCategoria" nowrap="nowrap">${produto.categoria.id}</td>
+							<td id="txtFornecedor" nowrap="nowrap">${produto.fornecedor.id}</td>
 							<td><a type="submit" class="btn btn-warning"
-								href="/ecommerce-web/AlterarFornecedor?txtId=${fornecedor.id}&operacao=CONSULTAR">ALTERAR</a>
+								href="/ecommerce-web/AlterarProduto?txtId=${produto.id}&operacao=CONSULTAR">ALTERAR</a>
 							</td>
 							<td><a type="submit" class="btn btn-danger"
-								href="/ecommerce-web/ExcluirFornecedor?txtId=${fornecedor.id}&operacao=EXCLUIR">EXCLUIR</a>
+								href="/ecommerce-web/ExcluirProduto?txtId=${produto.id}&operacao=EXCLUIR">EXCLUIR</a>
 
 							</td>
 						</tr>

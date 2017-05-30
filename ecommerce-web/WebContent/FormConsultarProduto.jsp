@@ -64,14 +64,17 @@
 </head>
 <body>
 	<%
-		Resultado resultado = (Resultado) session.getAttribute("resultado");
+		Resultado resultado = (Resultado) request.getAttribute("resultado");
 	%>
 
 	<div class="container">
 
 		<div class="col-sm-9">
+			<c:if test="${resultado.msg != null}">
+				<div class="bg-success text-success">${resultado.msg }</div>
+			</c:if>
 			<div class="form-group">
-				<form action="ConsultarFornecedor" method="post">
+				<form action="ConsultarProduto" method="post">
 
 					<div class="col-sm-12">
 						<h2 class="text-uppercase">Consultar Produto</h2>

@@ -70,50 +70,42 @@
 
 	<form class="form-group" action="SalvarProduto" method="post">
 		<div class="col-sm-9">
+			<c:if test="${resultado.msg != null}">
+				<div class="bg-success text-success">${resultado.msg }</div>
+			</c:if>
 			<div class="col-md-6">
-				<label for="txtNomeProd">Nome</label> 
-				<input type="text" class="form-control" id="txtNomeProd" name="txtNomeProd">
-				
-				<label for="txtDescProd">Descrição</label> 
-				<input type="text" class="form-control" id="txtDescProd" name="txtDescProd">
-				
-				<label for="txtPrecoProd">Preço</label> 
-				<input type="text" class="form-control" id="txtPrecoProd" name="txtPrecoProd">
-				
-				<label for="txtQtdProd">Quantidade</label> 
-				<input type="text" class="form-control" id="txtQtdProd" name="txtQtdProd">
-				
-				<label for="cmbCategoria">Categoria</label> 
-				
-				<select class="form-control" id="cmbCategoria" name="cmbCategoria" >
-				 <option value="1" selected="selected">Smartphone</option>
-				 <option value="2" >Computador</option>
-				 <option value="3" >Tablet</option>
-				 <option value="4" >Video Game</option>
-				</select>
-								
-				<label for="txtFornecedor">Fornecedor</label>
-				<input type="text" class="form-control" id="txtFornecedor" name="txtFornecedor" /> 
-				
-				<label  for="txtPesoProd">Peso</label>
-				<input type="text" class="form-control" id="txtPesoProd" name="txtPesoProd">
+				<label for="txtNomeProd">Nome</label> <input type="text"
+					class="form-control" id="txtNomeProd" name="txtNomeProd"> <label
+					for="txtDescProd">Descrição</label> <input type="text"
+					class="form-control" id="txtDescProd" name="txtDescProd"> <label
+					for="txtPrecoProd">Preço</label> <input type="text"
+					class="form-control" id="txtPrecoProd" name="txtPrecoProd">
 
-				<label for="txtComprimentoProd">Comprimento</label>
-				<input type="text" class="form-control" id="txtComprimentoProd" name="txtComprimentoProd">
-				
-				<label for="txtAlturaProd">Altura</label>
-				<input type="text" class="form-control" id="txtAlturaProd" name="txtAlturaProd">
-
-				<label for="txtLarguraProd">Largura</label>
-				<input type="text" class="form-control" id="txtLarguraProd" name="txtLarguraProd">
-				
-				<label for="txtDiametroProd">Diametro</label>
-				<input type="text" class="form-control" id="txtDiametroProd" name="txtDiametroProd">
-				
-				<label for="cmbFormatoProd">Formato</label>
-				<select class="form-control" id="cmbFormatoProd" name="cmbFormatoProd" >
-				 <option value="1" selected="selected">Caixa</option>
-				 <option value="2" >Envelope</option>
+				<label for="txtQtdProd">Quantidade</label> <input type="text"
+					class="form-control" id="txtQtdProd" name="txtQtdProd"> <label
+					for="cmbCategoria">Categoria</label> <select class="form-control"
+					id="cmbCategoria" name="cmbCategoria">
+					<option value="1" selected="selected">Smartphone</option>
+					<option value="2">Computador</option>
+					<option value="3">Tablet</option>
+					<option value="4">Video Game</option>
+				</select> <label for="txtFornecedor">Fornecedor</label> <input type="text"
+					class="form-control" id="txtFornecedor" name="txtFornecedor" /> <label
+					for="txtPesoProd">Peso</label> <input type="text"
+					class="form-control" id="txtPesoProd" name="txtPesoProd"> <label
+					for="txtComprimentoProd">Comprimento</label> <input type="text"
+					class="form-control" id="txtComprimentoProd"
+					name="txtComprimentoProd"> <label for="txtAlturaProd">Altura</label>
+				<input type="text" class="form-control" id="txtAlturaProd"
+					name="txtAlturaProd"> <label for="txtLarguraProd">Largura</label>
+				<input type="text" class="form-control" id="txtLarguraProd"
+					name="txtLarguraProd"> <label for="txtDiametroProd">Diametro</label>
+				<input type="text" class="form-control" id="txtDiametroProd"
+					name="txtDiametroProd"> <label for="cmbFormatoProd">Formato</label>
+				<select class="form-control" id="cmbFormatoProd"
+					name="cmbFormatoProd">
+					<option value="1" selected="selected">Caixa</option>
+					<option value="2">Envelope</option>
 				</select>
 			</div>
 
@@ -123,8 +115,7 @@
 						<br />
 						<button type="submit" class="btn btn-success" id="operacao"
 							name="operacao" value="SALVAR">SALVAR</button>
-						<a type="submit" class="btn  btn-danger"
-							href="pages-produto.jsp">VOLTAR</a>
+						<a type="submit" class="btn  btn-danger" href="pages-produto.jsp">VOLTAR</a>
 					</div>
 				</div>
 			</div>

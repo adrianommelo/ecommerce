@@ -69,6 +69,9 @@ public class Servlet extends HttpServlet {
 //    	vhs.put("/les12015-web/SalvarCliente", new ClienteViewHelper());
     	
     	vhs.put("/ecommerce-web/SalvarProduto", new ProdutoViewHelper());
+    	vhs.put("/ecommerce-web/ConsultarProduto", new ProdutoViewHelper());
+    	vhs.put("/ecommerce-web/AlterarProduto", new ProdutoViewHelper());
+    	vhs.put("/ecommerce-web/ExcluirProduto", new ProdutoViewHelper());
     	
     }
     

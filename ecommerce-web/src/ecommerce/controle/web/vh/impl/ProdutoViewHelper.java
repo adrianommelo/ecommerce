@@ -16,13 +16,11 @@ import ecommerce.dominio.Formato;
 import ecommerce.dominio.Fornecedor;
 import ecommerce.dominio.Produto;
 
-
-
 public class ProdutoViewHelper implements IViewHelper {
 
 	public EntidadeDominio getEntidade(HttpServletRequest request) {
-		
-		//Parametros da tela
+
+		// Parametros da tela
 		String id = request.getParameter("txtId");
 		String nome = request.getParameter("txtNomeProd");
 		String descricao = request.getParameter("txtDescProd");
@@ -36,100 +34,95 @@ public class ProdutoViewHelper implements IViewHelper {
 		String largura = request.getParameter("txtLarguraProd");
 		String diametro = request.getParameter("txtDiametroProd");
 		String formato = request.getParameter("cmbFormatoProd");
-		
+
 		Produto produto = new Produto();
-		
-		if(id != null && !id.equals("")) 
+
+		if (id != null && !id.equals(""))
 			produto.setId(Integer.parseInt(id));
 
-		if(nome != null && !nome.equals("")) 
+		if (nome != null && !nome.equals(""))
 			produto.setNome(nome);
 
-		if(descricao != null && !descricao.equals("")) 
+		if (descricao != null && !descricao.equals(""))
 			produto.setDescricao(descricao);
-		
-		if(preco != null && !preco.equals("")) 
+
+		if (preco != null && !preco.equals(""))
 			produto.setPreco(Double.parseDouble(preco));
-		
-		if(quantidade != null && !quantidade.equals("")) 
+
+		if (quantidade != null && !quantidade.equals(""))
 			produto.setQuantidade(Integer.parseInt(quantidade));
-		
+
 		produto.setCategoria(new Categoria());
-		if(categoria != null && !categoria.equals("")) 
-			produto.getCategoria().setId(Integer.parseInt(categoria));;
-		
+		if (categoria != null && !categoria.equals(""))
+			produto.getCategoria().setId(Integer.parseInt(categoria));
+		;
+
 		Fornecedor f = new Fornecedor();
-		if(fornecedor != null && !fornecedor.equals("")){
+		if (fornecedor != null && !fornecedor.equals("")) {
 			f.setId(Integer.parseInt(fornecedor));
-//			f.setNome(fornecedor);
+			// f.setNome(fornecedor);
 			produto.setFornecedor(f);
 		}
-		
-		if(peso != null && !peso.equals("")) 
+
+		if (peso != null && !peso.equals(""))
 			produto.setPeso(Double.parseDouble(peso));
-		
-		if(comprimento != null && !comprimento.equals("")) 
+
+		if (comprimento != null && !comprimento.equals(""))
 			produto.setComprimento(Long.parseLong(comprimento));
-		
-		if(altura != null && !altura.equals("")) 
+
+		if (altura != null && !altura.equals(""))
 			produto.setAltura(Long.parseLong(altura));
-		
-		if(largura != null && !largura.equals("")) 
+
+		if (largura != null && !largura.equals(""))
 			produto.setLargura(Long.parseLong(largura));
-		
-		if(diametro != null && !diametro.equals("")) 
+
+		if (diametro != null && !diametro.equals(""))
 			produto.setDiametro(Long.parseLong(diametro));
-		
+
 		produto.setFormato(new Formato());
-		if(formato != null && !formato.equals("")) 
+		if (formato != null && !formato.equals(""))
 			produto.getFormato().setId(Integer.parseInt(formato));
-		
-				
+
 		return produto;
 	}
 
-	
-	public void setView(Resultado resultado, HttpServletRequest request, 
-			HttpServletResponse response)  throws IOException, ServletException {
-		RequestDispatcher d=null;
-		
+	public void setView(Resultado resultado, HttpServletRequest request, HttpServletResponse response)
+			throws IOException, ServletException {
+		RequestDispatcher d = null;
+
 		String operacao = request.getParameter("operacao");
-		
-		if(resultado.getMsg() == null){
-			if(operacao.equals("SALVAR")){
-				resultado.setMsg("Produto cadastrado com sucesso!");
-			}
-			
-			request.getSession().setAttribute("resultado", resultado);
-			d= request.getRequestDispatcher("FormConsultarProduto.jsp");  			
+
+		if (resultado.getMsg() == null && operacao.equals("SALVAR")) {
+			resultado.setMsg("Produto cadastrado com sucesso!");
+			request.setAttribute("resultado", resultado);
+			d = request.getRequestDispatcher("new-produto.jsp");
 		}
-		
-		if(resultado.getMsg() == null && operacao.equals("ALTERAR")){
-			
-			d= request.getRequestDispatcher("FormConsultarProduto.jsp");  
+
+		if (resultado.getMsg() == null && operacao.equals("CONSULTAR")
+				&& request.getRequestURI().equals("/ecommerce-web/AlterarProduto")) {
+			request.setAttribute("resultado", resultado);
+			d = request.getRequestDispatcher("update-produto.jsp");
 		}
-		
-		if(resultado.getMsg() == null && operacao.equals("VISUALIZAR")){
-			
-			request.setAttribute("produto", resultado.getEntidades().get(0));
-			d= request.getRequestDispatcher("FormProduto.jsp");  			
+
+		if (resultado.getMsg() == null && operacao.equals("CONSULTAR")
+				&& request.getRequestURI().equals("/ecommerce-web/ConsultarProduto")) {
+			request.setAttribute("resultado", resultado);
+			d = request.getRequestDispatcher("consult-produto.jsp");
 		}
-		
-		if(resultado.getMsg() == null && operacao.equals("EXCLUIR")){
-			
+		if(resultado.getMsg() == null && operacao.equals("ALTERAR")) {
+			resultado.setMsg("Produto alterado com sucesso!");
+			request.setAttribute("resultado", resultado);
+			d = request.getRequestDispatcher("/update-produto.jsp");
+		}
+
+		if (resultado.getMsg() == null && operacao.equals("EXCLUIR")) {
+			resultado.setMsg("Produto excluído com sucesso!");
 			request.getSession().setAttribute("resultado", null);
-			d= request.getRequestDispatcher("FormConsultarProduto.jsp");  
+			d = request.getRequestDispatcher("consult-produto.jsp");
 		}
-		
-		if(resultado.getMsg() != null){
-			if(operacao.equals("SALVAR") || operacao.equals("ALTERAR")){
-				request.getSession().setAttribute("resultado", resultado);
-				d= request.getRequestDispatcher("consult-produto.jsp");  	
-			}
-		}
-		
-		d.forward(request,response); 
-		
+
+		d.forward(request, response);
+
 	}
 
 }
