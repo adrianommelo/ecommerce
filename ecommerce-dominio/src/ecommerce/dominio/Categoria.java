@@ -9,7 +9,7 @@ public class Categoria extends EntidadeDominio {
 	public static final int COMPUTADOR = 2;	
 	public static final int TABLET = 3;	
 	public static final int VIDEOGAME = 4;
-	private String categoria;
+	private String nome;
 	private Map<Integer, String> categorias = new HashMap<Integer, String>();
 	
 	public Categoria(){
@@ -27,13 +27,14 @@ public class Categoria extends EntidadeDominio {
 		this.categorias = categorias;
 	}
 
-	public String getCategoria() {
-		return categoria;
+	public String getNome() {
+		return nome;
 	}
 
-	public void setCategoria(String categoria) {
-		this.categoria = categoria;
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
+
 	
 	
 }
