@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ page
 	import="ecommerce.core.aplicacao.*, ecommerce.dominio.*, java.util.*"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -41,8 +41,8 @@
 					<p class="lead">Resumo do Pedido</p>
 					<h1 class="text">Pedido realizado com sucesso!</h1>
 					<p class="lead">
-						Número do Pedido <strong><a href="#">00001</a></strong>, você
-						poderá acompanhar seu pedido através da tela <strong><a
+						NÃºmero do Pedido <strong><a href="#">00001</a></strong>, vocÃª
+						poderÃ¡ acompanhar seu pedido atravÃ©s da tela <strong><a
 							href="#">Meus Pedidos</a></strong>!
 					</p>
 					<p>

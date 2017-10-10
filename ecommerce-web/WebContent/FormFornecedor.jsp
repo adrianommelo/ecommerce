@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ page
 	import="ecommerce.core.aplicacao.*, ecommerce.dominio.*, java.util.*"%>
 
@@ -72,7 +72,7 @@
 	<form class="form-group" action="SalvarFornecedor" method="post">
 		<div class="col-sm-9">
 			<div class="col-md-6">
-				<label for="txtRzSocial">Razão Social</label> <input type="text"
+				<label for="txtRzSocial">RazÃ£o Social</label> <input type="text"
 					class="form-control" id="txtRzSocial" name="txtRzSocial"> <label
 					for="txtForEmail">Email</label> <input type="text"
 					class="form-control" id="txtForEmail" name="txtForEmail"> <label
@@ -86,7 +86,7 @@
 					for="txtLogradouro">Logradouro</label> <input type="text"
 					class="form-control" id="txtLogradouro" name="txtLogradouro">
 
-				<label for="txtNumero">Número</label> <input type="text"
+				<label for="txtNumero">NÃºmero</label> <input type="text"
 					class="form-control" id="txtNumero" name="txtNumero"> <label
 					for="txtComplemento">Complemento</label> <input type="text"
 					class="form-control" id="txtComplemento" name="txtComplemento">

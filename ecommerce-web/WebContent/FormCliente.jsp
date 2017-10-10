@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -53,12 +53,12 @@
 						<br>
 
 						<div class="form-group">
-							<label for="txtGenero">Gênero</label> <br> <input
+							<label for="txtGenero">GÃªnero</label> <br> <input
 								type="radio" name="rdGenero" value="1" checked /> <label
 								for="rdGenero"> Masculino </label> <br> <input type="radio"
 								name="rdGenero" value="2" /> <label for="rdGenero">
 								Feminino </label> <br> <input type="radio" name="rdGenero"
-								value="3" /> <label for="rdGenero"> Não quero informar
+								value="3" /> <label for="rdGenero"> NÃ£o quero informar
 							</label>
 						</div>
 
@@ -68,13 +68,13 @@
 							type="date" class="form-control" id="txtDtNascimento"
 							name="txtDtNascimento"> <label for="txtTelefone">Telefone</label>
 						<input type="text" class="form-control" id="txtTelefone"
-							name="txtTelefone"> <br> <label for="txtEndereco">Endereço</label>
+							name="txtTelefone"> <br> <label for="txtEndereco">EndereÃ§o</label>
 						<br> <label for="txtCEP">CEP</label> <input type="text"
 							class="form-control" id="txtCEP" name="txtCEP"> <label
 							for="txtLogradouro">Logradouro</label> <input type="text"
 							class="form-control" id="txtLogradouro" name="txtLogradouro">
 
-						<label for="txtNumero">Número</label> <input type="text"
+						<label for="txtNumero">NÃºmero</label> <input type="text"
 							class="form-control" id="txtNumero" name="txtNumero"> <label
 							for="txtComplemento">Complemento</label> <input type="text"
 							class="form-control" id="txtComplemento" name="txtComplemento">

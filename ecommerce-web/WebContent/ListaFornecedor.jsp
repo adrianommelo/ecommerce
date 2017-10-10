@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 
 <%@ page
 	import="ecommerce.core.aplicacao.*, ecommerce.dominio.*, java.util.*"%>
@@ -84,11 +84,11 @@
 				<table class="table">
 					<tr>
 						<th nowrap="nowrap">Id</th>
-						<th nowrap="nowrap">Razão Social</th>
+						<th nowrap="nowrap">RazÃ£o Social</th>
 						<th nowrap="nowrap">Cnpj</th>
 						<th nowrap="nowrap">Data Cadastro</th>
 						<th nowrap="nowrap">Email</th>
-						<th nowrap="nowrap" colspan="2">Ações</th>
+						<th nowrap="nowrap" colspan="2">AÃ§Ãµes</th>
 					</tr>
 					<c:forEach var="fornecedor" items="${resultado.entidades}">
 						<tr id="fornecedor${fornecedor.id}">

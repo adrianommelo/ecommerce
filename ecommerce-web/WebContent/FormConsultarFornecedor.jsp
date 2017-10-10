@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ page
 	import="ecommerce.core.aplicacao.*, ecommerce.dominio.*, java.util.*"%>
 
@@ -80,7 +80,7 @@
 				<div class="col-sm-9">
 					<h2 class="text-uppercase">Consultar Fornecedor</h2>
 					<hr>
-					<p>Consulte o Fornecedor atravÈs de um dos campos abaixo:</p>
+					<p>Consulte o Fornecedor atrav√©s de um dos campos abaixo:</p>
 				</div>
 
 
@@ -94,7 +94,7 @@
 					</div>
 					<div class="col-md-4">
 
-						<label for="txtRzSocial">Raz„o Social</label> <input type="text"
+						<label for="txtRzSocial">Raz√£o Social</label> <input type="text"
 							class="form-control" id="txtRzSocial" name="txtRzSocial" />
 
 					</div>

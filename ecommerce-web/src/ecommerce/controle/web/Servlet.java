@@ -105,6 +105,7 @@ public class Servlet extends HttpServlet {
 	protected void doProcessRequest(HttpServletRequest request, 
 			HttpServletResponse response) throws ServletException, IOException {
 	
+		request.setCharacterEncoding("UTF-8");
 		//Obtêm a uri que invocou esta servlet (O que foi definido no methdo do form html)
 		String uri = request.getRequestURI();
 		

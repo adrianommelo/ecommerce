@@ -9,8 +9,8 @@ public class Produto extends EntidadeDominio {
 	private String nome;
 	private String descricao;
 	private Double preco;
+	private Categoria categoria;
 	private Integer quantidade;
-	private List<Categoria> categoria;
 	private Fornecedor fornecedor;
 	private Double peso;
 	private Long comprimento;
@@ -19,10 +19,11 @@ public class Produto extends EntidadeDominio {
 	private Long diametro;
 	private Formato formato;
 	
-	/**
-	 * Getter e Setter que componhem a classe {@link Produto}
-	 * @return
-	 */
+	private List<Categoria> categorias;
+	private List<Fornecedor> fornecedores;
+	
+	
+	
 	public String getNome() {
 		return nome;
 	}
@@ -41,23 +42,18 @@ public class Produto extends EntidadeDominio {
 	public void setPreco(Double preco) {
 		this.preco = preco;
 	}
+	public Categoria getCategoria() {
+		return categoria;
+	}
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
+	}
 	public Integer getQuantidade() {
 		return quantidade;
 	}
 	public void setQuantidade(Integer quantidade) {
 		this.quantidade = quantidade;
 	}
-		
-	public List<Categoria> getCategoria() {
-		if(categoria == null) {
-			categoria = new ArrayList<Categoria>();
-		}
-		return this.categoria;
-	}
-	public void setCategoria(List<Categoria> categoria) {
-		this.categoria = categoria;
-	}
-	
 	public Fornecedor getFornecedor() {
 		return fornecedor;
 	}
@@ -100,10 +96,33 @@ public class Produto extends EntidadeDominio {
 	public void setFormato(Formato formato) {
 		this.formato = formato;
 	}
-	
-	
+	public List<Categoria> getCategorias() {
+		return categorias;
+	}
+	public void setCategorias(List<Categoria> categorias) {
+		if(categorias == null) {
+			categorias = new ArrayList<Categoria>();
+		}
+		this.categorias = categorias;
+	}
+	public List<Fornecedor> getFornecedores() {
+		if(fornecedores == null) {
+			fornecedores = new ArrayList<Fornecedor>();
+		}
+		return fornecedores;
+	}
+	public void setFornecedores(List<Fornecedor> fornecedores) {
+		this.fornecedores = fornecedores;
+	}
 	public void addCategoria (Categoria cat) {
-		getCategoria().add(cat);
+		getCategorias().add(cat);
+	}
+	@Override
+	public String toString() {
+		return "Produto [nome=" + nome + ", descricao=" + descricao + ", preco=" + preco + ", categoria=" + categoria
+				+ ", quantidade=" + quantidade + ", fornecedor=" + fornecedor + ", peso=" + peso + ", comprimento="
+				+ comprimento + ", altura=" + altura + ", largura=" + largura + ", diametro=" + diametro + ", formato="
+				+ formato + ", categorias=" + categorias + ", fornecedores=" + fornecedores + "]";
 	}
 	
 	

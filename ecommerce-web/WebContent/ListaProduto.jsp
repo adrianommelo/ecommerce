@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 
 <%@ page
 	import="ecommerce.core.aplicacao.*, ecommerce.dominio.*, java.util.*"%>
@@ -81,7 +81,7 @@
 						<th nowrap="nowrap">Data Cadastro</th>
 						<th nowrap="nowrap">Categoria</th>
 						<th nowrap="nowrap">Fornecedor</th>
-						<th nowrap="nowrap" colspan="2">Ações</th>
+						<th nowrap="nowrap" colspan="2">AÃ§Ãµes</th>
 					</tr>
 					<c:forEach var="produto" items="${resultado.entidades}">
 						<tr id="produto${produto.id}">
@@ -89,7 +89,7 @@
 							<td id="txtId" nowrap="nowrap">${produto.id}</td>
 							<td id="txtNomeProd" nowrap="nowrap">${produto.nome}</td>
 							<td id="txtDtCadastro" nowrap="nowrap">${produto.dtCadastro}</td>
-							<td id="txtCategoria" nowrap="nowrap">${produto.categoria[0].id}</td>
+							<td id="txtCategoria" nowrap="nowrap">${produto.categoria.id}</td>
 							<td id="txtFornecedor" nowrap="nowrap">${produto.fornecedor.id}</td>
 							<td><a type="submit" class="btn btn-warning"
 								href="/ecommerce-web/AlterarProduto?txtId=${produto.id}&operacao=CONSULTAR">ALTERAR</a>

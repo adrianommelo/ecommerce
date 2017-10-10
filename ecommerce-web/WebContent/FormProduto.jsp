@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ page
 	import="ecommerce.core.aplicacao.*, ecommerce.dominio.*, java.util.*"%>
 
@@ -65,40 +65,60 @@
 
 	<%
 		Resultado resultado = (Resultado) request.getAttribute("resultado");
-		
 	%>
-	<div class="col-md-9">
-		<h2 class="text-uppercase lead">Novo Produto</h2>
-		<hr>
-	</div>
+	<div class="col-md-9"></div>
 
 	<form class="form-group" action="SalvarProduto" method="post">
 		<div class="col-sm-9">
 
 			<div class="col-md-6">
 
-				<c:if test="${resultado.msg != null}">
-					<div class="bg-success text-success">${resultado.msg }</div>
-				</c:if>
+				<h2 class="text-uppercase">Novo Produto</h2>
+				<hr>
+				<div class="col-md-12">
+					<div class="col-md-2"></div>
+					<div class="col-md-8">
+						<div class="bg-success text-success">
+							<c:if test="${resultado.msg != null}">
+								<h4 class="text-uppercase">${resultado.msg }
+									<i class="fa fa-chevron-right"></i>
+								</h4>
+							</c:if>
+						</div>
+					</div>
+					<div class="col-md-2"></div>
+				</div>
+				<hr>
+				<hr>
+				<p>Preencha os dados nos campos abaixo:</p>
 				<label for="txtNomeProd">Nome</label> <input type="text"
 					class="form-control" id="txtNomeProd" name="txtNomeProd"> <label
-					for="txtDescProd">Descrição</label> <input type="text"
+					for="txtDescProd">DescriÃ§Ã£o</label> <input type="text"
 					class="form-control" id="txtDescProd" name="txtDescProd"> <label
-					for="txtPrecoProd">Preço</label> <input type="text"
+					for="txtPrecoProd">PreÃ§o</label> <input type="text"
 					class="form-control" id="txtPrecoProd" name="txtPrecoProd">
 
 				<label for="txtQtdProd">Quantidade</label> <input type="text"
 					class="form-control" id="txtQtdProd" name="txtQtdProd"> <label
 					for="cmbCategoria">Categoria</label> <select class="form-control"
 					id="cmbCategoria" name="cmbCategoria">
-					<c:if test="${resultado.entidades.get(0).categoria != null}">
-						<c:forEach var="categoria"
-							items="${resultado.entidades.get(0).categoria}">
-							<option value="${categoria.id}" selected="selected">${categoria.categoria}</option>
+					<c:if test="${resultado.entidades.get(0).categorias != null}">
+						<c:forEach var="categorias"
+							items="${resultado.entidades.get(0).categorias}">
+							<option value="${categorias.id}" selected="selected">${categorias.categoria}</option>
 						</c:forEach>
 					</c:if>
-				</select> <label for="txtFornecedor">Fornecedor</label> <input type="text"
-					class="form-control" id="txtFornecedor" name="txtFornecedor" /> <label
+				</select> <label for="txtFornecedor">Fornecedor</label> 
+				<select class="form-control"
+					id="cmbFornecedor" name="cmbFornecedor">
+					<c:if test="${resultado.entidades.get(0).fornecedores != null}">
+						<c:forEach var="fornecedores"
+							items="${resultado.entidades.get(0).fornecedores}">
+							<option value="${fornecedores.id}" selected="selected">${fornecedores.razaoSocial}</option>
+						</c:forEach>
+					</c:if>
+				</select>
+				<label
 					for="txtPesoProd">Peso</label> <input type="text"
 					class="form-control" id="txtPesoProd" name="txtPesoProd"> <label
 					for="txtComprimentoProd">Comprimento</label> <input type="text"

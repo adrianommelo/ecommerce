@@ -28,7 +28,7 @@ public class ProdutoViewHelper implements IViewHelper {
 		String preco = request.getParameter("txtPrecoProd");
 		String quantidade = request.getParameter("txtQtdProd");
 		String categoria = request.getParameter("cmbCategoria");
-		String fornecedor = request.getParameter("txtFornecedor");
+		String fornecedor = request.getParameter("cmbFornecedor");
 		String peso = request.getParameter("txtPesoProd");
 		String comprimento = request.getParameter("txtComprimentoProd");
 		String altura = request.getParameter("txtAlturaProd");
@@ -53,17 +53,14 @@ public class ProdutoViewHelper implements IViewHelper {
 		if (quantidade != null && !quantidade.equals(""))
 			produto.setQuantidade(Integer.parseInt(quantidade));
 
-		produto.setCategoria(new ArrayList<Categoria>());
 		if (categoria != null && !categoria.equals("")) {
-			Categoria cat = new Categoria();
-			cat.setId(Integer.parseInt(categoria));
-			produto.getCategoria().add(cat);
+			produto.setCategoria(new Categoria());
+			produto.getCategoria().setId(Integer.parseInt(categoria));
 		}
 		
 		Fornecedor f = new Fornecedor();
 		if (fornecedor != null && !fornecedor.equals("")) {
 			f.setId(Integer.parseInt(fornecedor));
-			// f.setNome(fornecedor);
 			produto.setFornecedor(f);
 		}
 

@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="ISO-8859-1"%>
+	pageEncoding="UTF-8"%>
 <%@ page
     import="ecommerce.core.aplicacao.*, ecommerce.dominio.*, java.util.*"%>
 

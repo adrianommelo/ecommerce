@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ page
 	import="ecommerce.core.aplicacao.*, ecommerce.dominio.*, java.util.*"%>
 
@@ -79,7 +79,7 @@
 					<div class="col-sm-12">
 						<h2 class="text-uppercase">Consultar Produto</h2>
 						<hr>
-						<p>Consulte o Fornecedor através de um dos campos abaixo:</p>
+						<p>Consulte o Fornecedor atravÃ©s de um dos campos abaixo:</p>
 					</div>
 
 

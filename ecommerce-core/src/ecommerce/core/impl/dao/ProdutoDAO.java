@@ -41,7 +41,7 @@ public class ProdutoDAO extends AbstractJdbcDAO {
 			pst.setString(2, produto.getDescricao());
 			pst.setDouble(3, produto.getPreco());
 			pst.setInt(4, produto.getQuantidade());
-			pst.setInt(5, produto.getCategoria().get(0).getId());
+			pst.setInt(5, produto.getCategoria().getId());
 			pst.setInt(6, produto.getFornecedor().getId());
 			pst.setDouble(7, produto.getPeso());
 			pst.setDouble(8, produto.getComprimento());
@@ -93,7 +93,7 @@ public class ProdutoDAO extends AbstractJdbcDAO {
 		PreparedStatement pst = null;
 
 		Produto produto = (Produto) entidade;
-		Categoria cat = produto.getCategoria().get(0);
+		Categoria cat = produto.getCategoria();
 		Fornecedor fornecedor = produto.getFornecedor();
 		Formato formato = produto.getFormato();
 
@@ -167,7 +167,7 @@ public class ProdutoDAO extends AbstractJdbcDAO {
 				pst.setInt(i++, produto.getQuantidade());
 			}
 			if (cat != null && cat.getId() != null ) {
-				pst.setInt(i++, produto.getCategoria().get(0).getId());
+				pst.setInt(i++, produto.getCategoria().getId());
 			}
 			if (fornecedor != null && fornecedor.getId() != null ) {
 				pst.setInt(i++, produto.getFornecedor().getId());
@@ -240,14 +240,13 @@ public class ProdutoDAO extends AbstractJdbcDAO {
 	public List<EntidadeDominio> consultar(EntidadeDominio entidade) {
 		PreparedStatement pst = null;
 
+
 		Produto produto = (Produto) entidade;
-		Categoria cat = null;
-		if(!produto.getCategoria().isEmpty())
-			cat = produto.getCategoria().get(0);
-		else {
-			produto.getCategoria().add(new Categoria());
-			cat = produto.getCategoria().get(0);
-		}
+		Categoria cat = produto.getCategoria();
+		Fornecedor fornecedor = produto.getFornecedor();
+		Formato formato = produto.getFormato();
+		
+		
 		StringBuilder sql = new StringBuilder();
 
 		if (produto != null && produto.getId() == null && (produto.getNome() == null || produto.getNome().equals(""))) {
@@ -269,11 +268,21 @@ public class ProdutoDAO extends AbstractJdbcDAO {
 			CategoriaDAO catDAO = new CategoriaDAO();
 			catDAO.connection = connection;
 			catDAO.ctrlTransaction = false;
-			List<EntidadeDominio> categorias = catDAO.consultar(cat);
+			List<EntidadeDominio> categorias = catDAO.consultar(new Categoria());
 			List<Categoria> cats = new ArrayList<Categoria>();
 			for(EntidadeDominio ent : categorias) {
 				Categoria c = (Categoria)ent;
 				cats.add(c);
+			}
+			
+			FornecedorDAO fornecedorDAO = new FornecedorDAO();
+			fornecedorDAO.connection = connection;
+			fornecedorDAO.ctrlTransaction = false;
+			List<EntidadeDominio> fornecedores = fornecedorDAO.consultar(fornecedor);
+			List<Fornecedor> forns = new ArrayList<Fornecedor>();
+			for(EntidadeDominio ent : fornecedores) {
+				Fornecedor f = (Fornecedor)ent;
+				forns.add(f);
 			}
 			
 			pst = connection.prepareStatement(sql.toString());
@@ -296,12 +305,14 @@ public class ProdutoDAO extends AbstractJdbcDAO {
 
 				p.setPreco(rs.getDouble("PRECO"));
 				p.setQuantidade(rs.getInt("QTDE"));
-				p.setCategoria(cats);
 				
-//				p.getCategoria().add(new Categoria());
-//				p.getCategoria().get(0).setId(rs.getInt("ID_CATEGORIA"));
+				p.setCategoria(new Categoria());
+				p.getCategoria().setId(rs.getInt("ID_CATEGORIA"));
+				p.setCategorias(cats); //para o combo
+				
 				p.setFornecedor(new Fornecedor());
 				p.getFornecedor().setId(rs.getInt("ID_FORNECEDOR"));
+				p.setFornecedores(forns);
 				p.setPeso(rs.getDouble("PESO"));
 				p.setComprimento(rs.getLong("COMPRIMENTO"));
 				p.setAltura(rs.getLong("ALTURA"));
@@ -333,14 +344,7 @@ public class ProdutoDAO extends AbstractJdbcDAO {
 		PreparedStatement pst = null;
 
 		Produto produto = (Produto) entidade;
-		Categoria cat = null;
-		if(!produto.getCategoria().isEmpty())
-			cat = produto.getCategoria().get(0);
-		else {
-			produto.getCategoria().add(new Categoria());
-			cat = produto.getCategoria().get(0);
-		}
-		
+		Categoria cat = produto.getCategoria();
 		Fornecedor fornecedor = produto.getFornecedor();
 		Formato formato = produto.getFormato();
 
@@ -350,15 +354,6 @@ public class ProdutoDAO extends AbstractJdbcDAO {
 			openConnection();
 
 			connection.setAutoCommit(false);
-			CategoriaDAO catDAO = new CategoriaDAO();
-			catDAO.connection = connection;
-			catDAO.ctrlTransaction = false;
-			List<EntidadeDominio> categorias = catDAO.consultar(cat);
-			List<Categoria> cats = new ArrayList<Categoria>();
-			for(EntidadeDominio ent : categorias) {
-				Categoria c = (Categoria)ent;
-				cats.add(c);
-			}
 			
 			if(produto.getId() != null) {
 				
@@ -374,7 +369,7 @@ public class ProdutoDAO extends AbstractJdbcDAO {
 				pst.setString(2, produto.getDescricao());
 				pst.setDouble(3, produto.getPreco());
 				pst.setInt(4, produto.getQuantidade());
-				pst.setInt(5, produto.getCategoria().get(0).getId());
+				pst.setInt(5, produto.getCategoria().getId());
 				pst.setInt(6, produto.getFornecedor().getId());
 				pst.setDouble(7, produto.getPeso());
 				pst.setDouble(8, produto.getComprimento());
@@ -390,7 +385,29 @@ public class ProdutoDAO extends AbstractJdbcDAO {
 				if (ctrlTransaction)
 					connection.commit();
 			}else {
-				produto.setCategoria(cats);
+				
+				
+				CategoriaDAO catDAO = new CategoriaDAO();
+				catDAO.connection = connection;
+				catDAO.ctrlTransaction = false;
+				List<EntidadeDominio> categorias = catDAO.consultar(new Categoria());
+				List<Categoria> cats = new ArrayList<Categoria>();
+				for(EntidadeDominio ent : categorias) {
+					Categoria c = (Categoria)ent;
+					cats.add(c);
+				}
+				produto.setCategorias(cats);
+				
+				FornecedorDAO fornecedorDAO = new FornecedorDAO();
+				fornecedorDAO.connection = connection;
+				fornecedorDAO.ctrlTransaction = false;
+				List<EntidadeDominio> fornecedores = fornecedorDAO.consultar(fornecedor);
+				List<Fornecedor> forns = new ArrayList<Fornecedor>();
+				for(EntidadeDominio ent : fornecedores) {
+					Fornecedor f = (Fornecedor)ent;
+					forns.add(f);
+				}
+				produto.setFornecedores(forns);
 			}
 
 
