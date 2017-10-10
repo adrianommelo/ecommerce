@@ -14,13 +14,17 @@
 			<div class="box">
 				<div class="panel panel-default">
 					<div class="painel-body min-area ">
-						<div class="text-center">
-							<p class="lead">Cadastrar novo</p>
-							<a href="new-produto.jsp"
-								class="btn btn-success"> Acessar <i
-								class="fa fa-chevron-right"></i>
-							</a>
-						</div>
+						<form action="MontarProduto" method="post">
+							<div class="text-center">
+								<p class="lead">Cadastrar novo</p>
+								<a href="/ecommerce-web/MontarProduto?operacao=MONTAR"
+									class="btn btn-success">Acessar <i
+									class="fa fa-chevron-right"></i>
+									<!--<a href="new-produto.jsp" class="btn btn-success" > Acessar <i
+									class="fa fa-chevron-right">--></i>
+								</a>
+							</div>
+						</form>
 					</div>
 				</div>
 			</div>

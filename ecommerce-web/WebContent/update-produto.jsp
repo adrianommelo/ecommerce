@@ -1,9 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+	pageEncoding="utf-8"%>
 
 <%@ page
 	import="ecommerce.core.aplicacao.*, ecommerce.dominio.*, java.util.*"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html>
@@ -61,51 +63,44 @@
 <link rel="apple-touch-icon" sizes="152x152"
 	href="resources/img/apple-touch-icon-152x152.png">
 </head>
+
 <body>
-	<%
-		Resultado resultado = (Resultado) request.getAttribute("resultado");
-	%>
+	<div id="all">
 
-	
-			<div class="col-sm-12">
-				<h2 class="text-uppercase">Produto(s) encontrado(s)</h2>
-				<br>
-				<!-- <form action="AlterarFornecedor" method="post"> -->
+		<!-- header -->
+		<c:import url="header-template-adm.jsp"></c:import>
+
+
+		<!-- search-bar -->
+		<c:import url="search-bar.jsp"></c:import>
+
+		<div id="content">
+			<div class="container">
+				<div class="row">
+					<!-- coluna esquerda -->
+					<c:import url="left-menu-my-account-adm.jsp"></c:import>
+					<!-- coluna direita -->
+					<c:import url="FormAlteraProduto.jsp"></c:import>
+				</div>
+				<!-- row -->
 			</div>
+			<!-- /.container -->
+		</div>
+		<!-- /#content -->
 
-			<div class="col-sm-12">
-				<table class="table">
-					<tr>
-						<th nowrap="nowrap">Id</th>
-						<th nowrap="nowrap">Nome</th>
-						<th nowrap="nowrap">Data Cadastro</th>
-						<th nowrap="nowrap">Categoria</th>
-						<th nowrap="nowrap">Fornecedor</th>
-						<th nowrap="nowrap" colspan="2">Ações</th>
-					</tr>
-					<c:forEach var="produto" items="${resultado.entidades}">
-						<tr id="produto${produto.id}">
-							<!-- <input type="hidden" name="txtId" value="${fornecedor.id}"> -->
-							<td id="txtId" nowrap="nowrap">${produto.id}</td>
-							<td id="txtNomeProd" nowrap="nowrap">${produto.nome}</td>
-							<td id="txtDtCadastro" nowrap="nowrap">${produto.dtCadastro}</td>
-							<td id="txtCategoria" nowrap="nowrap">${produto.categoria[0].id}</td>
-							<td id="txtFornecedor" nowrap="nowrap">${produto.fornecedor.id}</td>
-							<td><a type="submit" class="btn btn-warning"
-								href="/ecommerce-web/AlterarProduto?txtId=${produto.id}&operacao=CONSULTAR">ALTERAR</a>
-							</td>
-							<td><a type="submit" class="btn btn-danger"
-								href="/ecommerce-web/ExcluirProduto?txtId=${produto.id}&operacao=EXCLUIR">EXCLUIR</a>
+		<c:import url="footer-template.jsp"></c:import>
+		<!-- footer -->
 
-							</td>
-						</tr>
-					</c:forEach>
-				</table>
-				<!-- </form> -->
-			</div>
+		<c:import url="copyright.jsp"></c:import>
+		<!-- copyright -->
+
+	</div>
+	<!-- /#all -->
 
 
+	<!-- #### JAVASCRIPT FILES ### -->
 
-	
+	<c:import url="js-files.jsp"></c:import>
+
 </body>
 </html>

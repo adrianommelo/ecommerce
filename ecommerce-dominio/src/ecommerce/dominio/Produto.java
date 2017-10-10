@@ -1,19 +1,22 @@
 
 package ecommerce.dominio;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Produto extends EntidadeDominio {
 
 	private String nome;
 	private String descricao;
 	private Double preco;
-	private int quantidade;
-	private Categoria categoria;
+	private Integer quantidade;
+	private List<Categoria> categoria;
 	private Fornecedor fornecedor;
-	private double peso;
-	private long comprimento;
-	private long altura;
-	private long largura;
-	private long diametro;
+	private Double peso;
+	private Long comprimento;
+	private Long altura;
+	private Long largura;
+	private Long diametro;
 	private Formato formato;
 	
 	/**
@@ -38,52 +41,57 @@ public class Produto extends EntidadeDominio {
 	public void setPreco(Double preco) {
 		this.preco = preco;
 	}
-	public int getQuantidade() {
+	public Integer getQuantidade() {
 		return quantidade;
 	}
-	public void setQuantidade(int quantidade) {
+	public void setQuantidade(Integer quantidade) {
 		this.quantidade = quantidade;
 	}
-	public Categoria getCategoria() {
-		return categoria;
+		
+	public List<Categoria> getCategoria() {
+		if(categoria == null) {
+			categoria = new ArrayList<Categoria>();
+		}
+		return this.categoria;
 	}
-	public void setCategoria(Categoria categoria) {
+	public void setCategoria(List<Categoria> categoria) {
 		this.categoria = categoria;
 	}
+	
 	public Fornecedor getFornecedor() {
 		return fornecedor;
 	}
 	public void setFornecedor(Fornecedor fornecedor) {
 		this.fornecedor = fornecedor;
 	}
-	public double getPeso() {
+	public Double getPeso() {
 		return peso;
 	}
-	public void setPeso(double peso) {
+	public void setPeso(Double peso) {
 		this.peso = peso;
 	}
-	public long getComprimento() {
+	public Long getComprimento() {
 		return comprimento;
 	}
-	public void setComprimento(long comprimento) {
+	public void setComprimento(Long comprimento) {
 		this.comprimento = comprimento;
 	}
-	public long getAltura() {
+	public Long getAltura() {
 		return altura;
 	}
-	public void setAltura(long altura) {
+	public void setAltura(Long altura) {
 		this.altura = altura;
 	}
-	public long getLargura() {
+	public Long getLargura() {
 		return largura;
 	}
-	public void setLargura(long largura) {
+	public void setLargura(Long largura) {
 		this.largura = largura;
 	}
-	public long getDiametro() {
+	public Long getDiametro() {
 		return diametro;
 	}
-	public void setDiametro(long diametro) {
+	public void setDiametro(Long diametro) {
 		this.diametro = diametro;
 	}
 	public Formato getFormato() {
@@ -94,6 +102,9 @@ public class Produto extends EntidadeDominio {
 	}
 	
 	
+	public void addCategoria (Categoria cat) {
+		getCategoria().add(cat);
+	}
 	
 	
 	

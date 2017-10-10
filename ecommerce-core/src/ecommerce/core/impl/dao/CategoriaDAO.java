@@ -13,13 +13,13 @@ import ecommerce.dominio.EntidadeDominio;
 public class CategoriaDAO extends AbstractJdbcDAO {
 
 	protected CategoriaDAO(String table, String idTable) {
-		super("tb_categoria", "id_categoria");	
+		super("tb_categoria", "id_categoria");
 	}
-	
-	public CategoriaDAO(Connection cx){
+
+	public CategoriaDAO(Connection cx) {
 		super(cx, "tb_categoria", "id_categoria");
 	}
-	
+
 	public CategoriaDAO() {
 		super("tb_categoria", "id_categoria");
 	}
@@ -39,7 +39,7 @@ public class CategoriaDAO extends AbstractJdbcDAO {
 
 			pst = connection.prepareStatement(sql.toString(), new String[] { "id_categoria" });
 
-			pst.setString(1, cat.getNome());
+			pst.setString(1, cat.getCategoria());
 			pst.setInt(2, cat.getAtivo());
 			pst.setDate(3, new java.sql.Date(cat.getDtCadastro().getTime()));
 			pst.executeUpdate();
@@ -80,8 +80,10 @@ public class CategoriaDAO extends AbstractJdbcDAO {
 		try {
 			connection.setAutoCommit(false);
 			StringBuilder sql = new StringBuilder();
-			if (cat != null && cat.getNome() != null && !cat.getNome().equals("")) {
-				sql.append("UPDATE tb_categoria ");
+			sql.append("UPDATE tb_categoria ");
+			
+			int i = 1;
+			if (cat != null && cat.getCategoria() != null && !cat.getCategoria().equals("")) {
 				sql.append("SET CATEGORIA = ? ");
 			}
 			if (cat != null && cat.getAtivo() != null) {
@@ -93,10 +95,17 @@ public class CategoriaDAO extends AbstractJdbcDAO {
 
 			pst = connection.prepareStatement(sql.toString());
 
-			pst.setString(1, cat.getNome());
-			pst.setInt(2, cat.getAtivo());
-			pst.setInt(3, cat.getId());
+			if (cat != null && cat.getCategoria() != null && !cat.getCategoria().equals(""))
+				pst.setString(i++, cat.getCategoria());
+			
+			if (cat != null && cat.getAtivo() != null) {
+				cat.setAtivo(1);
+				pst.setInt(i++, cat.getAtivo());
+			}
+			if (cat != null && cat.getId() != null)
+				pst.setInt(i++, cat.getId());
 
+			
 			pst.executeUpdate();
 			if (ctrlTransaction) {
 				connection.commit();
@@ -125,38 +134,83 @@ public class CategoriaDAO extends AbstractJdbcDAO {
 
 	@Override
 	public List<EntidadeDominio> consultar(EntidadeDominio entidade) throws SQLException {
-		if(connection == null) {
+		if (connection == null) {
 			openConnection();
 		}
-		
-		Categoria cat = (Categoria)entidade;
+
+		Categoria cat = (Categoria) entidade;
 		StringBuilder sql = new StringBuilder();
 		PreparedStatement pst = null;
-		
-		if(cat.getId() != null){
+
+		if (cat.getId() != null) {
 			sql.append("SELECT * FROM tb_categoria ");
 			sql.append("WHERE id_categoria = ? ");
+		} else {
+			sql.append("SELECT * FROM tb_categoria ");
 		}
-		
+
 		try {
 			openConnection();
 			pst = connection.prepareStatement(sql.toString());
-			
-			pst.setInt(1, cat.getId());
-			
+			if (cat != null && cat.getId() != null && cat.getId() != 0) {
+				pst.setInt(1, cat.getId());
+			}
 			ResultSet rs = pst.executeQuery();
 			List<EntidadeDominio> categorias = new ArrayList<EntidadeDominio>();
 			while (rs.next()) {
 				Categoria c = new Categoria();
 				c.setId(rs.getInt("ID_CATEGORIA"));
-				c.setNome(rs.getString("CATEGORIA"));
+				c.setCategoria(rs.getString("CATEGORIA"));
 				c.setAtivo(rs.getInt("ATIVO"));
-				
+
 				c.setDtCadastro(rs.getDate("DT_CADASTRO"));
-				categorias.add(c);				
+				categorias.add(c);
 			}
-			
+
 			return categorias;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	@Override
+	public EntidadeDominio montar(EntidadeDominio entidade) throws SQLException {
+		if (connection == null) {
+			openConnection();
+		}
+
+		Categoria cat = (Categoria) entidade;
+		StringBuilder sql = new StringBuilder();
+		PreparedStatement pst = null;
+
+		if (cat.getId() != null) {
+			sql.append("SELECT * FROM tb_categoria ");
+			sql.append("WHERE id_categoria = ? ");
+		} else {
+			sql.append("SELECT * FROM tb_categoria ");
+		}
+
+		try {
+			openConnection();
+			pst = connection.prepareStatement(sql.toString());
+
+			if (cat.getId() != null) {
+				pst.setInt(1, cat.getId());
+			}
+			ResultSet rs = pst.executeQuery();
+			List<EntidadeDominio> categorias = new ArrayList<EntidadeDominio>();
+			while (rs.next()) {
+				Categoria c = new Categoria();
+				c.setId(rs.getInt("ID_CATEGORIA"));
+				c.setCategoria(rs.getString("CATEGORIA"));
+				c.setAtivo(rs.getInt("ATIVO"));
+
+				c.setDtCadastro(rs.getDate("DT_CADASTRO"));
+				categorias.add(c);
+			}
+
+			return cat;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

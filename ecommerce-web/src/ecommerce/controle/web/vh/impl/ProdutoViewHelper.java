@@ -2,6 +2,7 @@
 package ecommerce.controle.web.vh.impl;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -52,11 +53,13 @@ public class ProdutoViewHelper implements IViewHelper {
 		if (quantidade != null && !quantidade.equals(""))
 			produto.setQuantidade(Integer.parseInt(quantidade));
 
-		produto.setCategoria(new Categoria());
-		if (categoria != null && !categoria.equals(""))
-			produto.getCategoria().setId(Integer.parseInt(categoria));
-		;
-
+		produto.setCategoria(new ArrayList<Categoria>());
+		if (categoria != null && !categoria.equals("")) {
+			Categoria cat = new Categoria();
+			cat.setId(Integer.parseInt(categoria));
+			produto.getCategoria().add(cat);
+		}
+		
 		Fornecedor f = new Fornecedor();
 		if (fornecedor != null && !fornecedor.equals("")) {
 			f.setId(Integer.parseInt(fornecedor));
@@ -121,6 +124,13 @@ public class ProdutoViewHelper implements IViewHelper {
 			d = request.getRequestDispatcher("consult-produto.jsp");
 		}
 
+		
+		if (resultado.getMsg() == null && operacao.equals("MONTAR")
+				&& request.getRequestURI().equals("/ecommerce-web/MontarProduto")) {
+			request.setAttribute("resultado", resultado);
+			d = request.getRequestDispatcher("new-produto.jsp");
+		}
+		
 		d.forward(request, response);
 
 	}

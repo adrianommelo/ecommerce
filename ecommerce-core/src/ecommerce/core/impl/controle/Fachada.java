@@ -19,8 +19,8 @@ import ecommerce.core.impl.negocio.ValidadorCpf;
 import ecommerce.core.impl.negocio.ValidadorDadosObrigatoriosFornecedor;
 import ecommerce.core.impl.negocio.ValidadorQtdProduto;
 import ecommerce.dominio.ClienteFisico;
-import ecommerce.dominio.Fornecedor;
 import ecommerce.dominio.EntidadeDominio;
+import ecommerce.dominio.Fornecedor;
 import ecommerce.dominio.Produto;
 
 public class Fachada implements IFachada {
@@ -327,5 +327,34 @@ public class Fachada implements IFachada {
 			return msg.toString();
 		else
 			return null;
+	}
+
+
+	@Override
+	public Resultado montar(EntidadeDominio entidade) {
+		resultado = new Resultado();
+		String nmClasse = entidade.getClass().getName();	
+		
+		String msg = executarRegras(entidade, "EXCLUIR");
+		
+		
+		if(msg == null){
+			IDAO dao = daos.get(nmClasse);
+			try {
+				dao.montar(entidade);
+				List<EntidadeDominio> entidades = new ArrayList<EntidadeDominio>();
+				entidades.add(entidade);
+				resultado.setEntidades(entidades);
+			} catch (SQLException e) {
+				e.printStackTrace();
+				resultado.setMsg("Não foi possível realizar a consulta!");
+				
+			}
+		}else{
+			resultado.setMsg(msg);
+			
+		}
+		
+		return resultado;
 	}
 }

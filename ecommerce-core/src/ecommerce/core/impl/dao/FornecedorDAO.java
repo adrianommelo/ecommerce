@@ -251,6 +251,11 @@ public class FornecedorDAO extends AbstractJdbcDAO {
 		}
 		return null;
 	}
+	@Override
+	public EntidadeDominio montar(EntidadeDominio entidade) throws SQLException {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 	
 	

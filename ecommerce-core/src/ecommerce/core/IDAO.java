@@ -11,6 +11,7 @@ public interface IDAO {
 	public void alterar(EntidadeDominio entidade)throws SQLException;
 	public void excluir(EntidadeDominio entidade)throws SQLException;
 	public List<EntidadeDominio> consultar(EntidadeDominio entidade)throws SQLException;
+	public EntidadeDominio montar(EntidadeDominio entidade) throws SQLException;
 	
 	
 }

@@ -60,6 +60,10 @@
 		<servlet-name>Servlet</servlet-name>
 		<url-pattern>/ExcluirProduto</url-pattern>
 	</servlet-mapping>
-
+	<servlet-mapping>
+		<servlet-name>Servlet</servlet-name>
+		<url-pattern>/MontarProduto</url-pattern>
+	</servlet-mapping>
+	
 
 </web-app>

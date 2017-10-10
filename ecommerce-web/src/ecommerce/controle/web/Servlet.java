@@ -13,6 +13,7 @@ import ecommerce.controle.web.command.ICommand;
 import ecommerce.controle.web.command.impl.AlterarCommand;
 import ecommerce.controle.web.command.impl.ConsultarCommand;
 import ecommerce.controle.web.command.impl.ExcluirCommand;
+import ecommerce.controle.web.command.impl.MontarCommand;
 import ecommerce.controle.web.command.impl.SalvarCommand;
 import ecommerce.controle.web.command.impl.VisualizarCommand;
 import ecommerce.controle.web.vh.IViewHelper;
@@ -48,6 +49,7 @@ public class Servlet extends HttpServlet {
     	commands.put("CONSULTAR", new ConsultarCommand());
     	commands.put("VISUALIZAR", new VisualizarCommand());
     	commands.put("ALTERAR", new AlterarCommand());
+    	commands.put("MONTAR", new MontarCommand());
     	
     	
     	/* Utilizando o ViewHelper para tratar especificações de qualquer tela e indexando 
@@ -72,6 +74,7 @@ public class Servlet extends HttpServlet {
     	vhs.put("/ecommerce-web/ConsultarProduto", new ProdutoViewHelper());
     	vhs.put("/ecommerce-web/AlterarProduto", new ProdutoViewHelper());
     	vhs.put("/ecommerce-web/ExcluirProduto", new ProdutoViewHelper());
+    	vhs.put("/ecommerce-web/MontarProduto", new ProdutoViewHelper());
     	
     }
     

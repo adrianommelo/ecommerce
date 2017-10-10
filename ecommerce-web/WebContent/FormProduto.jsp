@@ -63,6 +63,10 @@
 </head>
 <body>
 
+	<%
+		Resultado resultado = (Resultado) request.getAttribute("resultado");
+		
+	%>
 	<div class="col-md-9">
 		<h2 class="text-uppercase lead">Novo Produto</h2>
 		<hr>
@@ -70,10 +74,12 @@
 
 	<form class="form-group" action="SalvarProduto" method="post">
 		<div class="col-sm-9">
-			<c:if test="${resultado.msg != null}">
-				<div class="bg-success text-success">${resultado.msg }</div>
-			</c:if>
+
 			<div class="col-md-6">
+
+				<c:if test="${resultado.msg != null}">
+					<div class="bg-success text-success">${resultado.msg }</div>
+				</c:if>
 				<label for="txtNomeProd">Nome</label> <input type="text"
 					class="form-control" id="txtNomeProd" name="txtNomeProd"> <label
 					for="txtDescProd">Descrição</label> <input type="text"
@@ -85,10 +91,12 @@
 					class="form-control" id="txtQtdProd" name="txtQtdProd"> <label
 					for="cmbCategoria">Categoria</label> <select class="form-control"
 					id="cmbCategoria" name="cmbCategoria">
-					<option value="1" selected="selected">Smartphone</option>
-					<option value="2">Computador</option>
-					<option value="3">Tablet</option>
-					<option value="4">Video Game</option>
+					<c:if test="${resultado.entidades.get(0).categoria != null}">
+						<c:forEach var="categoria"
+							items="${resultado.entidades.get(0).categoria}">
+							<option value="${categoria.id}" selected="selected">${categoria.categoria}</option>
+						</c:forEach>
+					</c:if>
 				</select> <label for="txtFornecedor">Fornecedor</label> <input type="text"
 					class="form-control" id="txtFornecedor" name="txtFornecedor" /> <label
 					for="txtPesoProd">Peso</label> <input type="text"
